@@ -95,8 +95,8 @@ export default function EstateBeacon() {
       answer: "Yes. All documents and information are encrypted and stored securely. Your data is private and will never be shared.",
     },
     {
-      question: "When will this be available?",
-      answer: "We're currently in development. Join the waitlist to be notified when we launch and receive early access pricing.",
+      question: "How quickly can I get started?",
+      answer: "Once you sign up, we'll guide you through the setup process for your specific state. You'll receive your customized checklist and can start organizing your estate administration immediately.",
     },
   ];
 
@@ -133,7 +133,7 @@ export default function EstateBeacon() {
             </div>
 
             <p className="text-sm text-white/60 font-light tracking-wide">
-              Join the waitlist • Get notified at launch • Early access pricing
+              Get started today • State-specific guidance • One flat fee
             </p>
           </div>
         </div>
@@ -289,8 +289,8 @@ export default function EstateBeacon() {
             Ready to Bring Clarity<br className="hidden sm:block" /> to the Process?
           </h2>
           <p className="text-xl sm:text-2xl text-white/85 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
-            Join the waitlist and be the first to know when Estate Beacon launches.
-            Early subscribers receive special pricing.
+            Get your state-specific estate administration guide.
+            One flat fee of $400 for complete access throughout the process.
           </p>
           <div className="max-w-md mx-auto">
             <EmailCaptureForm />

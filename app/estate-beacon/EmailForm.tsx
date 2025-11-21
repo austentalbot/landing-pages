@@ -48,7 +48,7 @@ export function EmailCaptureForm() {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       setStatus("success");
-      setMessage("Thanks! We'll notify you when we launch.");
+      setMessage("Thanks for your interest! We're putting the finishing touches on Estate Beacon and will reach out shortly to get you started.");
       setEmail("");
 
       // Track conversion event (when analytics are set up)
@@ -72,7 +72,7 @@ export function EmailCaptureForm() {
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email address"
+          placeholder="Your email address"
           className="flex-1 px-5 py-4 rounded-xl border-2 border-white/20 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-white focus:border-white/40 outline-none text-gray-900 placeholder-gray-500 shadow-lg transition-all duration-200 font-light"
           disabled={status === "loading" || status === "success"}
           required
@@ -83,7 +83,7 @@ export function EmailCaptureForm() {
           className="group relative px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
         >
           <span className="relative z-10">
-            {status === "loading" ? "Joining..." : status === "success" ? "Joined! ✓" : "Join Waitlist"}
+            {status === "loading" ? "Submitting..." : status === "success" ? "Received! ✓" : "Get Started"}
           </span>
         </button>
       </div>
