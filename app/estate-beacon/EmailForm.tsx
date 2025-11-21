@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { EARLY_ACCESS_PRICE } from './constants';
 
 export function EmailCaptureForm() {
   const [email, setEmail] = useState("");
@@ -48,7 +49,7 @@ export function EmailCaptureForm() {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       setStatus("success");
-      setMessage("Thanks for your interest! We're putting the finishing touches on Estate Beacon and will reach out shortly to get you started.");
+      setMessage(`Thanks for your interest! We'll notify you when Estate Beacon launches in your state. Early access pricing will be just $${EARLY_ACCESS_PRICE}.`);
       setEmail("");
 
       // Track conversion event (when analytics are set up)
