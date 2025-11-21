@@ -2,6 +2,7 @@
 
 import { useState, FormEvent } from "react";
 import umami from '@umami/node'
+import { EARLY_ACCESS_PRICE } from './constants'
 
 interface QuestionnaireData {
   state: string;
@@ -415,11 +416,11 @@ export function Questionnaire() {
           {/* Email capture */}
           <div className="bg-white border-2 border-[#4a8177]/20 rounded-2xl p-8">
             <h4 className="text-xl font-semibold text-gray-900 mb-2">
-              We're putting the finishing touches on Estate Beacon
+              Estate Beacon is not yet available in {data.state}
             </h4>
             <p className="text-gray-600 font-light mb-6">
-              Enter your email and we'll notify you the moment your customized{" "}
-              {data.state} estate guide is ready.
+              Enter your email and we'll notify you when we launch in {data.state}.
+              Early access pricing will be just ${EARLY_ACCESS_PRICE}.
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
