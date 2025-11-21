@@ -149,21 +149,53 @@ export function Questionnaire() {
 
           {/* Preview Screenshot */}
           <div className="mt-8 p-6 bg-gradient-to-br from-[#4a8177]/5 to-[#3d7068]/5 rounded-xl border border-[#4a8177]/10">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Your State-Specific Checklist</p>
+            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Your Dashboard</p>
             <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-              <div className="p-4 space-y-2">
-                <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-green-200">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">✓</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-gray-900">Obtain Death Certificates</div>
-                    <div className="text-xs text-gray-500 mt-0.5">Completed • Required for all institutions</div>
+              <div className="p-6 space-y-4">
+                {/* Progress Ring */}
+                <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200 text-center">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-3">
+                    <span className="text-2xl font-bold">64%</span>
+                  </div>
+                  <div className="text-sm font-semibold text-gray-900">Overall Progress</div>
+                  <div className="text-xs text-gray-500 mt-1">23 of 36 tasks complete</div>
+                </div>
+
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 border border-gray-200 text-center">
+                    <div className="text-2xl font-bold text-[#4a8177]">13</div>
+                    <div className="text-xs text-gray-500 mt-1">Institutions Contacted</div>
+                  </div>
+                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 border border-gray-200 text-center">
+                    <div className="text-2xl font-bold text-orange-500">3</div>
+                    <div className="text-xs text-gray-500 mt-1">Upcoming Deadlines</div>
                   </div>
                 </div>
-                <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold">2</div>
-                  <div className="flex-1 min-w-0">
-                    <div className="text-sm font-semibold text-gray-700">File for Probate</div>
-                    <div className="text-xs text-gray-500 mt-0.5">State-specific forms required</div>
+
+                {/* Checklist Preview */}
+                <div className="space-y-2">
+                  <div className="text-xs font-semibold text-gray-900 mb-2">Recent Tasks</div>
+                  <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-green-200">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">✓</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-gray-900">Obtain Death Certificates</div>
+                      <div className="text-xs text-gray-500 mt-0.5">Completed Jan 12</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-3 bg-[#4a8177]/5 rounded-lg border-2 border-[#4a8177]">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#4a8177] flex items-center justify-center text-white text-xs font-bold">2</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-gray-900">File for Probate</div>
+                      <div className="text-xs text-gray-500 mt-0.5">In progress</div>
+                    </div>
+                  </div>
+                  <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
+                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold">3</div>
+                    <div className="flex-1 min-w-0">
+                      <div className="text-sm font-semibold text-gray-700">Notify Financial Institutions</div>
+                      <div className="text-xs text-gray-500 mt-0.5">Not started</div>
+                    </div>
                   </div>
                 </div>
               </div>
