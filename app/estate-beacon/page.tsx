@@ -102,11 +102,11 @@ export default function EstateBeacon() {
           }}></div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
           <div className="text-center">
-            {/* Minimalist Beacon Logo */}
-            <div className="inline-block mb-8">
-              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-6">
+            {/* Logo + Brand Name */}
+            <div className="inline-flex items-center gap-3 mb-6">
+              <svg width="48" height="48" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 {/* Outer waves */}
                 <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="1.5" opacity="0.2" />
                 <circle cx="30" cy="30" r="22" stroke="white" strokeWidth="1.5" opacity="0.4" />
@@ -116,16 +116,17 @@ export default function EstateBeacon() {
                 {/* Center dot */}
                 <circle cx="30" cy="30" r="3" fill="#2f5952" />
               </svg>
+              <span className="text-2xl sm:text-3xl font-bold text-white">Estate Beacon</span>
             </div>
-            <div className="inline-block mb-8">
+            <div className="inline-block mb-6">
               <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#d4e5df] text-xs font-semibold tracking-[0.15em] uppercase">
                 For Estate Executors
               </span>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-8 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
               Your Clear Path Through<br />Estate Administration
             </h1>
-            <p className="text-xl sm:text-2xl text-white/85 mb-12 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl sm:text-2xl text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
               Being named executor is overwhelming, especially while grieving. Get state-specific checklists,
               proper task sequencing, and tools to manage every aspect of estate settlement with confidence.
             </p>
@@ -153,7 +154,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* Problem Section */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-16 sm:py-20 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight">
             You Shouldn't Have to<br className="hidden sm:block" /> Figure This Out Alone
@@ -170,7 +171,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* Product Screenshots Section */}
-      <section className="py-24 sm:py-32 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">

@@ -146,6 +146,29 @@ export function Questionnaire() {
           <p className="text-sm text-gray-500 font-light">
             Estate laws vary by state, so we&apos;ll customize guidance for your location.
           </p>
+
+          {/* Preview Screenshot */}
+          <div className="mt-8 p-6 bg-gradient-to-br from-[#4a8177]/5 to-[#3d7068]/5 rounded-xl border border-[#4a8177]/10">
+            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Your State-Specific Checklist</p>
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="p-4 space-y-2">
+                <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-green-200">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">✓</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-gray-900">Obtain Death Certificates</div>
+                    <div className="text-xs text-gray-500 mt-0.5">Completed • Required for all institutions</div>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold">2</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-sm font-semibold text-gray-700">File for Probate</div>
+                    <div className="text-xs text-gray-500 mt-0.5">State-specific forms required</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
@@ -175,6 +198,32 @@ export function Questionnaire() {
                 {option.label}
               </button>
             ))}
+          </div>
+
+          {/* Preview Screenshot */}
+          <div className="mt-8 p-6 bg-gradient-to-br from-[#4a8177]/5 to-[#3d7068]/5 rounded-xl border border-[#4a8177]/10">
+            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Institution Contact Tracking</p>
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
+              <div className="p-4">
+                <div className="flex justify-between items-start mb-3">
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">Wells Fargo - Checking</div>
+                    <div className="text-xs text-gray-500">Account ending in 7392</div>
+                  </div>
+                  <span className="text-xs px-2 py-1 bg-green-100 text-green-700 rounded-full font-medium">Closed</span>
+                </div>
+                <div className="text-xs text-gray-600 space-y-1">
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Last Contact:</span>
+                    <span>Jan 15, 2025</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-500">Spoke With:</span>
+                    <span>Maria J., Rep #4782</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
@@ -206,6 +255,32 @@ export function Questionnaire() {
                 {option.label}
               </button>
             ))}
+          </div>
+
+          {/* Preview Screenshot */}
+          <div className="mt-8 p-6 bg-gradient-to-br from-[#4a8177]/5 to-[#3d7068]/5 rounded-xl border border-[#4a8177]/10">
+            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Progress Dashboard</p>
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden p-4">
+              <div className="flex items-center justify-between mb-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] flex items-center justify-center text-white font-bold">64%</div>
+                  <div>
+                    <div className="text-sm font-semibold text-gray-900">Overall Progress</div>
+                    <div className="text-xs text-gray-500">23 of 36 tasks complete</div>
+                  </div>
+                </div>
+              </div>
+              <div className="grid grid-cols-2 gap-2 mt-3">
+                <div className="bg-gray-50 rounded p-2 text-center">
+                  <div className="text-lg font-bold text-[#4a8177]">13</div>
+                  <div className="text-xs text-gray-500">Institutions</div>
+                </div>
+                <div className="bg-gray-50 rounded p-2 text-center">
+                  <div className="text-lg font-bold text-orange-500">3</div>
+                  <div className="text-xs text-gray-500">Deadlines</div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}
