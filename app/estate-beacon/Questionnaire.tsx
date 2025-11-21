@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import umami from '@umami/node'
 
 interface QuestionnaireData {
   state: string;
@@ -74,12 +75,20 @@ export function Questionnaire() {
 
   const totalSteps = 5;
 
-  const handleNext = (field: keyof QuestionnaireData, value: string) => {
+  const handleNext = async (field: keyof QuestionnaireData, value: string) => {
     setData({ ...data, [field]: value });
+    await umami.track(`Next Step ${step}`, {
+      ...data,
+      field,
+      step,
+    })
     setStep(step + 1);
   };
 
-  const handleBack = () => {
+  const handleBack = async () => {
+    await umami.track(`Back`, {
+      step,
+    })
     setStep(Math.max(0, step - 1));
   };
 
@@ -108,6 +117,7 @@ export function Questionnaire() {
       // });
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
+      await umami.track('Submit')
 
       setSubmitStatus("success");
       setMessage(

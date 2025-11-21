@@ -199,6 +199,7 @@ export default function EstateBeacon() {
             {/* Get Started Button */}
             <div className="mb-6">
               <a
+                data-umami-event="Get Started Button"
                 href="#questionnaire"
                 className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-[0_20px_60px_-15px_rgba(255,255,255,0.3)] hover:shadow-[0_25px_70px_-15px_rgba(255,255,255,0.4)] hover:-translate-y-1 relative group"
               >
