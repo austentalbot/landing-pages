@@ -228,78 +228,426 @@ export default function LandingPage() {
 - Secondary: `#475569` (Gray)
 - Accent: `#f97316` (Orange)
 
-## 4. Analytics Setup
+## 4. Analytics Setup with Umami
 
-### Option A: Google Analytics (Simple)
+Use Umami for privacy-focused, open-source analytics tracking.
 
-Add to `app/layout.tsx` or individual landing pages:
-
-```tsx
-import Script from "next/script";
-
-export default function Layout({ children }) {
-  return (
-    <html>
-      <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'GA_MEASUREMENT_ID');
-          `}
-        </Script>
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-### Option B: Vercel Analytics (Easiest)
+### Setup Umami Analytics
 
 ```bash
-npm i @vercel/analytics
+npm i @umami/node
 ```
 
-```tsx
-// app/layout.tsx
-import { Analytics } from "@vercel/analytics/react";
+**1. Create Umami Account:**
+- Visit https://umami.is or self-host
+- Create a new website in your Umami dashboard
+- Get your Website ID
 
-export default function Layout({ children }) {
-  return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
-  );
-}
+**2. Set up environment variables:**
+```bash
+# .env.local
+NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-website-id
+```
+
+**3. Track events in components:**
+
+```tsx
+import umami from "@umami/node";
+
+// Simple declarative tracking with data attributes
+<button data-umami-event="Get Started Button">
+  Get Started →
+</button>
+
+// Programmatic tracking with custom properties
+const handleNext = async (field: string, value: string) => {
+  await umami.track("Next Step", {
+    step: currentStep,
+    field,
+    value
+  });
+  // Continue with your logic
+};
+
+// Track form submissions
+const handleSubmit = async (e: FormEvent) => {
+  e.preventDefault();
+
+  // Process form...
+
+  // Track successful submission
+  await umami.track("Submit", {
+    source: "questionnaire",
+    ...formData
+  });
+};
 ```
 
 ### Track Custom Events
 
 ```tsx
-// Track button clicks, form submissions, etc.
-const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", eventName, properties);
-  }
-};
-
-// Usage
-<button onClick={() => trackEvent("cta_click", { location: "hero" })}>
-  Click Me
+// 1. Simple button with data attribute (Umami auto-tracking)
+<button data-umami-event="Get Started Button">
+  Get Started
 </button>
+
+// 2. Link with additional context
+<a
+  href="#questionnaire"
+  data-umami-event="CTA Click"
+  data-umami-event-location="hero"
+>
+  Learn More
+</a>
+
+// 3. Programmatic tracking with context
+<button onClick={async () => {
+  await umami.track("Next Step", {
+    step: currentStep,
+    field: "state",
+    value: selectedValue
+  });
+  handleNext();
+}}>
+  Continue
+</button>
+
+// 4. Track navigation between questionnaire steps
+const handleBack = async () => {
+  await umami.track("Back", { step: currentStep });
+  setStep(Math.max(0, currentStep - 1));
+};
 ```
 
-## 5. Common Section Templates
+## 5. Constants File Pattern
+
+Keep configuration values in a separate constants file for maintainability:
+
+```tsx
+// app/[route-name]/constants.ts
+/**
+ * Pricing and configuration constants
+ */
+
+/**
+ * Regular pricing
+ */
+export const REGULAR_PRICE = 499;
+
+/**
+ * Early access pricing
+ * $100 discount off the regular price for early signups
+ */
+export const EARLY_ACCESS_PRICE = REGULAR_PRICE - 100;
+
+// Other useful constants
+export const MAX_SIGNUP_LIMIT = 1000;
+export const LAUNCH_DATE = "2025-03-01";
+```
+
+**Usage in components:**
+```tsx
+import { EARLY_ACCESS_PRICE, REGULAR_PRICE } from './constants';
+
+<p className="text-lg">
+  Early access pricing: ${EARLY_ACCESS_PRICE} (Save ${REGULAR_PRICE - EARLY_ACCESS_PRICE})
+</p>
+```
+
+## 6. Multi-Step Questionnaire Pattern
+
+For better engagement and data collection, use a multi-step questionnaire instead of a simple email form:
+
+### Questionnaire Component Template
+
+```tsx
+// app/[route-name]/Questionnaire.tsx
+"use client";
+
+import { useState, FormEvent } from "react";
+import umami from "@umami/node";
+import { EARLY_ACCESS_PRICE } from "./constants";
+
+interface QuestionnaireData {
+  field1: string;
+  field2: string;
+  field3: string;
+}
+
+export function Questionnaire() {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState<Partial<QuestionnaireData>>({});
+  const [email, setEmail] = useState("");
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [message, setMessage] = useState("");
+
+  const totalSteps = 3;
+
+  const handleNext = async (field: keyof QuestionnaireData, value: string) => {
+    setData({ ...data, [field]: value });
+
+    // Track progress through questionnaire
+    await umami.track(`Next Step ${step}`, {
+      ...data,
+      field,
+      step,
+    });
+
+    setStep(step + 1);
+  };
+
+  const handleBack = async () => {
+    await umami.track(`Back`, { step });
+    setStep(Math.max(0, step - 1));
+  };
+
+  const handleEmailSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setSubmitStatus("error");
+      setMessage("Please enter a valid email address");
+      return;
+    }
+
+    setSubmitStatus("loading");
+
+    try {
+      // TODO: Send to your email service
+      // await fetch("/api/subscribe", {
+      //   method: "POST",
+      //   body: JSON.stringify({ email, questionnaireData: data }),
+      // });
+
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await umami.track("Submit", data);
+
+      setSubmitStatus("success");
+      setMessage("Thank you! We'll notify you when we launch.");
+    } catch (error) {
+      setSubmitStatus("error");
+      setMessage("Something went wrong. Please try again.");
+    }
+  };
+
+  if (submitStatus === "success") {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+          <span className="text-4xl">✓</span>
+        </div>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">You're all set</h3>
+        <p className="text-gray-600">{message}</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="w-full max-w-2xl mx-auto">
+      {/* Progress bar */}
+      {step < totalSteps && (
+        <div className="mb-8">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-sm text-gray-600">Question {step + 1} of {totalSteps}</span>
+            <span className="text-sm text-gray-600">{Math.round(((step + 1) / totalSteps) * 100)}%</span>
+          </div>
+          <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+            <div
+              className="h-full bg-[#4a8177] transition-all duration-300"
+              style={{ width: `${((step + 1) / totalSteps) * 100}%` }}
+            ></div>
+          </div>
+        </div>
+      )}
+
+      {/* Step 0: First Question */}
+      {step === 0 && (
+        <div className="space-y-6">
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Your first question here?
+          </h3>
+          <div className="space-y-3">
+            {["Option 1", "Option 2", "Option 3"].map((option) => (
+              <button
+                key={option}
+                onClick={() => handleNext("field1", option)}
+                className="w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#4a8177] hover:bg-[#4a8177]/5 transition-all"
+              >
+                {option}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Step 1: Second Question */}
+      {step === 1 && (
+        <div className="space-y-6">
+          <button onClick={handleBack} className="text-sm text-gray-500 hover:text-gray-700">
+            ← Back
+          </button>
+          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900">
+            Your second question?
+          </h3>
+          {/* Add options similar to step 0 */}
+        </div>
+      )}
+
+      {/* Final step: Summary + Email */}
+      {step === totalSteps && (
+        <div className="space-y-8">
+          <button onClick={handleBack} className="text-sm text-gray-500 hover:text-gray-700">
+            ← Back
+          </button>
+
+          <div className="text-center">
+            <h3 className="text-3xl font-bold text-gray-900 mb-4">
+              Thank you for sharing
+            </h3>
+            <p className="text-lg text-gray-600 mb-8">
+              Based on your answers, we'll customize your experience.
+            </p>
+          </div>
+
+          {/* Summary of answers */}
+          <div className="bg-gray-50 rounded-2xl p-6">
+            <h4 className="font-semibold text-gray-900 mb-4">Your details</h4>
+            <div className="space-y-2 text-sm text-gray-600">
+              <p>Field 1: {data.field1}</p>
+              <p>Field 2: {data.field2}</p>
+            </div>
+          </div>
+
+          {/* Email capture */}
+          <div className="bg-white border-2 border-[#4a8177]/20 rounded-2xl p-8">
+            <h4 className="text-xl font-semibold text-gray-900 mb-2">
+              Get notified when we launch
+            </h4>
+            <p className="text-gray-600 mb-6">
+              Early access pricing: ${EARLY_ACCESS_PRICE}
+            </p>
+
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="Your email address"
+                className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-[#4a8177] focus:border-[#4a8177] outline-none"
+                disabled={submitStatus === "loading"}
+                required
+              />
+              <button
+                type="submit"
+                disabled={submitStatus === "loading"}
+                className="w-full px-8 py-4 bg-[#4a8177] text-white font-semibold rounded-xl hover:bg-[#3d7068] transition-all disabled:opacity-50"
+              >
+                {submitStatus === "loading" ? "Submitting..." : "Notify Me When Ready"}
+              </button>
+              {message && submitStatus === "error" && (
+                <p className="text-sm text-red-600">{message}</p>
+              )}
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+```
+
+**Key Features:**
+- Progress bar for visual feedback
+- Back button for navigation
+- Data collection at each step
+- Analytics tracking on each interaction
+- Summary view before email capture
+- Success state after submission
+
+## 7. Collapsible FAQ Component
+
+```tsx
+// app/[route-name]/CollapsibleFAQs.tsx
+"use client";
+
+import { useState } from "react";
+
+interface FAQ {
+  question: string;
+  answer: string;
+}
+
+interface CollapsibleFAQsProps {
+  faqs: FAQ[];
+}
+
+export function CollapsibleFAQs({ faqs }: CollapsibleFAQsProps) {
+  const [openIndex, setOpenIndex] = useState<number>(0);
+
+  const toggleFAQ = (index: number) => {
+    setOpenIndex(openIndex === index ? -1 : index);
+  };
+
+  return (
+    <div className="space-y-4">
+      {faqs.map((faq, i) => (
+        <div
+          key={i}
+          className="border border-gray-200 rounded-xl overflow-hidden transition-all hover:border-gray-300"
+        >
+          <button
+            onClick={() => toggleFAQ(i)}
+            className="w-full text-left px-6 py-5 bg-white hover:bg-gray-50 transition-colors flex items-center justify-between gap-4"
+          >
+            <h3 className="text-lg font-semibold text-gray-900">
+              {faq.question}
+            </h3>
+            <svg
+              className={`flex-shrink-0 w-6 h-6 text-gray-500 transition-transform ${
+                openIndex === i ? "rotate-180" : ""
+              }`}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M19 9l-7 7-7-7"
+              />
+            </svg>
+          </button>
+          <div
+            className={`overflow-hidden transition-all duration-300 ${
+              openIndex === i ? "max-h-96" : "max-h-0"
+            }`}
+          >
+            <div className="px-6 pb-5 pt-2 bg-gray-50">
+              <p className="text-gray-600 leading-relaxed">{faq.answer}</p>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+```
+
+**Usage:**
+```tsx
+const faqs = [
+  {
+    question: "How does this work?",
+    answer: "Detailed explanation..."
+  },
+  // ... more FAQs
+];
+
+<CollapsibleFAQs faqs={faqs} />
+```
+
+## 8. Common Section Templates
 
 ### Features Section
 ```tsx
