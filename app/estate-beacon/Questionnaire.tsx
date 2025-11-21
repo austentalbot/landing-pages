@@ -117,7 +117,7 @@ export function Questionnaire() {
       // });
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
-      await umami.track('Submit')
+      await umami.track('Submit', data)
 
       setSubmitStatus("success");
       setMessage(
