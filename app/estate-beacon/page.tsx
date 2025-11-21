@@ -218,7 +218,7 @@ export default function EstateBeacon() {
 
             {/* Corner Screenshots */}
             {/* Bottom-left: Accounts Checklist */}
-            <div className="absolute bottom-20 left-8 hidden xl:block w-72 z-20">
+            <div className="absolute bottom-8 left-2 hidden xl:block w-64 z-20">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
@@ -270,7 +270,7 @@ export default function EstateBeacon() {
             </div>
 
             {/* Top-right: Progress Dashboard */}
-            <div className="absolute top-20 right-8 hidden xl:block w-72 z-20">
+            <div className="absolute top-8 right-2 hidden xl:block w-64 z-20">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
@@ -801,98 +801,6 @@ export default function EstateBeacon() {
             <p className="text-xl sm:text-2xl text-white/85 leading-relaxed max-w-2xl mx-auto font-light">
               Answer a few questions to create a checklist tailored to your state.
             </p>
-          </div>
-
-          {/* Dashboard Screenshot Preview */}
-          <div className="mb-8 max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/30">
-              <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center gap-2">
-                <div className="flex space-x-2">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
-                </div>
-                <div className="flex-1 text-center text-xs text-gray-500">
-                  Estate Beacon Dashboard
-                </div>
-              </div>
-              <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* Progress Ring */}
-                  <div className="bg-white rounded-lg p-6 border border-gray-200 text-center">
-                    <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-3 shadow-lg">
-                      <span className="text-3xl font-bold">64%</span>
-                    </div>
-                    <div className="text-sm font-semibold text-gray-900 mb-1">
-                      Overall Progress
-                    </div>
-                    <div className="text-xs text-gray-500 font-light">
-                      23 of 36 tasks complete
-                    </div>
-                    <div className="grid grid-cols-2 gap-3 mt-4">
-                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                        <div className="text-xl font-bold text-[#4a8177]">13</div>
-                        <div className="text-[10px] text-gray-500 font-light">Institutions</div>
-                      </div>
-                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
-                        <div className="text-xl font-bold text-orange-500">3</div>
-                        <div className="text-[10px] text-gray-500 font-light">Deadlines</div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Checklist Items */}
-                  <div className="space-y-2">
-                    <div className="bg-white rounded-lg p-3 border-2 border-green-200">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
-                          ✓
-                        </div>
-                        <div className="text-sm font-semibold text-gray-900">
-                          Death Certificates
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white rounded-lg p-3 border-2 border-green-200">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
-                          ✓
-                        </div>
-                        <div className="text-sm font-semibold text-gray-900">
-                          Probate Filing
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-white rounded-lg p-3 border-2 border-[#4a8177]">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#4a8177] flex items-center justify-center text-white text-xs font-bold">
-                          →
-                        </div>
-                        <div className="text-sm font-semibold text-gray-900">
-                          Notify Institutions
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 opacity-60">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs"></div>
-                        <div className="text-sm font-semibold text-gray-700">
-                          Asset Inventory
-                        </div>
-                      </div>
-                    </div>
-                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 opacity-60">
-                      <div className="flex items-center gap-2">
-                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs"></div>
-                        <div className="text-sm font-semibold text-gray-700">
-                          Tax Returns
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Questionnaire */}
