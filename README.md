@@ -1,6 +1,6 @@
 # Landing Pages
 
-A Next.js workspace for building and testing idea validation landing pages.
+A Next.js workspace for building and testing idea validation landing pages with sophisticated design and user engagement flows.
 
 ## Getting Started
 
@@ -34,12 +34,87 @@ npm run dev
 - `/lib` - Shared utilities
 - `/components` - Shared components (use sparingly)
 
+## Landing Page Design Standards
+
+Based on our first landing page (estate-beacon), future landing pages should include:
+
+### Required Sections
+
+1. **Hero Section** with:
+   - Rich, layered gradient backgrounds (not flat colors)
+   - Radial blur effects and subtle patterns for depth
+   - Logo + brand name + descriptive tagline badge
+   - Large, bold headline (5xl-6xl) with clear value proposition
+   - Supporting subheadline explaining the problem/solution
+   - Single prominent CTA button
+   - Optional: Corner/floating product screenshots showing real UI
+
+2. **Problem/Solution Section**:
+   - Side-by-side layout with text and product screenshot
+   - Clear articulation of user pain points
+   - Simple checklist or progress visualization
+
+3. **Product Screenshots Section**:
+   - 3+ alternating left/right feature showcases
+   - Browser window mockups with realistic UI elements
+   - Category badges for each feature
+   - Feature benefit lists with checkmarks
+   - Descriptive text explaining the value
+
+4. **Features Grid**:
+   - 6-9 features in responsive grid (2-3 columns)
+   - Emoji or icon + title + description
+   - Hover effects (lift, shadow, scale)
+
+5. **How It Works**:
+   - 3-step numbered process
+   - Visual step indicators with gradient backgrounds
+   - Connecting lines between steps (on desktop)
+
+6. **FAQ Section**:
+   - Collapsible accordion-style FAQs
+   - Address common objections and concerns
+   - Price transparency if applicable
+
+7. **Questionnaire/Email Capture**:
+   - Multi-step questionnaire (3-5 questions)
+   - Progress bar for user engagement
+   - Collect relevant segmentation data
+   - Summary of user's answers
+   - Email capture with clear value proposition
+   - Success state confirmation
+
+8. **Footer**:
+   - Dark background for contrast
+   - Logo + copyright + basic links
+
+### Design Patterns
+
+- **Visual Hierarchy**: Use size, weight, and color to guide attention
+- **Gradients**: Multi-layered, sophisticated gradients (not simple linear)
+- **Typography**: Mix of bold headlines (font-bold) and light body text (font-light)
+- **Spacing**: Generous padding and margins for breathing room
+- **Mockups**: Browser window chrome for product screenshots
+- **Colors**: Establish a primary brand color and use consistently
+- **Animations**: Subtle hover states and transitions
+- **Trust Signals**: Professional mockups, clear pricing, social proof
+
+### Technical Requirements
+
+- **Metadata**: SEO-optimized title, description, and Open Graph tags
+- **Responsive**: Mobile-first design with breakpoints (sm, md, lg, xl)
+- **Components**: Extract reusable components (Questionnaire, FAQ, EmailForm)
+- **Analytics**: gtag event tracking for conversions
+- **Loading States**: Handle form submissions with proper feedback
+- **Validation**: Email validation and error handling
+
 ## Landing Pages
 
 ### Estate Beacon
 - **Route:** `/estate-beacon`
 - **Description:** State-specific guidance for estate executors. Provides customized checklists, contact tracking, and step-by-step guidance for estate settlement based on the user's state.
 - **Features:** State-specific checklists, institution contact log, asset inventory tracker, document storage, beneficiary communication, deadline reminders
+- **Status:** ✅ Complete - Reference implementation
 
 ## Documentation
 
@@ -48,7 +123,7 @@ npm run dev
 
 ## Creating a New Landing Page
 
-See `LANDING_PAGE_TEMPLATE.md` for detailed code templates and instructions on scaffolding a new landing page.
+See `LANDING_PAGE_TEMPLATE.md` for detailed code templates and instructions on scaffolding a new landing page following the estate-beacon design patterns.
 
 ## Launching & Validating
 
