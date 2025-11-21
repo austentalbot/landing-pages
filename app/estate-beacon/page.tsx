@@ -59,19 +59,19 @@ export default function EstateBeacon() {
       step: "1",
       title: "Select Your State",
       description:
-        "Get a customized checklist based on your state's specific probate laws and requirements.",
+        "Get a customized checklist based on your state's probate laws.",
     },
     {
       step: "2",
       title: "Follow the Sequence",
       description:
-        "Work through tasks in the right order. We'll tell you exactly what to do next, and why it matters.",
+        "Work through tasks in the right order. We'll tell you what to do next and why.",
     },
     {
       step: "3",
       title: "Track Everything",
       description:
-        "Log contacts, store documents, manage deadlines, and communicate with beneficiaries—all in one place.",
+        "Log contacts, store documents, manage deadlines—all in one place.",
     },
   ];
 
@@ -197,8 +197,7 @@ export default function EstateBeacon() {
             <p className="text-xl sm:text-2xl text-white/85 mb-6 max-w-4xl mx-auto leading-relaxed font-light">
               Being named executor is overwhelming, especially while grieving.
               <br />
-              Get state-specific guidance & step-by-step tools to settle the
-              estate with confidence.
+              Get state-specific guidance and step-by-step tools to settle the estate.
             </p>
 
             {/* Get Started Button */}
@@ -217,10 +216,10 @@ export default function EstateBeacon() {
               reimbursable
             </p>
 
-            {/* Small Screenshots in Header */}
-            <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center max-w-4xl mx-auto">
-              {/* Mini Screenshot 1: Accounts Checklist */}
-              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
+            {/* Corner Screenshots */}
+            {/* Bottom-left: Accounts Checklist */}
+            <div className="absolute bottom-20 left-8 hidden xl:block w-72 z-20">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -268,9 +267,11 @@ export default function EstateBeacon() {
                   </div>
                 </div>
               </div>
+            </div>
 
-              {/* Mini Screenshot 2: Progress Card */}
-              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
+            {/* Top-right: Progress Dashboard */}
+            <div className="absolute top-20 right-8 hidden xl:block w-72 z-20">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -310,89 +311,56 @@ export default function EstateBeacon() {
         ></div>
       </section>
 
-      {/* Hero Screenshot with Text Overlay */}
-      <section className="relative pt-8 pb-16 sm:pt-12 sm:pb-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
+      {/* Side-by-Side Section */}
+      <section className="py-12 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative">
-            {/* Screenshot as Background */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-40 scale-105 blur-[1px]">
-              <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
-                {/* Browser Chrome */}
-                <div className="bg-gray-100 px-4 py-3 flex items-center space-x-2 border-b border-gray-200">
-                  <div className="flex space-x-2">
-                    <div className="w-3 h-3 rounded-full bg-red-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-400"></div>
-                  </div>
-                  <div className="flex-1 text-center text-xs text-gray-500 font-light">
-                    Estate Beacon - California Checklist
-                  </div>
+          <div className="grid md:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4 tracking-tight">
+                You Shouldn't Have to Figure This Out Alone
+              </h2>
+              <p className="text-lg text-gray-600 mb-4 leading-relaxed font-light">
+                Every executor faces the same questions: Where do I start? Am I doing this in the right order?
+              </p>
+              <p className="text-lg text-gray-700 leading-relaxed font-light">
+                Estate Beacon turns chaos into a clear, step-by-step process.
+              </p>
+            </div>
+            <div>
+              {/* Simplified Checklist */}
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
+                <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
+                  <div className="font-semibold text-gray-900">Your Checklist</div>
                 </div>
-                {/* Content */}
-                <div className="p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white">
+                <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
                   <div className="space-y-3">
-                    <div className="flex items-start space-x-4 p-4 bg-white rounded-lg border-2 border-green-200 shadow-sm">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">
+                    <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border-2 border-green-200">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-green-500 flex items-center justify-center text-white font-bold text-sm">
                         ✓
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900">
+                        <div className="font-semibold text-gray-900 text-sm">
                           Obtain Death Certificates
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1 font-light">
-                          Completed • Required for all institutions
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-4 p-4 bg-white rounded-lg border-2 border-[#4a8177] shadow-sm">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#4a8177] flex items-center justify-center text-white font-bold">
+                    <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border-2 border-[#4a8177]">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-[#4a8177] flex items-center justify-center text-white font-bold text-sm">
                         2
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-900">
-                          File for Probate (Superior Court)
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1 font-light">
-                          In Progress • CA specific forms required
+                        <div className="font-semibold text-gray-900 text-sm">
+                          File for Probate
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
+                    <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200">
+                      <div className="flex-shrink-0 w-6 h-6 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold text-sm">
                         3
                       </div>
                       <div className="flex-1">
-                        <div className="font-semibold text-gray-700">
+                        <div className="font-semibold text-gray-700 text-sm">
                           Notify Financial Institutions
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1 font-light">
-                          Start after probate filing
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
-                        4
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-700">
-                          Inventory Estate Assets
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1 font-light">
-                          CA requires detailed inventory
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
-                      <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">
-                        5
-                      </div>
-                      <div className="flex-1">
-                        <div className="font-semibold text-gray-700">
-                          File Tax Returns
-                        </div>
-                        <div className="text-sm text-gray-500 mt-1 font-light">
-                          Federal and state estate taxes
                         </div>
                       </div>
                     </div>
@@ -400,33 +368,7 @@ export default function EstateBeacon() {
                 </div>
               </div>
             </div>
-
-            {/* Text Overlay */}
-            <div className="relative z-10 py-24 sm:py-32 text-center">
-              <div className="max-w-4xl mx-auto px-4">
-                <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight" style={{textShadow: '0 2px 10px rgba(255,255,255,0.8), 0 4px 20px rgba(255,255,255,0.6)'}}>
-                  You Shouldn't Have to
-                  <br className="hidden sm:block" /> Figure This Out Alone
-                </h2>
-                <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8 font-light" style={{textShadow: '0 1px 8px rgba(255,255,255,0.9), 0 2px 15px rgba(255,255,255,0.7)'}}>
-                  Every executor faces the same questions:{" "}
-                  <em className="text-gray-900 font-normal">
-                    Where do I start? Am I doing this in the right order? Did I
-                    contact everyone? What do I tell the beneficiaries?
-                  </em>
-                </p>
-                <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed font-light max-w-3xl mx-auto" style={{textShadow: '0 1px 8px rgba(255,255,255,0.9), 0 2px 15px rgba(255,255,255,0.7)'}}>
-                  Estate Beacon turns the chaos of estate administration into a clear,
-                  step-by-step process tailored to your state's requirements.
-                </p>
-              </div>
-            </div>
           </div>
-
-          <p className="text-center text-sm text-gray-500 mt-4 font-light">
-            State-specific guidance in the right order • Automatically sequenced
-            for your location
-          </p>
         </div>
       </section>
 
@@ -450,9 +392,8 @@ export default function EstateBeacon() {
                   Your Checklist in Proper Order
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Each step is ordered correctly for your state's laws. Death
-                  certificates before probate filing. Probate court before
-                  contacting financial institutions. No guesswork, no mistakes.
+                  Each step is ordered correctly for your state. Death
+                  certificates before probate, probate before institutions. No guesswork.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -627,12 +568,11 @@ export default function EstateBeacon() {
                   Institution Tracking
                 </div>
                 <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                  Keep Track of Every Institution Contact
+                  Track Every Institution Contact
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Record every institution contact in one place. Phone numbers,
-                  representatives' names, dates, and detailed notes—all
-                  organized for when you need them.
+                  Record calls and emails in one place. Phone numbers,
+                  representatives, dates, and notes organized when you need them.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -667,8 +607,7 @@ export default function EstateBeacon() {
                   See Your Progress at a Glance
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Know exactly where you stand. Upcoming deadlines, pending
-                  tasks, and completion status all in one dashboard.
+                  Track deadlines, pending tasks, and completion status in one dashboard.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -766,8 +705,7 @@ export default function EstateBeacon() {
               Everything You Need in One Place
             </h2>
             <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
-              Purpose-built tools for the unique challenges of estate
-              administration.
+              Purpose-built tools for estate administration.
             </p>
           </div>
 
@@ -861,9 +799,100 @@ export default function EstateBeacon() {
               <br className="hidden sm:block" /> Estate Administration Guide
             </h2>
             <p className="text-xl sm:text-2xl text-white/85 leading-relaxed max-w-2xl mx-auto font-light">
-              Answer a few quick questions so we can create a checklist tailored
-              to your state and situation.
+              Answer a few questions to create a checklist tailored to your state.
             </p>
+          </div>
+
+          {/* Dashboard Screenshot Preview */}
+          <div className="mb-8 max-w-3xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-white/30">
+              <div className="bg-gray-50 px-4 py-3 border-b border-gray-200 flex items-center gap-2">
+                <div className="flex space-x-2">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                </div>
+                <div className="flex-1 text-center text-xs text-gray-500">
+                  Estate Beacon Dashboard
+                </div>
+              </div>
+              <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {/* Progress Ring */}
+                  <div className="bg-white rounded-lg p-6 border border-gray-200 text-center">
+                    <div className="inline-flex items-center justify-center w-28 h-28 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-3 shadow-lg">
+                      <span className="text-3xl font-bold">64%</span>
+                    </div>
+                    <div className="text-sm font-semibold text-gray-900 mb-1">
+                      Overall Progress
+                    </div>
+                    <div className="text-xs text-gray-500 font-light">
+                      23 of 36 tasks complete
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 mt-4">
+                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="text-xl font-bold text-[#4a8177]">13</div>
+                        <div className="text-[10px] text-gray-500 font-light">Institutions</div>
+                      </div>
+                      <div className="bg-gray-50 rounded-lg p-3 border border-gray-200">
+                        <div className="text-xl font-bold text-orange-500">3</div>
+                        <div className="text-[10px] text-gray-500 font-light">Deadlines</div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Checklist Items */}
+                  <div className="space-y-2">
+                    <div className="bg-white rounded-lg p-3 border-2 border-green-200">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
+                          ✓
+                        </div>
+                        <div className="text-sm font-semibold text-gray-900">
+                          Death Certificates
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border-2 border-green-200">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-500 flex items-center justify-center text-white text-xs font-bold">
+                          ✓
+                        </div>
+                        <div className="text-sm font-semibold text-gray-900">
+                          Probate Filing
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-white rounded-lg p-3 border-2 border-[#4a8177]">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#4a8177] flex items-center justify-center text-white text-xs font-bold">
+                          →
+                        </div>
+                        <div className="text-sm font-semibold text-gray-900">
+                          Notify Institutions
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 opacity-60">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs"></div>
+                        <div className="text-sm font-semibold text-gray-700">
+                          Asset Inventory
+                        </div>
+                      </div>
+                    </div>
+                    <div className="bg-gray-50 rounded-lg p-3 border border-gray-200 opacity-60">
+                      <div className="flex items-center gap-2">
+                        <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-300 flex items-center justify-center text-gray-600 text-xs"></div>
+                        <div className="text-sm font-semibold text-gray-700">
+                          Tax Returns
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Questionnaire */}
