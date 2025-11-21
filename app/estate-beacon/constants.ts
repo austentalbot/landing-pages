@@ -5,7 +5,7 @@
 /**
  * Regular pricing for Estate Beacon
  */
-export const REGULAR_PRICE = 200;
+export const REGULAR_PRICE = 499;
 
 /**
  * Early access pricing for Estate Beacon
