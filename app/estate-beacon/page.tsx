@@ -76,7 +76,7 @@ export default function EstateBeacon() {
   const faqs = [
     {
       question: "Do I need this if I have a lawyer?",
-      answer: "Many executors work with lawyers but still handle the day-to-day coordination. Estate Beacon helps you stay organized, track your progress, and know what questions to ask your attorney.",
+      answer: "Many executors work with lawyers but still handle the day-to-day coordination. Estate Beacon helps you stay organized, track your progress, and know what questions to ask your attorney—potentially saving you billable hours. The cost is fully reimbursable from the estate.",
     },
     {
       question: "How is this different from a regular task manager?",
@@ -88,7 +88,7 @@ export default function EstateBeacon() {
     },
     {
       question: "How much does it cost?",
-      answer: "Estate Beacon is $400 per estate. One flat fee for complete access throughout the entire estate settlement process—typically 6-18 months.",
+      answer: "Estate Beacon is $199 per estate—a one-time flat fee for complete access throughout the entire settlement process (typically 6-18 months). This is a qualified estate expense and is fully reimbursable from the estate, so you don't pay out of pocket.",
     },
     {
       question: "Is my data secure?",
@@ -133,7 +133,7 @@ export default function EstateBeacon() {
             </div>
 
             <p className="text-sm text-white/60 font-light tracking-wide">
-              Get started today • State-specific guidance • One flat fee
+              Get started today • State-specific guidance • Estate reimbursable
             </p>
           </div>
         </div>
@@ -242,11 +242,13 @@ export default function EstateBeacon() {
               </p>
               <p className="text-gray-900">
                 <strong className="font-semibold">Generic advice can lead to costly mistakes.</strong> Missing a deadline or filing forms
-                in the wrong order can delay the process by months—or worse, create legal liability.
+                in the wrong order can delay the process by months—or worse, create legal liability. A single missed deadline
+                could cost the estate thousands in additional legal fees.
               </p>
               <p>
                 Estate Beacon provides checklists built for your specific state, with proper sequencing and
-                deadline reminders tailored to your jurisdiction&apos;s requirements.
+                deadline reminders tailored to your jurisdiction&apos;s requirements. The cost is a qualified estate expense,
+                reimbursable from the estate—a small investment compared to hiring additional legal help or fixing mistakes later.
               </p>
             </div>
           </div>
@@ -290,7 +292,7 @@ export default function EstateBeacon() {
           </h2>
           <p className="text-xl sm:text-2xl text-white/85 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
             Get your state-specific estate administration guide.
-            One flat fee of $400 for complete access throughout the process.
+            One flat fee. Reimbursable from the estate.
           </p>
           <div className="max-w-md mx-auto">
             <EmailCaptureForm />
