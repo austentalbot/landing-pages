@@ -90,7 +90,7 @@ export function Questionnaire() {
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
           <span className="text-4xl">✓</span>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">{"You're all set"}</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">You're all set</h3>
         <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
           {message}
         </p>
@@ -159,7 +159,7 @@ export function Questionnaire() {
             ← Back
           </button>
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            {"What's your current situation?"}
+            What's your current situation?
           </h3>
           <div className="space-y-3">
             {[
@@ -220,7 +220,7 @@ export function Questionnaire() {
             ← Back
           </button>
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            {"What's your biggest challenge right now?"}
+            What's your biggest challenge right now?
           </h3>
           <div className="space-y-3">
             {[
@@ -290,7 +290,7 @@ export function Questionnaire() {
               Thank you for sharing these details
             </h3>
             <p className="text-lg text-gray-600 font-light mb-8">
-              {"Based on your answers, we'll create a "}{data.state}{"-specific checklist tailored to your situation."}
+              Based on your answers, we'll create a {data.state}-specific checklist tailored to your situation.
             </p>
           </div>
 
@@ -321,10 +321,10 @@ export function Questionnaire() {
           {/* Email capture */}
           <div className="bg-white border-2 border-[#4a8177]/20 rounded-2xl p-8">
             <h4 className="text-xl font-semibold text-gray-900 mb-2">
-              {"We're putting the finishing touches on Estate Beacon"}
+              We're putting the finishing touches on Estate Beacon
             </h4>
             <p className="text-gray-600 font-light mb-6">
-              {"Enter your email and we'll notify you the moment your customized "}{data.state}{" estate guide is ready."}
+              Enter your email and we'll notify you the moment your customized {data.state} estate guide is ready.
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">

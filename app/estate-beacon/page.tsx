@@ -43,16 +43,6 @@ export default function EstateBeacon() {
       title: "Deadline Reminders",
       description: "Never miss critical deadlines for probate filings, tax returns, or institutional notifications.",
     },
-    {
-      icon: "✉️",
-      title: "Template Letters & Scripts",
-      description: "Pre-written scripts for common situations. Know exactly what to say when contacting financial institutions.",
-    },
-    {
-      icon: "✓",
-      title: "Status Tracking",
-      description: "See at a glance which institutions you've contacted, which are in progress, and which are complete.",
-    },
   ];
 
   const howItWorks = [
@@ -166,7 +156,7 @@ export default function EstateBeacon() {
       <section className="py-24 sm:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight">
-            {"You Shouldn't Have to"}<br className="hidden sm:block" /> Figure This Out Alone
+            You Shouldn't Have to<br className="hidden sm:block" /> Figure This Out Alone
           </h2>
           <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-8 font-light">
             Every executor faces the same questions: <em className="text-gray-800 font-normal">Where do I start? Am I doing this in the right order?
@@ -174,7 +164,7 @@ export default function EstateBeacon() {
           </p>
           <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed font-light max-w-3xl mx-auto">
             Estate Beacon turns the chaos of estate administration into a clear, step-by-step process
-            tailored to your {"state's"} requirements.
+            tailored to your state's requirements.
           </p>
         </div>
       </section>
@@ -202,7 +192,7 @@ export default function EstateBeacon() {
                   Your California Checklist in Proper Order
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Each step is ordered correctly for your {"state's"} laws. Death certificates before probate filing.
+                  Each step is ordered correctly for your state's laws. Death certificates before probate filing.
                   Probate court before contacting financial institutions. No guesswork, no mistakes.
                 </p>
                 <ul className="space-y-3 text-gray-700">
@@ -325,7 +315,7 @@ export default function EstateBeacon() {
                   Keep Track of Every Institution Contact
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Record every institution contact in one place. Phone numbers, {"representatives'"} names,
+                  Record every institution contact in one place. Phone numbers, representatives' names,
                   dates, and detailed notes—all organized for when you need them.
                 </p>
                 <ul className="space-y-3 text-gray-700">
@@ -435,7 +425,7 @@ export default function EstateBeacon() {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {features.map((feature, i) => (
               <div key={i} className="group bg-white p-8 rounded-2xl border border-gray-100 hover:border-[#6b9688]/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
                 <div className="text-5xl mb-5 transition-transform group-hover:scale-110 duration-300">{feature.icon}</div>
@@ -498,19 +488,10 @@ export default function EstateBeacon() {
             </h2>
             <div className="space-y-6 text-gray-700 text-base sm:text-lg leading-relaxed font-light">
               <p>
-                Estate laws vary dramatically from state to state. California&apos;s probate process is completely
-                different from Texas or New York. Filing deadlines, required forms, and even the order of operations
-                changes based on where the estate is being settled.
+                Estate laws vary dramatically by state. California's probate process is completely different from Texas or New York—filing deadlines, required forms, and even the order of operations change based on your location.
               </p>
               <p className="text-gray-900">
-                <strong className="font-semibold">Generic advice can lead to costly mistakes.</strong> Missing a deadline or filing forms
-                in the wrong order can delay the process by months—or worse, create legal liability. A single missed deadline
-                could cost the estate thousands in additional legal fees.
-              </p>
-              <p>
-                Estate Beacon provides checklists built for your specific state, with proper sequencing and
-                deadline reminders tailored to your jurisdiction&apos;s requirements. The cost is a qualified estate expense,
-                reimbursable from the estate—a small investment compared to hiring additional legal help or fixing mistakes later.
+                <strong className="font-semibold">Generic advice can lead to costly mistakes.</strong> Missing a deadline or filing forms in the wrong order can delay the process by months or create legal liability. Estate Beacon provides state-specific checklists with proper sequencing and deadline reminders. The cost is fully reimbursable from the estate.
               </p>
             </div>
           </div>
