@@ -102,37 +102,37 @@ export default function EstateBeacon() {
           }}></div>
         </div>
 
-        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
+        <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="text-center">
             {/* Logo + Brand Name */}
-            <div className="inline-flex items-center gap-3 mb-6">
-              <svg width="48" height="48" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-                {/* Outer waves */}
-                <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="1.5" opacity="0.2" />
-                <circle cx="30" cy="30" r="22" stroke="white" strokeWidth="1.5" opacity="0.4" />
-                {/* Inner beacon light */}
-                <circle cx="30" cy="30" r="14" fill="white" opacity="0.9" />
-                <circle cx="30" cy="30" r="8" fill="white" />
-                {/* Center dot */}
-                <circle cx="30" cy="30" r="3" fill="#2f5952" />
-              </svg>
-              <span className="text-2xl sm:text-3xl font-bold text-white">Estate Beacon</span>
-            </div>
-            <div className="inline-block mb-6">
+            <div className="inline-block mb-4">
+              <div className="flex items-center gap-3 justify-center mb-3">
+                <svg width="48" height="48" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  {/* Outer waves */}
+                  <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="1.5" opacity="0.2" />
+                  <circle cx="30" cy="30" r="22" stroke="white" strokeWidth="1.5" opacity="0.4" />
+                  {/* Inner beacon light */}
+                  <circle cx="30" cy="30" r="14" fill="white" opacity="0.9" />
+                  <circle cx="30" cy="30" r="8" fill="white" />
+                  {/* Center dot */}
+                  <circle cx="30" cy="30" r="3" fill="#2f5952" />
+                </svg>
+                <span className="text-2xl sm:text-3xl font-bold text-white">Estate Beacon</span>
+              </div>
               <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#d4e5df] text-xs font-semibold tracking-[0.15em] uppercase">
                 For Estate Executors
               </span>
             </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 leading-[1.1] tracking-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-5 leading-[1.1] tracking-tight">
               Your Clear Path Through<br />Estate Administration
             </h1>
-            <p className="text-xl sm:text-2xl text-white/85 mb-8 max-w-3xl mx-auto leading-relaxed font-light">
+            <p className="text-xl sm:text-2xl text-white/85 mb-6 max-w-3xl mx-auto leading-relaxed font-light">
               Being named executor is overwhelming, especially while grieving. Get state-specific checklists,
               proper task sequencing, and tools to manage every aspect of estate settlement with confidence.
             </p>
 
             {/* Get Started Button */}
-            <div className="mb-8">
+            <div className="mb-6">
               <a
                 href="#questionnaire"
                 className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
@@ -151,6 +151,66 @@ export default function EstateBeacon() {
         <div className="absolute bottom-0 left-0 right-0 h-16 bg-white" style={{
           clipPath: "polygon(0 50%, 100% 0, 100% 100%, 0 100%)"
         }}></div>
+      </section>
+
+      {/* Hero Screenshot - Immediate Visual */}
+      <section className="pt-8 pb-16 sm:pt-12 sm:pb-20 bg-white">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
+            {/* Browser Chrome */}
+            <div className="bg-gray-100 px-4 py-3 flex items-center space-x-2 border-b border-gray-200">
+              <div className="flex space-x-2">
+                <div className="w-3 h-3 rounded-full bg-red-400"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-400"></div>
+                <div className="w-3 h-3 rounded-full bg-green-400"></div>
+              </div>
+              <div className="flex-1 text-center text-xs text-gray-500 font-light">Estate Beacon - California Checklist</div>
+            </div>
+            {/* Content */}
+            <div className="p-6 sm:p-8 bg-gradient-to-br from-gray-50 to-white">
+              <div className="space-y-3">
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-lg border-2 border-green-200 shadow-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600 font-bold">✓</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">Obtain Death Certificates</div>
+                    <div className="text-sm text-gray-500 mt-1 font-light">Completed • Required for all institutions</div>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4 p-4 bg-white rounded-lg border-2 border-[#4a8177] shadow-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-[#4a8177] flex items-center justify-center text-white font-bold">2</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-900">File for Probate (Superior Court)</div>
+                    <div className="text-sm text-gray-500 mt-1 font-light">In Progress • CA specific forms required</div>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">3</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-700">Notify Financial Institutions</div>
+                    <div className="text-sm text-gray-500 mt-1 font-light">Start after probate filing</div>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">4</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-700">Inventory Estate Assets</div>
+                    <div className="text-sm text-gray-500 mt-1 font-light">CA requires detailed inventory</div>
+                  </div>
+                </div>
+                <div className="flex items-start space-x-4 p-4 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-bold">5</div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-700">File Tax Returns</div>
+                    <div className="text-sm text-gray-500 mt-1 font-light">Federal and state estate taxes</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p className="text-center text-sm text-gray-500 mt-4 font-light">
+            State-specific guidance in the right order • Automatically sequenced for your location
+          </p>
+        </div>
       </section>
 
       {/* Problem Section */}
