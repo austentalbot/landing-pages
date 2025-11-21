@@ -116,6 +116,10 @@ export default function EstateBeacon() {
         <div className="absolute inset-0 bg-gradient-to-t from-[#1f3d38]/40 via-transparent to-transparent"></div>
         <div className="absolute inset-0 bg-gradient-to-br from-[#4a8177]/20 via-transparent to-[#2f5952]/30"></div>
 
+        {/* Radial gradient glow effects */}
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-[#5a9284]/30 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-[#3d7068]/20 rounded-full blur-3xl"></div>
+
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div
@@ -135,6 +139,12 @@ export default function EstateBeacon() {
             backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
           }}
         ></div>
+
+        {/* Animated light beams */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-1/3 w-px h-full bg-gradient-to-b from-white via-white/50 to-transparent"></div>
+          <div className="absolute top-0 right-1/3 w-px h-full bg-gradient-to-b from-transparent via-white/30 to-transparent"></div>
+        </div>
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
           <div className="text-center">
@@ -195,9 +205,10 @@ export default function EstateBeacon() {
             <div className="mb-6">
               <a
                 href="#questionnaire"
-                className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
+                className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-[0_20px_60px_-15px_rgba(255,255,255,0.3)] hover:shadow-[0_25px_70px_-15px_rgba(255,255,255,0.4)] hover:-translate-y-1 relative group"
               >
-                Get Started →
+                <span className="relative z-10">Get Started →</span>
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white via-white to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
               </a>
             </div>
 
@@ -208,28 +219,50 @@ export default function EstateBeacon() {
 
             {/* Small Screenshots in Header */}
             <div className="mt-12 flex flex-col sm:flex-row gap-6 justify-center items-center max-w-4xl mx-auto">
-              {/* Mini Screenshot 1: Contact Log */}
-              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-white/20 transform hover:scale-105 transition-transform duration-200">
+              {/* Mini Screenshot 1: Accounts Checklist */}
+              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                  <span className="text-[10px] text-gray-500 ml-2">Contact Log</span>
+                  <span className="text-[10px] text-gray-500 ml-2">Accounts to Close</span>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-gray-50 to-white">
-                  <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-                    <div className="px-3 py-2 bg-gray-50 border-b border-gray-200">
-                      <div className="text-xs font-semibold text-gray-900">Wells Fargo</div>
-                      <div className="text-[10px] text-gray-500">Acct. •••7392</div>
-                    </div>
-                    <div className="p-3 space-y-2">
-                      <div className="flex justify-between text-[10px]">
-                        <span className="text-gray-500">Status:</span>
-                        <span className="text-green-600 font-medium">Closed</span>
+                  <div className="space-y-2">
+                    {/* Completed Account */}
+                    <div className="flex items-center gap-2 p-2 bg-green-50 rounded border border-green-200">
+                      <div className="flex-shrink-0 w-4 h-4 rounded bg-green-500 flex items-center justify-center">
+                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        </svg>
                       </div>
-                      <div className="flex justify-between text-[10px]">
-                        <span className="text-gray-500">Contact:</span>
-                        <span className="text-gray-900">Jan 15</span>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-gray-900 line-through">Wells Fargo</div>
+                        <div className="text-[10px] text-gray-500">Checking •••7392</div>
+                      </div>
+                    </div>
+                    {/* In Progress Account */}
+                    <div className="flex items-center gap-2 p-2 bg-blue-50 rounded border border-blue-200">
+                      <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-blue-500 bg-white"></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-gray-900">Chase Bank</div>
+                        <div className="text-[10px] text-gray-500">Savings •••4521</div>
+                      </div>
+                    </div>
+                    {/* Pending Account */}
+                    <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
+                      <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-gray-300 bg-white"></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-gray-900">Bank of America</div>
+                        <div className="text-[10px] text-gray-500">Investment •••8834</div>
+                      </div>
+                    </div>
+                    {/* Pending Account */}
+                    <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
+                      <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-gray-300 bg-white"></div>
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-semibold text-gray-900">Fidelity</div>
+                        <div className="text-[10px] text-gray-500">IRA •••2091</div>
                       </div>
                     </div>
                   </div>
@@ -237,7 +270,7 @@ export default function EstateBeacon() {
               </div>
 
               {/* Mini Screenshot 2: Progress Card */}
-              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl overflow-hidden border border-white/20 transform hover:scale-105 transition-transform duration-200">
+              <div className="w-full sm:w-80 bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -245,19 +278,19 @@ export default function EstateBeacon() {
                   <span className="text-[10px] text-gray-500 ml-2">Dashboard</span>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-gray-50 to-white">
-                  <div className="bg-white rounded-lg border border-gray-200 p-4 text-center">
-                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-2">
+                  <div className="bg-white rounded-lg border border-gray-200 p-4 text-center shadow-sm">
+                    <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-2 shadow-lg">
                       <span className="text-xl font-bold">64%</span>
                     </div>
                     <div className="text-[10px] font-semibold text-gray-900">Overall Progress</div>
                     <div className="text-[9px] text-gray-500 mt-1">23 of 36 complete</div>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-3">
-                    <div className="bg-white rounded p-2 border border-gray-200 text-center">
+                    <div className="bg-white rounded p-2 border border-gray-200 text-center shadow-sm">
                       <div className="text-lg font-bold text-[#4a8177]">13</div>
                       <div className="text-[9px] text-gray-500">Institutions</div>
                     </div>
-                    <div className="bg-white rounded p-2 border border-gray-200 text-center">
+                    <div className="bg-white rounded p-2 border border-gray-200 text-center shadow-sm">
                       <div className="text-lg font-bold text-orange-500">3</div>
                       <div className="text-[9px] text-gray-500">Deadlines</div>
                     </div>
@@ -278,11 +311,11 @@ export default function EstateBeacon() {
       </section>
 
       {/* Hero Screenshot with Text Overlay */}
-      <section className="relative pt-8 pb-16 sm:pt-12 sm:pb-20 bg-white overflow-hidden">
+      <section className="relative pt-8 pb-16 sm:pt-12 sm:pb-20 bg-gradient-to-b from-white via-gray-50 to-white overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative">
             {/* Screenshot as Background */}
-            <div className="absolute inset-0 flex items-center justify-center opacity-20 scale-105 blur-[2px]">
+            <div className="absolute inset-0 flex items-center justify-center opacity-40 scale-105 blur-[1px]">
               <div className="w-full max-w-4xl bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-200">
                 {/* Browser Chrome */}
                 <div className="bg-gray-100 px-4 py-3 flex items-center space-x-2 border-b border-gray-200">
@@ -370,19 +403,19 @@ export default function EstateBeacon() {
 
             {/* Text Overlay */}
             <div className="relative z-10 py-24 sm:py-32 text-center">
-              <div className="backdrop-blur-sm bg-white/80 rounded-3xl p-8 sm:p-12 shadow-2xl border border-gray-200/50 max-w-4xl mx-auto">
-                <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight">
+              <div className="max-w-4xl mx-auto px-4">
+                <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight" style={{textShadow: '0 2px 10px rgba(255,255,255,0.8), 0 4px 20px rgba(255,255,255,0.6)'}}>
                   You Shouldn't Have to
                   <br className="hidden sm:block" /> Figure This Out Alone
                 </h2>
-                <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-8 font-light">
+                <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed mb-8 font-light" style={{textShadow: '0 1px 8px rgba(255,255,255,0.9), 0 2px 15px rgba(255,255,255,0.7)'}}>
                   Every executor faces the same questions:{" "}
-                  <em className="text-gray-800 font-normal">
+                  <em className="text-gray-900 font-normal">
                     Where do I start? Am I doing this in the right order? Did I
                     contact everyone? What do I tell the beneficiaries?
                   </em>
                 </p>
-                <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed font-light max-w-3xl mx-auto">
+                <p className="text-xl sm:text-2xl text-gray-800 leading-relaxed font-light max-w-3xl mx-auto" style={{textShadow: '0 1px 8px rgba(255,255,255,0.9), 0 2px 15px rgba(255,255,255,0.7)'}}>
                   Estate Beacon turns the chaos of estate administration into a clear,
                   step-by-step process tailored to your state's requirements.
                 </p>
