@@ -218,8 +218,8 @@ export default function EstateBeacon() {
 
             {/* Corner Screenshots */}
             {/* Bottom-left: Accounts Checklist */}
-            <div className="absolute bottom-8 left-2 hidden xl:block w-64 z-20">
-              <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
+            <div className="absolute bottom-2 left-0 hidden xl:block w-56 z-20">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden border border-white/30">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
@@ -270,8 +270,8 @@ export default function EstateBeacon() {
             </div>
 
             {/* Top-right: Progress Dashboard */}
-            <div className="absolute top-8 right-2 hidden xl:block w-64 z-20">
-              <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.4)] overflow-hidden border border-white/30 transform hover:scale-105 transition-all duration-300 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.5)]">
+            <div className="absolute top-2 right-0 hidden xl:block w-56 z-20">
+              <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden border border-white/30">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
