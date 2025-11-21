@@ -419,8 +419,7 @@ export function Questionnaire() {
               Estate Beacon is not yet available in {data.state}
             </h4>
             <p className="text-gray-600 font-light mb-6">
-              Enter your email and we'll notify you when we launch in {data.state}.
-              Early access pricing will be just ${EARLY_ACCESS_PRICE}.
+              Enter your email to be notified when we launch in {data.state} and receive the early access price of ${EARLY_ACCESS_PRICE}.
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
