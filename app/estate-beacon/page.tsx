@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { EmailCaptureForm } from "./EmailForm";
+import { Questionnaire } from "./Questionnaire";
 
 export const metadata: Metadata = {
   title: "Estate Beacon - Your Clear Path Through Estate Administration",
@@ -127,13 +127,18 @@ export default function EstateBeacon() {
               proper task sequencing, and tools to manage every aspect of estate settlement with confidence.
             </p>
 
-            {/* Email Capture Form */}
-            <div className="max-w-md mx-auto mb-8">
-              <EmailCaptureForm />
+            {/* Get Started Button */}
+            <div className="mb-8">
+              <a
+                href="#questionnaire"
+                className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
+              >
+                Get Started →
+              </a>
             </div>
 
             <p className="text-sm text-white/60 font-light tracking-wide">
-              Get started today • State-specific guidance • Estate reimbursable
+              Answer a few questions • Get your customized guide • Estate reimbursable
             </p>
           </div>
         </div>
@@ -276,8 +281,8 @@ export default function EstateBeacon() {
         </div>
       </section>
 
-      {/* Final CTA Section */}
-      <section className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]">
+      {/* Questionnaire Section */}
+      <section id="questionnaire" className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]">
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
           <div className="absolute inset-0" style={{
@@ -286,16 +291,19 @@ export default function EstateBeacon() {
           }}></div>
         </div>
 
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-8 tracking-tight leading-tight">
-            Ready to Bring Clarity<br className="hidden sm:block" /> to the Process?
-          </h2>
-          <p className="text-xl sm:text-2xl text-white/85 mb-12 leading-relaxed max-w-2xl mx-auto font-light">
-            Get your state-specific estate administration guide.
-            One flat fee. Reimbursable from the estate.
-          </p>
-          <div className="max-w-md mx-auto">
-            <EmailCaptureForm />
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
+              Get Your Customized<br className="hidden sm:block" /> Estate Administration Guide
+            </h2>
+            <p className="text-xl sm:text-2xl text-white/85 leading-relaxed max-w-2xl mx-auto font-light">
+              Answer a few quick questions so we can create a checklist tailored to your state and situation.
+            </p>
+          </div>
+
+          {/* Questionnaire */}
+          <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-2xl">
+            <Questionnaire />
           </div>
         </div>
       </section>
