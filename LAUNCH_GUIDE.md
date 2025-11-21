@@ -69,292 +69,99 @@ export const metadata: Metadata = {
 
 ## Analytics & Tracking
 
-### Recommended: Umami + Google Analytics (Estate Beacon Approach)
-
-**Why:** Privacy-focused open-source analytics + detailed conversion tracking
-
-Estate Beacon uses a dual-analytics approach that combines Umami's privacy-friendly tracking with Google Analytics' detailed conversion insights.
-
-#### Setup Umami Analytics
+### Umami Analytics
 
 ```bash
 npm i @umami/node
 ```
 
-**1. Create Umami Account:**
-- Visit https://umami.is (cloud) or self-host
-- Create a new website in your Umami dashboard
-- Get your Website ID
+**Setup:**
+1. Create account at umami.is
+2. Add website, get Website ID
+3. Add to `.env.local`: `NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-id`
 
-**2. Set up environment variables:**
-```bash
-# .env.local
-NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-website-id
-```
-
-**3. Track events in components:**
+**Track events:**
 
 ```tsx
 import umami from "@umami/node";
 
-// Simple declarative tracking with data attributes
-<button data-umami-event="Get Started Button">
-  Get Started →
-</button>
+// Data attribute (auto-tracked)
+<button data-umami-event="Get Started Button">Get Started</button>
 
-// Programmatic tracking with custom properties
-const handleNext = async () => {
-  await umami.track("Next Step", {
-    step: currentStep,
-    field: "state",
-    value: selectedValue
-  });
-  // Continue with your logic
-};
-
-// Track form submissions
-const handleSubmit = async () => {
-  await umami.track("Submit", {
-    source: "questionnaire",
-    ...collectedData
-  });
-};
+// Programmatic with context
+await umami.track("Step Complete", { step, field, value });
 ```
-
-**Cost:** Free tier available, $20/mo for 100k events
-
-### Recommended Stack for Validation
-
-**Minimum (Free):**
-- Umami (free tier) for privacy-focused event tracking
-- Total cost: $0
-
-**Better (if budget allows):**
-- Umami ($20/mo for 100k events)
-- Microsoft Clarity (free) for session recordings
-- Total cost: $20/mo
 
 ---
 
 ## Email Collection
 
-Your #1 validation metric is **email signups**. You need a place to send and store them.
+### MongoDB
 
-### Service Options
-
-#### 1. **MongoDB** (Recommended)
-- **Why:** Full control, flexible schema, free tier, easy to query
-- **Cost:** Free tier on MongoDB Atlas (512MB storage)
-- **Use case:** Store all email signups with custom metadata
+**Setup:** Create cluster at mongodb.com/atlas → Get connection string → Add to `.env.local`
 
 ```bash
 npm i mongodb
 ```
 
 ```tsx
-// lib/mongodb.ts
+// app/api/subscribe/route.ts
 import { MongoClient } from 'mongodb';
-
-const uri = process.env.MONGODB_URI!;
-const options = {};
-
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local');
-}
-
-if (process.env.NODE_ENV === 'development') {
-  if (!(global as any)._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    (global as any)._mongoClientPromise = client.connect();
-  }
-  clientPromise = (global as any)._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
-
-export default clientPromise;
-```
-
-```tsx
-// app/api/subscribe/route.ts
-import { NextResponse } from 'next/server';
-import clientPromise from '@/lib/mongodb';
 import { LANDING_PAGE_TYPES } from '@/lib/constants';
 
 export async function POST(request: Request) {
-  try {
-    const { email, landingPageType, questionnaireData } = await request.json();
+  const { email, landingPageType, questionnaireData } = await request.json();
 
-    const client = await clientPromise;
-    const db = client.db('landing-pages');
-
-    // Store email with landing page type
-    await db.collection('emails').insertOne({
-      email,
-      type: landingPageType, // e.g., LANDING_PAGE_TYPES.ESTATE_BEACON
-      questionnaireData,
-      createdAt: new Date(),
-      source: 'questionnaire',
-    });
-
-    return NextResponse.json({ success: true });
-  } catch (error) {
-    console.error('Email subscription error:', error);
-    return NextResponse.json(
-      { error: 'Failed to subscribe' },
-      { status: 500 }
-    );
-  }
-}
-```
-
-**Usage in components:**
-```tsx
-import { LANDING_PAGE_TYPES } from '@/lib/constants';
-
-const handleSubmit = async () => {
-  await fetch('/api/subscribe', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      email,
-      landingPageType: LANDING_PAGE_TYPES.ESTATE_BEACON,
-      questionnaireData: data,
-    }),
-  });
-};
-```
-
-#### 2. **Loops** (Alternative for email marketing)
-- **Why:** API-first, simple, built for developers
-- **Cost:** Free up to 1,000 contacts
-- **Use case:** Transactional emails, simple newsletters
-- **Setup:** https://loops.so
-
-```tsx
-// Example API call
-const response = await fetch("https://app.loops.so/api/v1/contacts/create", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.LOOPS_API_KEY}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    email: email,
-    source: "landing-page-name"
-  })
-});
-```
-
-#### 2. **Resend** (Email sending)
-- **Why:** Modern API, great DX, transactional focus
-- **Cost:** Free up to 3,000 emails/month
-- **Use case:** Send confirmation emails, updates
-- **Setup:** https://resend.com
-
-```bash
-npm i resend
-```
-
-```tsx
-// app/api/subscribe/route.ts
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-export async function POST(request: Request) {
-  const { email } = await request.json();
-
-  // Send welcome email
-  await resend.emails.send({
-    from: 'onboarding@yourdomain.com',
-    to: email,
-    subject: 'Thanks for joining!',
-    html: '<p>Welcome to the waitlist...</p>'
+  const client = await MongoClient.connect(process.env.MONGODB_URI!);
+  await client.db('landing-pages').collection('emails').insertOne({
+    email,
+    type: landingPageType,
+    questionnaireData,
+    createdAt: new Date(),
   });
 
   return Response.json({ success: true });
 }
 ```
 
-#### 3. **ConvertKit**
-- **Why:** Built for creators, automations, landing pages
-- **Cost:** Free up to 1,000 subscribers
-- **Use case:** Email marketing, sequences, broadcasts
-
-#### 4. **Mailchimp**
-- **Why:** Popular, full-featured
-- **Cost:** Free up to 500 contacts, 1,000 sends/month
-- **Use case:** Traditional email marketing
-
-#### 5. **Airtable** (Dead simple)
-- **Why:** Spreadsheet as database, easy to view/export
-- **Cost:** Free tier available
-- **Use case:** Quick validation without email service
-
+**Usage:**
 ```tsx
-// Example webhook to Airtable
-await fetch("https://api.airtable.com/v0/YOUR_BASE/Emails", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
-    "Content-Type": "application/json"
-  },
+await fetch('/api/subscribe', {
+  method: 'POST',
   body: JSON.stringify({
-    fields: {
-      email: email,
-      source: "landing-page-name",
-      timestamp: new Date().toISOString()
-    }
-  })
+    email,
+    landingPageType: LANDING_PAGE_TYPES.ESTATE_BEACON,
+    questionnaireData: data,
+  }),
 });
 ```
 
-#### 6. **Supabase** (Self-hosted data)
-- **Why:** Free Postgres database, real-time, auth built-in
-- **Cost:** Free tier: 500MB database, 2GB bandwidth
-- **Use case:** Full control, can build admin dashboard
+---
+
+## Optional: Email Sending
+
+If you want to send welcome/confirmation emails:
+
+### Resend
+
+Send welcome/confirmation emails (optional):
 
 ```bash
-npm i @supabase/supabase-js
+npm i resend
 ```
 
 ```tsx
-// lib/supabase.ts
-import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend';
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// app/api/subscribe/route.ts
-import { supabase } from '@/lib/supabase'
-
-export async function POST(request: Request) {
-  const { email } = await request.json();
-
-  const { data, error } = await supabase
-    .from('waitlist')
-    .insert([{ email, source: 'hero', created_at: new Date() }])
-
-  return Response.json({ success: !error });
-}
+await resend.emails.send({
+  from: 'onboarding@yourdomain.com',
+  to: email,
+  subject: 'Thanks for joining!',
+  html: '<p>Welcome!</p>'
+});
 ```
-
-### Recommended Email Stack
-
-**Early validation (0-100 signups):**
-- Loops (free) + Resend (free) for sending emails
-- OR Airtable (dead simple to view submissions)
-
-**Growth phase (100-1,000 signups):**
-- ConvertKit or Loops for automation
-- Resend for transactional emails
 
 ---
 
@@ -737,79 +544,12 @@ After 2-4 weeks, score your idea (0-10 each):
 
 ---
 
-## Quick Reference: Recommended Stack
+## Tech Stack
 
-### Minimal (Free Tier)
-
-**Landing Page:**
-- Next.js on Vercel (free)
-
-**Analytics:**
-- Umami (free tier) - privacy-focused event tracking
-
-**Email Collection:**
-- MongoDB Atlas (free tier - 512MB)
-
-**Email Sending (optional):**
-- Resend (free up to 3k/month)
-
-**Legal:**
-- Privacy policy generator (free)
-
-**Total monthly cost:** $0
-
-### Better (Small Budget)
-
-**Add:**
-- Umami ($20/mo for 100k events) - upgraded plan
-- Microsoft Clarity (free) - heatmaps and session recordings
-- Loops or Resend ($20-50/mo) - email marketing automation
-- Custom domain ($10-15/year)
-
-**Total monthly cost:** ~$20-40/mo
-
-### Advanced (Serious Validation)
-
-**Add:**
-- Dedicated email marketing platform like Loops ($50/mo) or ConvertKit ($29-50/mo)
-- Typeform ($25/mo) - beautiful surveys
-- Sentry ($0-26/mo) - error tracking
-
-**Total monthly cost:** ~$50-100/mo
-
----
-
-## Tools Cheat Sheet
-
-### Analytics
-- **Umami** ⭐ (Recommended): Free tier available, privacy-focused, open-source, simple event tracking
-
-### Email Collection & Sending
-- **MongoDB** ⭐ (Recommended): Free tier, full control, flexible schema
-- **Loops**: Free-$50/mo, developer-friendly, email marketing
-- **Resend**: Free-$20/mo, transactional emails
-- **ConvertKit**: Free-$29/mo, email marketing
-- **Mailchimp**: Free-$20/mo, traditional ESP
-- **Airtable**: Free, spreadsheet database
-
-### Heatmaps & Session Recording
-- **Microsoft Clarity**: FREE, unlimited sessions
-- **Hotjar**: $0-99/mo, heatmaps + recordings + surveys
-- **FullStory**: $$$ enterprise
-
-### A/B Testing
-- **Vercel Edge Middleware**: Free, code-based
-- **VWO**: $200+/mo, visual editor
-- **Optimizely**: $$$ enterprise
-
-### Forms & Surveys
-- **Typeform**: $0-25/mo, beautiful forms
-- **Tally**: Free, notion-style forms
-- **Google Forms**: Free, basic but works
-
-### Error Tracking
-- **Sentry**: $0-26/mo, error monitoring
-- **LogRocket**: $99+/mo, session replay + errors
+- **Hosting:** Next.js on Vercel
+- **Analytics:** Umami
+- **Email Storage:** MongoDB Atlas
+- **Email Sending (optional):** Resend
 
 ---
 
