@@ -114,6 +114,19 @@ export default function EstateBeacon() {
 
         <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 sm:py-32 lg:py-40">
           <div className="text-center">
+            {/* Minimalist Beacon Logo */}
+            <div className="inline-block mb-8">
+              <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="mx-auto mb-6">
+                {/* Outer waves */}
+                <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="1.5" opacity="0.2" />
+                <circle cx="30" cy="30" r="22" stroke="white" strokeWidth="1.5" opacity="0.4" />
+                {/* Inner beacon light */}
+                <circle cx="30" cy="30" r="14" fill="white" opacity="0.9" />
+                <circle cx="30" cy="30" r="8" fill="white" />
+                {/* Center dot */}
+                <circle cx="30" cy="30" r="3" fill="#2f5952" />
+              </svg>
+            </div>
             <div className="inline-block mb-8">
               <span className="inline-flex items-center px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 text-[#d4e5df] text-xs font-semibold tracking-[0.15em] uppercase">
                 For Estate Executors
@@ -153,7 +166,7 @@ export default function EstateBeacon() {
       <section className="py-24 sm:py-32 bg-white">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-8 tracking-tight leading-tight">
-            You Shouldn&apos;t Have to<br className="hidden sm:block" /> Figure This Out Alone
+            {"You Shouldn't Have to"}<br className="hidden sm:block" /> Figure This Out Alone
           </h2>
           <p className="text-xl sm:text-2xl text-gray-600 leading-relaxed mb-8 font-light">
             Every executor faces the same questions: <em className="text-gray-800 font-normal">Where do I start? Am I doing this in the right order?
@@ -161,48 +174,20 @@ export default function EstateBeacon() {
           </p>
           <p className="text-xl sm:text-2xl text-gray-700 leading-relaxed font-light max-w-3xl mx-auto">
             Estate Beacon turns the chaos of estate administration into a clear, step-by-step process
-            tailored to your state&apos;s requirements.
+            tailored to your {"state's"} requirements.
           </p>
         </div>
       </section>
 
-      {/* Features Section */}
-      <section className="py-24 sm:py-32 bg-gradient-to-b from-gray-50 to-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              Everything You Need in One Place
-            </h2>
-            <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
-              Purpose-built tools for the unique challenges of estate administration.
-            </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {features.map((feature, i) => (
-              <div key={i} className="group bg-white p-8 rounded-2xl border border-gray-100 hover:border-[#6b9688]/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="text-5xl mb-5 transition-transform group-hover:scale-110 duration-300">{feature.icon}</div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-3 leading-snug">
-                  {feature.title}
-                </h3>
-                <p className="text-gray-600 text-sm leading-relaxed font-light">
-                  {feature.description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Product Screenshots Section */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-24 sm:py-32 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
               See Estate Beacon in Action
             </h2>
             <p className="text-xl sm:text-2xl text-gray-600 max-w-3xl mx-auto font-light leading-relaxed">
-              Get a preview of the state-specific guidance and tools that will guide you through every step.
+              A preview of the state-specific guidance and tools that will guide you through every step.
             </p>
           </div>
 
@@ -217,7 +202,7 @@ export default function EstateBeacon() {
                   Your California Checklist in Proper Order
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Each step is ordered correctly for your state&apos;s laws. Death certificates before probate filing.
+                  Each step is ordered correctly for your {"state's"} laws. Death certificates before probate filing.
                   Probate court before contacting financial institutions. No guesswork, no mistakes.
                 </p>
                 <ul className="space-y-3 text-gray-700">
@@ -337,11 +322,11 @@ export default function EstateBeacon() {
                   Institution Tracking
                 </div>
                 <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-                  Never Forget Who You Called or What Was Said
+                  Keep Track of Every Institution Contact
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Track every institution contact in one place. Record phone numbers, representatives&apos; names,
-                  dates, and detailed notes. Stop searching through emails and scraps of paper.
+                  Record every institution contact in one place. Phone numbers, {"representatives'"} names,
+                  dates, and detailed notes—all organized for when you need them.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -434,6 +419,34 @@ export default function EstateBeacon() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="py-24 sm:py-32 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-20">
+            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
+              Everything You Need in One Place
+            </h2>
+            <p className="text-xl sm:text-2xl text-gray-600 max-w-2xl mx-auto font-light leading-relaxed">
+              Purpose-built tools for the unique challenges of estate administration.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+            {features.map((feature, i) => (
+              <div key={i} className="group bg-white p-8 rounded-2xl border border-gray-100 hover:border-[#6b9688]/30 shadow-sm hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+                <div className="text-5xl mb-5 transition-transform group-hover:scale-110 duration-300">{feature.icon}</div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-3 leading-snug">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-600 text-sm leading-relaxed font-light">
+                  {feature.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -556,7 +569,17 @@ export default function EstateBeacon() {
       <footer className="bg-[#1a1f2e] text-gray-400 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <div className="mb-6">
+            <div className="mb-6 flex items-center justify-center gap-3">
+              <svg width="32" height="32" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                {/* Outer waves */}
+                <circle cx="30" cy="30" r="28" stroke="currentColor" strokeWidth="1.5" opacity="0.2" className="text-gray-600" />
+                <circle cx="30" cy="30" r="22" stroke="currentColor" strokeWidth="1.5" opacity="0.4" className="text-gray-500" />
+                {/* Inner beacon light */}
+                <circle cx="30" cy="30" r="14" fill="currentColor" opacity="0.6" className="text-[#4a8177]" />
+                <circle cx="30" cy="30" r="8" fill="currentColor" className="text-[#4a8177]" />
+                {/* Center dot */}
+                <circle cx="30" cy="30" r="3" fill="white" />
+              </svg>
               <span className="text-2xl font-bold text-white">Estate Beacon</span>
             </div>
             <p className="text-sm font-light mb-6">

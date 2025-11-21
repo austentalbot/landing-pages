@@ -68,7 +68,7 @@ export function Questionnaire() {
       await new Promise(resolve => setTimeout(resolve, 1000));
 
       setSubmitStatus("success");
-      setMessage("Thanks! We'll notify you as soon as Estate Beacon is ready. We'll use your answers to personalize your experience.");
+      setMessage("Thank you. We'll notify you as soon as Estate Beacon is ready and will use your answers to personalize your experience.");
 
       // Track conversion
       if (typeof window !== "undefined" && (window as any).gtag) {
@@ -90,7 +90,7 @@ export function Questionnaire() {
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
           <span className="text-4xl">✓</span>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">You&apos;re all set!</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">{"You're all set"}</h3>
         <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
           {message}
         </p>
@@ -159,13 +159,13 @@ export function Questionnaire() {
             ← Back
           </button>
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            What&apos;s your current situation?
+            {"What's your current situation?"}
           </h3>
           <div className="space-y-3">
             {[
-              { value: "current_executor", label: "I&apos;m currently serving as an executor" },
-              { value: "named_not_started", label: "I&apos;ve been named but haven&apos;t started yet" },
-              { value: "preparing", label: "I&apos;m preparing in case I&apos;m named" },
+              { value: "current_executor", label: "I'm currently serving as an executor" },
+              { value: "named_not_started", label: "I've been named but haven't started yet" },
+              { value: "preparing", label: "I'm preparing in case I'm named" },
             ].map(option => (
               <button
                 key={option.value}
@@ -220,7 +220,7 @@ export function Questionnaire() {
             ← Back
           </button>
           <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            What&apos;s your biggest challenge right now?
+            {"What's your biggest challenge right now?"}
           </h3>
           <div className="space-y-3">
             {[
@@ -287,16 +287,16 @@ export function Questionnaire() {
               <span className="text-3xl">📋</span>
             </div>
             <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Perfect! We&apos;re preparing your customized guide
+              Thank you for sharing these details
             </h3>
             <p className="text-lg text-gray-600 font-light mb-8">
-              Based on your answers, we&apos;ll create a {data.state}-specific checklist tailored to your situation.
+              {"Based on your answers, we'll create a "}{data.state}{"-specific checklist tailored to your situation."}
             </p>
           </div>
 
           {/* Summary */}
           <div className="bg-gray-50 rounded-2xl p-6 space-y-3 text-left">
-            <h4 className="font-semibold text-gray-900 mb-4">Your details:</h4>
+            <h4 className="font-semibold text-gray-900 mb-4">Your details</h4>
             <div className="space-y-2 text-sm text-gray-600 font-light">
               <p>📍 <strong className="text-gray-900">State:</strong> {data.state}</p>
               <p>👤 <strong className="text-gray-900">Status:</strong> {
@@ -321,10 +321,10 @@ export function Questionnaire() {
           {/* Email capture */}
           <div className="bg-white border-2 border-[#4a8177]/20 rounded-2xl p-8">
             <h4 className="text-xl font-semibold text-gray-900 mb-2">
-              We&apos;re putting the finishing touches on Estate Beacon
+              {"We're putting the finishing touches on Estate Beacon"}
             </h4>
             <p className="text-gray-600 font-light mb-6">
-              Enter your email and we&apos;ll notify you the moment your customized {data.state} estate guide is ready.
+              {"Enter your email and we'll notify you the moment your customized "}{data.state}{" estate guide is ready."}
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
