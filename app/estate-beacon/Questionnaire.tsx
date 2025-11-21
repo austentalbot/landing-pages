@@ -11,23 +11,65 @@ interface QuestionnaireData {
 }
 
 const US_STATES = [
-  "Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado",
-  "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho",
-  "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana",
-  "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota",
-  "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada",
-  "New Hampshire", "New Jersey", "New Mexico", "New York",
-  "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon",
-  "Pennsylvania", "Rhode Island", "South Carolina", "South Dakota",
-  "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington",
-  "West Virginia", "Wisconsin", "Wyoming"
+  "Alabama",
+  "Alaska",
+  "Arizona",
+  "Arkansas",
+  "California",
+  "Colorado",
+  "Connecticut",
+  "Delaware",
+  "Florida",
+  "Georgia",
+  "Hawaii",
+  "Idaho",
+  "Illinois",
+  "Indiana",
+  "Iowa",
+  "Kansas",
+  "Kentucky",
+  "Louisiana",
+  "Maine",
+  "Maryland",
+  "Massachusetts",
+  "Michigan",
+  "Minnesota",
+  "Mississippi",
+  "Missouri",
+  "Montana",
+  "Nebraska",
+  "Nevada",
+  "New Hampshire",
+  "New Jersey",
+  "New Mexico",
+  "New York",
+  "North Carolina",
+  "North Dakota",
+  "Ohio",
+  "Oklahoma",
+  "Oregon",
+  "Pennsylvania",
+  "Rhode Island",
+  "South Carolina",
+  "South Dakota",
+  "Tennessee",
+  "Texas",
+  "Utah",
+  "Vermont",
+  "Virginia",
+  "Washington",
+  "West Virginia",
+  "Wisconsin",
+  "Wyoming",
 ];
 
 export function Questionnaire() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Partial<QuestionnaireData>>({});
   const [email, setEmail] = useState("");
-  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [submitStatus, setSubmitStatus] = useState<
+    "idle" | "loading" | "success" | "error"
+  >("idle");
   const [message, setMessage] = useState("");
 
   const totalSteps = 5;
@@ -65,10 +107,12 @@ export function Questionnaire() {
       //   }),
       // });
 
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
 
       setSubmitStatus("success");
-      setMessage("Thank you. We'll notify you as soon as Estate Beacon is ready and will use your answers to personalize your experience.");
+      setMessage(
+        "Thank you. We'll notify you as soon as Estate Beacon is ready and will use your answers to personalize your experience."
+      );
 
       // Track conversion
       if (typeof window !== "undefined" && (window as any).gtag) {
@@ -90,7 +134,9 @@ export function Questionnaire() {
         <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
           <span className="text-4xl">✓</span>
         </div>
-        <h3 className="text-2xl font-bold text-gray-900 mb-4">You're all set</h3>
+        <h3 className="text-2xl font-bold text-gray-900 mb-4">
+          You're all set
+        </h3>
         <p className="text-gray-600 leading-relaxed max-w-md mx-auto">
           {message}
         </p>
@@ -135,72 +181,20 @@ export function Questionnaire() {
               backgroundRepeat: "no-repeat",
               backgroundPosition: "right 1rem center",
               backgroundSize: "1.5em 1.5em",
-              paddingRight: "3rem"
+              paddingRight: "3rem",
             }}
           >
             <option value="">Select a state...</option>
-            {US_STATES.map(state => (
-              <option key={state} value={state}>{state}</option>
+            {US_STATES.map((state) => (
+              <option key={state} value={state}>
+                {state}
+              </option>
             ))}
           </select>
           <p className="text-sm text-gray-500 font-light">
-            Estate laws vary by state, so we&apos;ll customize guidance for your location.
+            Estate laws vary by state, so we&apos;ll customize guidance for your
+            location.
           </p>
-
-          {/* Preview Screenshot */}
-          <div className="mt-8 p-6 bg-gradient-to-br from-[#4a8177]/5 to-[#3d7068]/5 rounded-xl border border-[#4a8177]/10">
-            <p className="text-xs text-gray-500 font-semibold uppercase tracking-wider mb-3">Preview: Your Dashboard</p>
-            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
-              <div className="p-6 space-y-4">
-                {/* Progress Ring */}
-                <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 border border-gray-200 text-center">
-                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-3">
-                    <span className="text-2xl font-bold">64%</span>
-                  </div>
-                  <div className="text-sm font-semibold text-gray-900">Overall Progress</div>
-                  <div className="text-xs text-gray-500 mt-1">23 of 36 tasks complete</div>
-                </div>
-
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-2xl font-bold text-[#4a8177]">13</div>
-                    <div className="text-xs text-gray-500 mt-1">Institutions Contacted</div>
-                  </div>
-                  <div className="bg-gradient-to-br from-gray-50 to-white rounded-lg p-4 border border-gray-200 text-center">
-                    <div className="text-2xl font-bold text-orange-500">3</div>
-                    <div className="text-xs text-gray-500 mt-1">Upcoming Deadlines</div>
-                  </div>
-                </div>
-
-                {/* Checklist Preview */}
-                <div className="space-y-2">
-                  <div className="text-xs font-semibold text-gray-900 mb-2">Recent Tasks</div>
-                  <div className="flex items-start space-x-3 p-3 bg-white rounded-lg border border-green-200">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-green-100 flex items-center justify-center text-green-600 text-xs font-bold">✓</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold text-gray-900">Obtain Death Certificates</div>
-                      <div className="text-xs text-gray-500 mt-0.5">Completed Jan 12</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3 p-3 bg-[#4a8177]/5 rounded-lg border-2 border-[#4a8177]">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-[#4a8177] flex items-center justify-center text-white text-xs font-bold">2</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold text-gray-900">File for Probate</div>
-                      <div className="text-xs text-gray-500 mt-0.5">In progress</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-200 opacity-60">
-                    <div className="flex-shrink-0 w-5 h-5 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 text-xs font-bold">3</div>
-                    <div className="flex-1 min-w-0">
-                      <div className="text-sm font-semibold text-gray-700">Notify Financial Institutions</div>
-                      <div className="text-xs text-gray-500 mt-0.5">Not started</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
       )}
 
@@ -218,10 +212,16 @@ export function Questionnaire() {
           </h3>
           <div className="space-y-3">
             {[
-              { value: "current_executor", label: "I'm currently serving as an executor" },
-              { value: "named_not_started", label: "I've been named but haven't started yet" },
+              {
+                value: "current_executor",
+                label: "I'm currently serving as an executor",
+              },
+              {
+                value: "named_not_started",
+                label: "I've been named but haven't started yet",
+              },
               { value: "preparing", label: "I'm preparing in case I'm named" },
-            ].map(option => (
+            ].map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleNext("situation", option.value)}
@@ -248,11 +248,14 @@ export function Questionnaire() {
           </h3>
           <div className="space-y-3">
             {[
-              { value: "just_starting", label: "Just starting (within first month)" },
+              {
+                value: "just_starting",
+                label: "Just starting (within first month)",
+              },
               { value: "in_progress", label: "In progress (1-6 months in)" },
               { value: "well_underway", label: "Well underway (6+ months in)" },
               { value: "not_started", label: "Haven't started yet" },
-            ].map(option => (
+            ].map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleNext("stage", option.value)}
@@ -279,12 +282,24 @@ export function Questionnaire() {
           </h3>
           <div className="space-y-3">
             {[
-              { value: "what_to_do_first", label: "Not knowing what to do first" },
-              { value: "tracking_institutions", label: "Keeping track of all the institutions" },
-              { value: "deadlines_paperwork", label: "Managing deadlines and paperwork" },
-              { value: "beneficiary_communication", label: "Communicating with beneficiaries" },
+              {
+                value: "what_to_do_first",
+                label: "Not knowing what to do first",
+              },
+              {
+                value: "tracking_institutions",
+                label: "Keeping track of all the institutions",
+              },
+              {
+                value: "deadlines_paperwork",
+                label: "Managing deadlines and paperwork",
+              },
+              {
+                value: "beneficiary_communication",
+                label: "Communicating with beneficiaries",
+              },
               { value: "all_of_above", label: "All of the above" },
-            ].map(option => (
+            ].map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleNext("challenge", option.value)}
@@ -314,7 +329,7 @@ export function Questionnaire() {
               { value: "yes", label: "Yes, I have legal representation" },
               { value: "no", label: "No, I'm handling it myself" },
               { value: "not_sure", label: "Not sure yet" },
-            ].map(option => (
+            ].map((option) => (
               <button
                 key={option.value}
                 onClick={() => handleNext("hasLawyer", option.value)}
@@ -345,7 +360,8 @@ export function Questionnaire() {
               Thank you for sharing these details
             </h3>
             <p className="text-lg text-gray-600 font-light mb-8">
-              Based on your answers, we'll create a {data.state}-specific checklist tailored to your situation.
+              Based on your answers, we'll create a {data.state}-specific
+              checklist tailored to your situation.
             </p>
           </div>
 
@@ -353,23 +369,36 @@ export function Questionnaire() {
           <div className="bg-gray-50 rounded-2xl p-6 space-y-3 text-left">
             <h4 className="font-semibold text-gray-900 mb-4">Your details</h4>
             <div className="space-y-2 text-sm text-gray-600 font-light">
-              <p>📍 <strong className="text-gray-900">State:</strong> {data.state}</p>
-              <p>👤 <strong className="text-gray-900">Status:</strong> {
-                data.situation === "current_executor" ? "Currently serving as executor" :
-                data.situation === "named_not_started" ? "Named but not started" :
-                "Preparing for role"
-              }</p>
-              <p>📊 <strong className="text-gray-900">Stage:</strong> {
-                data.stage === "just_starting" ? "Just starting" :
-                data.stage === "in_progress" ? "In progress" :
-                data.stage === "well_underway" ? "Well underway" :
-                "Not started yet"
-              }</p>
-              <p>⚖️ <strong className="text-gray-900">Legal help:</strong> {
-                data.hasLawyer === "yes" ? "Working with lawyer" :
-                data.hasLawyer === "no" ? "Self-managing" :
-                "Deciding"
-              }</p>
+              <p>
+                📍 <strong className="text-gray-900">State:</strong>{" "}
+                {data.state}
+              </p>
+              <p>
+                👤 <strong className="text-gray-900">Status:</strong>{" "}
+                {data.situation === "current_executor"
+                  ? "Currently serving as executor"
+                  : data.situation === "named_not_started"
+                  ? "Named but not started"
+                  : "Preparing for role"}
+              </p>
+              <p>
+                📊 <strong className="text-gray-900">Stage:</strong>{" "}
+                {data.stage === "just_starting"
+                  ? "Just starting"
+                  : data.stage === "in_progress"
+                  ? "In progress"
+                  : data.stage === "well_underway"
+                  ? "Well underway"
+                  : "Not started yet"}
+              </p>
+              <p>
+                ⚖️ <strong className="text-gray-900">Legal help:</strong>{" "}
+                {data.hasLawyer === "yes"
+                  ? "Working with lawyer"
+                  : data.hasLawyer === "no"
+                  ? "Self-managing"
+                  : "Deciding"}
+              </p>
             </div>
           </div>
 
@@ -379,7 +408,8 @@ export function Questionnaire() {
               We're putting the finishing touches on Estate Beacon
             </h4>
             <p className="text-gray-600 font-light mb-6">
-              Enter your email and we'll notify you the moment your customized {data.state} estate guide is ready.
+              Enter your email and we'll notify you the moment your customized{" "}
+              {data.state} estate guide is ready.
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
@@ -397,7 +427,9 @@ export function Questionnaire() {
                 disabled={submitStatus === "loading"}
                 className="w-full px-8 py-4 bg-[#4a8177] text-white font-semibold rounded-xl hover:bg-[#3d7068] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5"
               >
-                {submitStatus === "loading" ? "Submitting..." : "Notify Me When Ready"}
+                {submitStatus === "loading"
+                  ? "Submitting..."
+                  : "Notify Me When Ready"}
               </button>
               {message && submitStatus === "error" && (
                 <p className="text-sm text-red-600 font-medium">{message}</p>

@@ -136,7 +136,8 @@ export default function EstateBeacon() {
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+            backgroundImage:
+              "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")",
           }}
         ></div>
 
@@ -194,10 +195,10 @@ export default function EstateBeacon() {
               <br />
               Estate Administration
             </h1>
-            <p className="text-xl sm:text-2xl text-white/85 mb-6 max-w-4xl mx-auto leading-relaxed font-light">
+            <p className="text-xl sm:text-2xl text-white/85 mb-6 max-w-2xl mx-auto leading-relaxed font-light">
               Being named executor is overwhelming, especially while grieving.
               <br />
-              Get state-specific guidance and step-by-step tools to settle the estate.
+              Get specific guidance & step-by-step help to settle the estate.
             </p>
 
             {/* Get Started Button */}
@@ -218,50 +219,78 @@ export default function EstateBeacon() {
 
             {/* Corner Screenshots */}
             {/* Bottom-left: Accounts Checklist */}
-            <div className="absolute bottom-2 left-0 hidden xl:block w-56 z-20">
+            <div className="absolute bottom-12 left-0 hidden xl:block w-56 z-20">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden border border-white/30">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                  <span className="text-[10px] text-gray-500 ml-2">Accounts to Close</span>
+                  <span className="text-[10px] text-gray-500 ml-2">
+                    Accounts to Close
+                  </span>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-gray-50 to-white">
                   <div className="space-y-2">
                     {/* Completed Account */}
                     <div className="flex items-center gap-2 p-2 bg-green-50 rounded border border-green-200">
                       <div className="flex-shrink-0 w-4 h-4 rounded bg-green-500 flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                        <svg
+                          className="w-3 h-3 text-white"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={3}
+                            d="M5 13l4 4L19 7"
+                          />
                         </svg>
                       </div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-gray-900 line-through">Wells Fargo</div>
-                        <div className="text-[10px] text-gray-500">Checking •••7392</div>
+                        <div className="text-xs font-semibold text-gray-900 line-through">
+                          Wells Fargo
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          Checking •••7392
+                        </div>
                       </div>
                     </div>
                     {/* In Progress Account */}
                     <div className="flex items-center gap-2 p-2 bg-blue-50 rounded border border-blue-200">
                       <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-blue-500 bg-white"></div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-gray-900">Chase Bank</div>
-                        <div className="text-[10px] text-gray-500">Savings •••4521</div>
+                        <div className="text-xs font-semibold text-gray-900">
+                          Chase Bank
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          Savings •••4521
+                        </div>
                       </div>
                     </div>
                     {/* Pending Account */}
                     <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
                       <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-gray-300 bg-white"></div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-gray-900">Bank of America</div>
-                        <div className="text-[10px] text-gray-500">Investment •••8834</div>
+                        <div className="text-xs font-semibold text-gray-900">
+                          Bank of America
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          Investment •••8834
+                        </div>
                       </div>
                     </div>
                     {/* Pending Account */}
                     <div className="flex items-center gap-2 p-2 bg-white rounded border border-gray-200">
                       <div className="flex-shrink-0 w-4 h-4 rounded border-2 border-gray-300 bg-white"></div>
                       <div className="flex-1 min-w-0">
-                        <div className="text-xs font-semibold text-gray-900">Fidelity</div>
-                        <div className="text-[10px] text-gray-500">IRA •••2091</div>
+                        <div className="text-xs font-semibold text-gray-900">
+                          Fidelity
+                        </div>
+                        <div className="text-[10px] text-gray-500">
+                          IRA •••2091
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -270,26 +299,34 @@ export default function EstateBeacon() {
             </div>
 
             {/* Top-right: Progress Dashboard */}
-            <div className="absolute top-2 right-0 hidden xl:block w-56 z-20">
+            <div className="absolute top-6 right-0 hidden xl:block w-56 z-20">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl overflow-hidden border border-white/30">
                 <div className="bg-gray-50 px-3 py-2 border-b border-gray-200 flex items-center gap-2">
                   <div className="w-2 h-2 rounded-full bg-red-400"></div>
                   <div className="w-2 h-2 rounded-full bg-yellow-400"></div>
                   <div className="w-2 h-2 rounded-full bg-green-400"></div>
-                  <span className="text-[10px] text-gray-500 ml-2">Dashboard</span>
+                  <span className="text-[10px] text-gray-500 ml-2">
+                    Dashboard
+                  </span>
                 </div>
                 <div className="p-4 bg-gradient-to-br from-gray-50 to-white">
                   <div className="bg-white rounded-lg border border-gray-200 p-4 text-center shadow-sm">
                     <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-br from-[#4a8177] to-[#3d7068] text-white mb-2 shadow-lg">
                       <span className="text-xl font-bold">64%</span>
                     </div>
-                    <div className="text-[10px] font-semibold text-gray-900">Overall Progress</div>
-                    <div className="text-[9px] text-gray-500 mt-1">23 of 36 complete</div>
+                    <div className="text-[10px] font-semibold text-gray-900">
+                      Overall Progress
+                    </div>
+                    <div className="text-[9px] text-gray-500 mt-1">
+                      23 of 36 complete
+                    </div>
                   </div>
                   <div className="grid grid-cols-2 gap-2 mt-3">
                     <div className="bg-white rounded p-2 border border-gray-200 text-center shadow-sm">
                       <div className="text-lg font-bold text-[#4a8177]">13</div>
-                      <div className="text-[9px] text-gray-500">Institutions</div>
+                      <div className="text-[9px] text-gray-500">
+                        Institutions
+                      </div>
                     </div>
                     <div className="bg-white rounded p-2 border border-gray-200 text-center shadow-sm">
                       <div className="text-lg font-bold text-orange-500">3</div>
@@ -312,7 +349,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* Side-by-Side Section */}
-      <section className="py-12 bg-white">
+      <section className="py-8 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             <div>
@@ -320,7 +357,8 @@ export default function EstateBeacon() {
                 You Shouldn't Have to Figure This Out Alone
               </h2>
               <p className="text-lg text-gray-600 mb-4 leading-relaxed font-light">
-                Every executor faces the same questions: Where do I start? Am I doing this in the right order?
+                Every executor faces the same questions: Where do I start? Am I
+                doing this in the right order?
               </p>
               <p className="text-lg text-gray-700 leading-relaxed font-light">
                 Estate Beacon turns chaos into a clear, step-by-step process.
@@ -330,7 +368,9 @@ export default function EstateBeacon() {
               {/* Simplified Checklist */}
               <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-200">
                 <div className="bg-gray-50 px-4 py-3 border-b border-gray-200">
-                  <div className="font-semibold text-gray-900">Your Checklist</div>
+                  <div className="font-semibold text-gray-900">
+                    Your Checklist
+                  </div>
                 </div>
                 <div className="p-6 bg-gradient-to-br from-gray-50 to-white">
                   <div className="space-y-3">
@@ -373,14 +413,8 @@ export default function EstateBeacon() {
       </section>
 
       {/* Product Screenshots Section */}
-      <section className="py-16 sm:py-20 bg-gradient-to-b from-gray-50 to-white">
+      <section className="py-16 sm:py-8 bg-gradient-to-b from-gray-50 to-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
-              See Estate Beacon in Action
-            </h2>
-          </div>
-
           <div className="space-y-24">
             {/* Screenshot 1: State-Specific Checklist */}
             <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -393,7 +427,8 @@ export default function EstateBeacon() {
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
                   Each step is ordered correctly for your state. Death
-                  certificates before probate, probate before institutions. No guesswork.
+                  certificates before probate, probate before institutions. No
+                  guesswork.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -572,7 +607,8 @@ export default function EstateBeacon() {
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
                   Record calls and emails in one place. Phone numbers,
-                  representatives, dates, and notes organized when you need them.
+                  representatives, dates, and notes organized when you need
+                  them.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -607,7 +643,8 @@ export default function EstateBeacon() {
                   See Your Progress at a Glance
                 </h3>
                 <p className="text-lg text-gray-600 mb-6 leading-relaxed font-light">
-                  Track deadlines, pending tasks, and completion status in one dashboard.
+                  Track deadlines, pending tasks, and completion status in one
+                  dashboard.
                 </p>
                 <ul className="space-y-3 text-gray-700">
                   <li className="flex items-start">
@@ -698,7 +735,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* Features Section */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-24 sm:py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -731,7 +768,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* How It Works Section */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-24 sm:py-8 bg-white">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-6 tracking-tight">
@@ -766,7 +803,7 @@ export default function EstateBeacon() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-24 sm:py-32 bg-white">
+      <section className="py-24 sm:py-8 bg-white">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl sm:text-5xl font-bold text-gray-900 text-center mb-20 tracking-tight">
             Frequently Asked Questions
@@ -778,7 +815,7 @@ export default function EstateBeacon() {
       {/* Questionnaire Section */}
       <section
         id="questionnaire"
-        className="relative py-24 sm:py-32 overflow-hidden bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]"
+        className="relative py-24 sm:py-12 overflow-hidden bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]"
       >
         {/* Subtle background pattern */}
         <div className="absolute inset-0 opacity-5">
@@ -799,7 +836,8 @@ export default function EstateBeacon() {
               <br className="hidden sm:block" /> Estate Administration Guide
             </h2>
             <p className="text-xl sm:text-2xl text-white/85 leading-relaxed max-w-2xl mx-auto font-light">
-              Answer a few questions to create a checklist tailored to your state.
+              Answer a few questions to create a checklist tailored to your
+              state.
             </p>
           </div>
 
