@@ -67,27 +67,29 @@ export function EmailCaptureForm() {
 
   return (
     <form onSubmit={handleSubmit} className="w-full">
-      <div className="flex flex-col sm:flex-row gap-3">
+      <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          placeholder="Enter your email"
-          className="flex-1 px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#6b9688] focus:border-transparent outline-none text-gray-900 placeholder-gray-500"
+          placeholder="Enter your email address"
+          className="flex-1 px-5 py-4 rounded-xl border-2 border-white/20 bg-white/95 backdrop-blur-sm focus:ring-2 focus:ring-white focus:border-white/40 outline-none text-gray-900 placeholder-gray-500 shadow-lg transition-all duration-200 font-light"
           disabled={status === "loading" || status === "success"}
           required
         />
         <button
           type="submit"
           disabled={status === "loading" || status === "success"}
-          className="px-6 py-3 bg-white text-[#2f5952] font-semibold rounded-lg hover:bg-gray-50 transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap"
+          className="group relative px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap shadow-xl hover:shadow-2xl hover:-translate-y-0.5"
         >
-          {status === "loading" ? "Joining..." : status === "success" ? "Joined!" : "Join Waitlist"}
+          <span className="relative z-10">
+            {status === "loading" ? "Joining..." : status === "success" ? "Joined! ✓" : "Join Waitlist"}
+          </span>
         </button>
       </div>
       {message && (
         <p
-          className={`mt-3 text-sm font-medium ${
+          className={`mt-4 text-sm font-medium ${
             status === "success" ? "text-green-100" : "text-red-200"
           }`}
         >
