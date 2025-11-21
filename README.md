@@ -34,6 +34,13 @@ npm run dev
 - `/lib` - Shared utilities
 - `/components` - Shared components (use sparingly)
 
+## Landing Pages
+
+### Estate Beacon
+- **Route:** `/estate-beacon`
+- **Description:** State-specific guidance for estate executors. Provides customized checklists, contact tracking, and step-by-step guidance for estate settlement based on the user's state.
+- **Features:** State-specific checklists, institution contact log, asset inventory tracker, document storage, beneficiary communication, deadline reminders
+
 ## Documentation
 
 - **[LANDING_PAGE_TEMPLATE.md](./LANDING_PAGE_TEMPLATE.md)** - Code templates and patterns for building new landing pages
