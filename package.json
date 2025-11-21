@@ -3,21 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "dotenvx run -f .env.${ENV:-local} -- next dev --turbopack -p 8060",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint",
-    "ngrok": "ngrok http --url=$NGROK_FORWARDING_URL 3000"
+    "ngrok": "ngrok http --url=$NGROK_FORWARDING_URL 8060"
   },
   "dependencies": {
+    "@umami/node": "^0.4.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
+    "@dotenvx/dotenvx": "^1.51.1",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
