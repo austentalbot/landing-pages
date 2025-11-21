@@ -34,9 +34,23 @@ npm run dev
 - `/lib` - Shared utilities
 - `/components` - Shared components (use sparingly)
 
+## Documentation
+
+- **[LANDING_PAGE_TEMPLATE.md](./LANDING_PAGE_TEMPLATE.md)** - Code templates and patterns for building new landing pages
+- **[LAUNCH_GUIDE.md](./LAUNCH_GUIDE.md)** - Complete guide for launching and validating ideas (analytics, email collection, metrics, legal, etc.)
+
 ## Creating a New Landing Page
 
-See `LANDING_PAGE_TEMPLATE.md` for detailed instructions on scaffolding a new landing page.
+See `LANDING_PAGE_TEMPLATE.md` for detailed code templates and instructions on scaffolding a new landing page.
+
+## Launching & Validating
+
+See `LAUNCH_GUIDE.md` for a comprehensive guide on:
+- Setting up analytics and tracking
+- Email collection services and strategies
+- Key metrics to measure
+- Legal and compliance requirements
+- Post-launch activities and when to pivot
 
 ## Deployment
 
