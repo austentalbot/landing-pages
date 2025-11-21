@@ -94,17 +94,12 @@ export default function EstateBeacon() {
     {
       question: "How much does it cost?",
       answer:
-        "Estate Beacon is $199 per estate—a one-time flat fee for complete access throughout the entire settlement process (typically 6-18 months). This is a qualified estate expense and is fully reimbursable from the estate, so you don't pay out of pocket.",
+        "Estate Beacon is $499 per estate—a one-time flat fee for complete access throughout the entire settlement process (typically 6-18 months). This is a qualified estate expense and is fully reimbursable from the estate, so you don't pay out of pocket.",
     },
     {
       question: "Is my data secure?",
       answer:
         "Yes. All documents and information are encrypted and stored securely. Your data is private and will never be shared.",
-    },
-    {
-      question: "How quickly can I get started?",
-      answer:
-        "Once you sign up, we'll guide you through the setup process for your specific state. You'll receive your customized checklist and can start organizing your estate administration immediately.",
     },
   ];
 
