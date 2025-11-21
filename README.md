@@ -5,11 +5,13 @@ A Next.js workspace for building and testing idea validation landing pages with 
 ## Getting Started
 
 1. Install dependencies:
+
 ```bash
 npm install
 ```
 
 2. Run the development server:
+
 ```bash
 npm run dev
 ```
@@ -36,25 +38,26 @@ npm run dev
 
 ## Landing Page Design Standards
 
-Based on our first landing page (estate-beacon), future landing pages should include:
-
 ### Required Sections
 
 1. **Hero Section** with:
+
    - Rich, layered gradient backgrounds (not flat colors)
    - Radial blur effects and subtle patterns for depth
    - Logo + brand name + descriptive tagline badge
    - Large, bold headline (5xl-6xl) with clear value proposition
    - Supporting subheadline explaining the problem/solution
    - Single prominent CTA button
-   - Optional: Corner/floating product screenshots showing real UI
+   - Floating product screenshots showing real UI
 
 2. **Problem/Solution Section**:
+
    - Side-by-side layout with text and product screenshot
    - Clear articulation of user pain points
    - Simple checklist or progress visualization
 
 3. **Product Screenshots Section**:
+
    - 3+ alternating left/right feature showcases
    - Browser window mockups with realistic UI elements
    - Category badges for each feature
@@ -62,21 +65,25 @@ Based on our first landing page (estate-beacon), future landing pages should inc
    - Descriptive text explaining the value
 
 4. **Features Grid**:
-   - 6-9 features in responsive grid (2-3 columns)
+
+   - 4-8 features in responsive grid (2-3 columns)
    - Emoji or icon + title + description
    - Hover effects (lift, shadow, scale)
 
 5. **How It Works**:
+
    - 3-step numbered process
    - Visual step indicators with gradient backgrounds
    - Connecting lines between steps (on desktop)
 
 6. **FAQ Section**:
+
    - Collapsible accordion-style FAQs
    - Address common objections and concerns
    - Price transparency if applicable
 
 7. **Questionnaire/Email Capture**:
+
    - Multi-step questionnaire (3-5 questions)
    - Progress bar for user engagement
    - Collect relevant segmentation data
@@ -111,6 +118,7 @@ Based on our first landing page (estate-beacon), future landing pages should inc
 ## Landing Pages
 
 ### Estate Beacon
+
 - **Route:** `/estate-beacon`
 - **Description:** State-specific guidance for estate executors. Provides customized checklists, contact tracking, and step-by-step guidance for estate settlement based on the user's state.
 - **Features:** State-specific checklists, institution contact log, asset inventory tracker, document storage, beneficiary communication, deadline reminders
@@ -128,6 +136,7 @@ See `LANDING_PAGE_TEMPLATE.md` for detailed code templates and instructions on s
 ## Launching & Validating
 
 See `LAUNCH_GUIDE.md` for a comprehensive guide on:
+
 - Setting up analytics and tracking
 - Email collection services and strategies
 - Key metrics to measure
