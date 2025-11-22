@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, FormEvent } from "react";
+import { useRouter } from "next/navigation";
 import { EARLY_ACCESS_PRICE } from "./constants";
 
 interface QuestionnaireData {
@@ -65,6 +66,7 @@ const US_STATES = [
 ];
 
 export function Questionnaire() {
+  const router = useRouter();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Partial<QuestionnaireData>>({});
   const [email, setEmail] = useState("");
@@ -118,11 +120,6 @@ export function Questionnaire() {
 
       window.umami?.track("Submit", data);
 
-      setSubmitStatus("success");
-      setMessage(
-        "Thank you. We'll notify you as soon as Estate Beacon is ready."
-      );
-
       // Track conversion
       if (typeof window !== "undefined" && (window as any).gtag) {
         (window as any).gtag("event", "conversion", {
@@ -130,6 +127,9 @@ export function Questionnaire() {
           event_label: "estate_beacon",
         });
       }
+
+      // Navigate to thank-you page
+      router.push("/estate-beacon/thank-you");
     } catch (error) {
       setSubmitStatus("error");
       setMessage("Something went wrong. Please try again.");
