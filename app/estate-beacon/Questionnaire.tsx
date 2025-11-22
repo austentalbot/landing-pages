@@ -73,7 +73,7 @@ export function Questionnaire() {
   >("idle");
   const [message, setMessage] = useState("");
 
-  const totalSteps = 5;
+  const totalSteps = 4;
 
   const handleNext = async (field: keyof QuestionnaireData, value: string) => {
     setData({ ...data, [field]: value });
@@ -207,7 +207,7 @@ export function Questionnaire() {
         </div>
       )}
 
-      {/* Question 2: Situation */}
+      {/* Question 2: Combined Situation & Stage */}
       {step === 1 && (
         <div className="space-y-6 animate-fadeIn">
           <button
@@ -222,14 +222,25 @@ export function Questionnaire() {
           <div className="space-y-3">
             {[
               {
-                value: "current_executor",
-                label: "I'm currently serving as an executor",
+                value: "current_executor_just_starting",
+                label: "Currently serving as executor - just starting (within first month)",
+              },
+              {
+                value: "current_executor_in_progress",
+                label: "Currently serving as executor - in progress (1-6 months in)",
+              },
+              {
+                value: "current_executor_well_underway",
+                label: "Currently serving as executor - well underway (6+ months in)",
               },
               {
                 value: "named_not_started",
-                label: "I've been named but haven't started yet",
+                label: "Named as executor but haven't started yet",
               },
-              { value: "preparing", label: "I'm preparing in case I'm named" },
+              {
+                value: "preparing",
+                label: "Preparing in case I'm named",
+              },
             ].map((option) => (
               <button
                 key={option.value}
@@ -243,42 +254,8 @@ export function Questionnaire() {
         </div>
       )}
 
-      {/* Question 3: Stage */}
+      {/* Question 3: Challenge */}
       {step === 2 && (
-        <div className="space-y-6 animate-fadeIn">
-          <button
-            onClick={handleBack}
-            className="text-sm text-gray-500 hover:text-gray-700 font-light mb-4"
-          >
-            ← Back
-          </button>
-          <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">
-            Where are you in the process?
-          </h3>
-          <div className="space-y-3">
-            {[
-              {
-                value: "just_starting",
-                label: "Just starting (within first month)",
-              },
-              { value: "in_progress", label: "In progress (1-6 months in)" },
-              { value: "well_underway", label: "Well underway (6+ months in)" },
-              { value: "not_started", label: "Haven't started yet" },
-            ].map((option) => (
-              <button
-                key={option.value}
-                onClick={() => handleNext("stage", option.value)}
-                className="w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#4a8177] hover:bg-[#4a8177]/5 transition-all font-light"
-              >
-                {option.label}
-              </button>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {/* Question 4: Challenge */}
-      {step === 3 && (
         <div className="space-y-6 animate-fadeIn">
           <button
             onClick={handleBack}
@@ -321,8 +298,8 @@ export function Questionnaire() {
         </div>
       )}
 
-      {/* Question 5: Lawyer */}
-      {step === 4 && (
+      {/* Question 4: Lawyer */}
+      {step === 3 && (
         <div className="space-y-6 animate-fadeIn">
           <button
             onClick={handleBack}
@@ -352,7 +329,7 @@ export function Questionnaire() {
       )}
 
       {/* Final step: Summary and email */}
-      {step === 5 && (
+      {step === 4 && (
         <div className="space-y-8 animate-fadeIn">
           <button
             onClick={handleBack}
@@ -384,21 +361,15 @@ export function Questionnaire() {
               </p>
               <p>
                 👤 <strong className="text-gray-900">Status:</strong>{" "}
-                {data.situation === "current_executor"
-                  ? "Currently serving as executor"
+                {data.situation === "current_executor_just_starting"
+                  ? "Currently serving as executor - just starting"
+                  : data.situation === "current_executor_in_progress"
+                  ? "Currently serving as executor - in progress"
+                  : data.situation === "current_executor_well_underway"
+                  ? "Currently serving as executor - well underway"
                   : data.situation === "named_not_started"
                   ? "Named but not started"
                   : "Preparing for role"}
-              </p>
-              <p>
-                📊 <strong className="text-gray-900">Stage:</strong>{" "}
-                {data.stage === "just_starting"
-                  ? "Just starting"
-                  : data.stage === "in_progress"
-                  ? "In progress"
-                  : data.stage === "well_underway"
-                  ? "Well underway"
-                  : "Not started yet"}
               </p>
               <p>
                 ⚖️ <strong className="text-gray-900">Legal help:</strong>{" "}
