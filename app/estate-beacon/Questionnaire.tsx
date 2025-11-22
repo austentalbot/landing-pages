@@ -118,11 +118,6 @@ export function Questionnaire() {
 
       window.umami?.track("Submit", data);
 
-      setSubmitStatus("success");
-      setMessage(
-        "Thank you. We'll notify you as soon as Estate Beacon is ready."
-      );
-
       // Track conversion
       if (typeof window !== "undefined" && (window as any).gtag) {
         (window as any).gtag("event", "conversion", {
@@ -130,6 +125,16 @@ export function Questionnaire() {
           event_label: "estate_beacon",
         });
       }
+
+      // Update URL for conversion tracking without navigation
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/estate-beacon/thank-you");
+      }
+
+      setSubmitStatus("success");
+      setMessage(
+        "Thank you. We'll notify you as soon as Estate Beacon is ready."
+      );
     } catch (error) {
       setSubmitStatus("error");
       setMessage("Something went wrong. Please try again.");

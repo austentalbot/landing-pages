@@ -6,12 +6,13 @@ A practical guide for engineers new to validating business ideas through landing
 
 1. [Pre-Launch Setup](#pre-launch-setup)
 2. [Analytics & Tracking](#analytics--tracking)
-3. [Email Collection](#email-collection)
-4. [Key Metrics to Track](#key-metrics-to-track)
-5. [Legal & Compliance](#legal--compliance)
-6. [Launch Checklist](#launch-checklist)
-7. [Post-Launch Activities](#post-launch-activities)
-8. [When to Pivot or Iterate](#when-to-pivot-or-iterate)
+3. [Conversion Campaigns](#conversion-campaigns)
+4. [Email Collection](#email-collection)
+5. [Key Metrics to Track](#key-metrics-to-track)
+6. [Legal & Compliance](#legal--compliance)
+7. [Launch Checklist](#launch-checklist)
+8. [Post-Launch Activities](#post-launch-activities)
+9. [When to Pivot or Iterate](#when-to-pivot-or-iterate)
 
 ---
 
@@ -91,6 +92,109 @@ import umami from "@umami/node";
 // Programmatic with context
 await umami.track("Step Complete", { step, field, value });
 ```
+
+---
+
+## Conversion Campaigns
+
+### Why Change the URL After Conversion
+
+For conversion tracking (especially with paid ads), you need a unique URL that appears after completing your primary conversion action (email signup). This allows:
+
+- **Ad platforms** (Google Ads, Facebook Ads) to track conversions accurately
+- **Analytics tools** to measure conversion funnel completion
+- **A/B testing tools** to determine which variant converts better
+- **Simple, inline user experience** - no page navigation required
+
+### Setting Up URL-Based Conversion Tracking
+
+**Update your form submission to change the URL without navigation:**
+
+```tsx
+"use client";
+
+export function EmailForm() {
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+
+    setSubmitStatus("loading");
+
+    try {
+      // Submit email to your API
+      await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, source: "your_landing_page" }),
+      });
+
+      // Track the submission with analytics
+      window.umami?.track("Email Submitted");
+
+      // Track conversion with Google Ads
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          event_category: "email_signup",
+          event_label: "your_landing_page",
+        });
+      }
+
+      // Update URL for conversion tracking WITHOUT navigation
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/[your-landing-page]/thank-you");
+      }
+
+      // Show success message
+      setSubmitStatus("success");
+    } catch (error) {
+      console.error("Submission error:", error);
+      setSubmitStatus("error");
+    }
+  };
+
+  // Show success message inline
+  if (submitStatus === "success") {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+          <span className="text-4xl">✓</span>
+        </div>
+        <h3 className="text-2xl font-bold mb-4">You're all set!</h3>
+        <p>Thank you. We'll notify you as soon as we're ready.</p>
+      </div>
+    );
+  }
+
+  return <form onSubmit={handleSubmit}>{/* form fields */}</form>;
+}
+```
+
+### Setting Up Conversion Tracking
+
+**Google Ads:**
+1. In Google Ads, go to Tools → Conversions → New Conversion
+2. Choose "Website" conversion
+3. Set the conversion URL to: `https://yourdomain.com/[landing-page]/thank-you`
+4. The URL will change to this after successful submission (without navigation)
+
+**Facebook Pixel:**
+```tsx
+// In your handleSubmit function, after successful submission
+if (typeof window !== "undefined" && (window as any).fbq) {
+  (window as any).fbq("track", "Lead");
+}
+```
+
+**Umami (Simple Analytics):**
+Track the URL change as a custom event:
+```tsx
+window.umami?.track("Conversion Complete");
+```
+
+You can also monitor pageviews to the `/thank-you` URL path in your analytics dashboard.
+
+**Pro Tip:** The URL changes to `/thank-you` but the user stays on the same page with the success message. This provides a seamless experience while still enabling conversion tracking.
 
 ---
 
