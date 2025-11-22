@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, FormEvent } from "react";
-import { useRouter } from "next/navigation";
 import { EARLY_ACCESS_PRICE } from "./constants";
 
 interface QuestionnaireData {
@@ -66,7 +65,6 @@ const US_STATES = [
 ];
 
 export function Questionnaire() {
-  const router = useRouter();
   const [step, setStep] = useState(0);
   const [data, setData] = useState<Partial<QuestionnaireData>>({});
   const [email, setEmail] = useState("");
@@ -128,8 +126,15 @@ export function Questionnaire() {
         });
       }
 
-      // Navigate to thank-you page
-      router.push("/estate-beacon/thank-you");
+      // Update URL for conversion tracking without navigation
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/estate-beacon/thank-you");
+      }
+
+      setSubmitStatus("success");
+      setMessage(
+        "Thank you. We'll notify you as soon as Estate Beacon is ready."
+      );
     } catch (error) {
       setSubmitStatus("error");
       setMessage("Something went wrong. Please try again.");

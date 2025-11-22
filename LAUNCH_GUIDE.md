@@ -97,71 +97,29 @@ await umami.track("Step Complete", { step, field, value });
 
 ## Conversion Campaigns
 
-### Why Use a Unique Thank-You URL
+### Why Change the URL After Conversion
 
-For conversion tracking (especially with paid ads), you need a unique URL that users land on after completing your primary conversion action (email signup). This allows:
+For conversion tracking (especially with paid ads), you need a unique URL that appears after completing your primary conversion action (email signup). This allows:
 
 - **Ad platforms** (Google Ads, Facebook Ads) to track conversions accurately
 - **Analytics tools** to measure conversion funnel completion
 - **A/B testing tools** to determine which variant converts better
-- **Clear success confirmation** for users
+- **Simple, inline user experience** - no page navigation required
 
-### Setting Up a Thank-You Page
+### Setting Up URL-Based Conversion Tracking
 
-**1. Create the thank-you page:**
-
-```bash
-mkdir -p app/[your-landing-page]/thank-you
-```
-
-**2. Create `app/[your-landing-page]/thank-you/page.tsx`:**
-
-```tsx
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Thank You - Your Product Name",
-  description: "Thank you for joining the waitlist!",
-  robots: "noindex", // Don't index thank-you pages
-};
-
-export default function ThankYouPage() {
-  return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center px-4">
-      <div className="max-w-2xl mx-auto text-center py-12">
-        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
-          <span className="text-4xl">✓</span>
-        </div>
-
-        <h1 className="text-4xl font-bold text-gray-900 mb-4">
-          You're all set!
-        </h1>
-
-        <p className="text-lg text-gray-600 mb-8">
-          Thank you for joining the waitlist. We'll notify you as soon as we're ready.
-        </p>
-
-        <a href="/[your-landing-page]" className="text-blue-600 hover:underline">
-          ← Back to home
-        </a>
-      </div>
-    </div>
-  );
-}
-```
-
-**3. Update your form submission to navigate to the thank-you page:**
+**Update your form submission to change the URL without navigation:**
 
 ```tsx
 "use client";
 
-import { useRouter } from "next/navigation";
-
 export function EmailForm() {
-  const router = useRouter();
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
+
+    setSubmitStatus("loading");
 
     try {
       // Submit email to your API
@@ -174,13 +132,39 @@ export function EmailForm() {
       // Track the submission with analytics
       window.umami?.track("Email Submitted");
 
-      // Navigate to thank-you page
-      router.push("/[your-landing-page]/thank-you");
+      // Track conversion with Google Ads
+      if (typeof window !== "undefined" && (window as any).gtag) {
+        (window as any).gtag("event", "conversion", {
+          event_category: "email_signup",
+          event_label: "your_landing_page",
+        });
+      }
+
+      // Update URL for conversion tracking WITHOUT navigation
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", "/[your-landing-page]/thank-you");
+      }
+
+      // Show success message
+      setSubmitStatus("success");
     } catch (error) {
       console.error("Submission error:", error);
-      setError("Something went wrong. Please try again.");
+      setSubmitStatus("error");
     }
   };
+
+  // Show success message inline
+  if (submitStatus === "success") {
+    return (
+      <div className="text-center py-12">
+        <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-green-100 mb-6">
+          <span className="text-4xl">✓</span>
+        </div>
+        <h3 className="text-2xl font-bold mb-4">You're all set!</h3>
+        <p>Thank you. We'll notify you as soon as we're ready.</p>
+      </div>
+    );
+  }
 
   return <form onSubmit={handleSubmit}>{/* form fields */}</form>;
 }
@@ -192,24 +176,25 @@ export function EmailForm() {
 1. In Google Ads, go to Tools → Conversions → New Conversion
 2. Choose "Website" conversion
 3. Set the conversion URL to: `https://yourdomain.com/[landing-page]/thank-you`
-4. Add the Google Ads conversion tag to your thank-you page
+4. The URL will change to this after successful submission (without navigation)
 
 **Facebook Pixel:**
 ```tsx
-// In your thank-you page
-useEffect(() => {
-  if (typeof window !== "undefined" && (window as any).fbq) {
-    (window as any).fbq("track", "Lead");
-  }
-}, []);
+// In your handleSubmit function, after successful submission
+if (typeof window !== "undefined" && (window as any).fbq) {
+  (window as any).fbq("track", "Lead");
+}
 ```
 
 **Umami (Simple Analytics):**
-The thank-you page view will be automatically tracked. You can monitor:
-- Pageviews to `/thank-you` = total conversions
-- Conversion rate = (thank-you pageviews / landing page pageviews) × 100
+Track the URL change as a custom event:
+```tsx
+window.umami?.track("Conversion Complete");
+```
 
-**Pro Tip:** Add the thank-you URL as a goal in your analytics platform to easily monitor conversion rates over time.
+You can also monitor pageviews to the `/thank-you` URL path in your analytics dashboard.
+
+**Pro Tip:** The URL changes to `/thank-you` but the user stays on the same page with the success message. This provides a seamless experience while still enabling conversion tracking.
 
 ---
 
