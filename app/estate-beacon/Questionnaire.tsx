@@ -364,10 +364,11 @@ export function Questionnaire() {
               <span className="text-3xl">📋</span>
             </div>
             <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-              Perfect! Here's what's next
+              Thank you for sharing these details
             </h3>
             <p className="text-base text-gray-600 font-light mb-6">
-              We'll create a {data.state}-specific checklist tailored to your situation
+              We'll create a {data.state}-specific checklist tailored to your
+              situation
             </p>
           </div>
 
@@ -380,7 +381,9 @@ export function Questionnaire() {
               Get Notified When We Launch in {data.state}
             </h4>
             <p className="text-white/90 font-light mb-6 text-lg">
-              Enter your email below to secure the early access price of ${EARLY_ACCESS_PRICE} and be first to know when Estate Beacon is ready.
+              Enter your email below to secure the early access price of $
+              {EARLY_ACCESS_PRICE} and be first to know when Estate Beacon is
+              ready.
             </p>
 
             <form onSubmit={handleEmailSubmit} className="space-y-4">
