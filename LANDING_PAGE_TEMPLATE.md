@@ -228,78 +228,162 @@ export default function LandingPage() {
 - Secondary: `#475569` (Gray)
 - Accent: `#f97316` (Orange)
 
-## 4. Analytics Setup
-
-### Option A: Google Analytics (Simple)
-
-Add to `app/layout.tsx` or individual landing pages:
-
-```tsx
-import Script from "next/script";
-
-export default function Layout({ children }) {
-  return (
-    <html>
-      <head>
-        {/* Google Analytics */}
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID"
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'GA_MEASUREMENT_ID');
-          `}
-        </Script>
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
-```
-
-### Option B: Vercel Analytics (Easiest)
+## 4. Analytics Setup with Umami
 
 ```bash
-npm i @vercel/analytics
+npm i @umami/node
 ```
 
-```tsx
-// app/layout.tsx
-import { Analytics } from "@vercel/analytics/react";
+**Setup:** Create account at umami.is → Get Website ID → Add to `.env.local`
 
-export default function Layout({ children }) {
+**Track events:**
+
+```tsx
+import umami from "@umami/node";
+
+// Simple: data attribute (auto-tracked)
+<button data-umami-event="Get Started Button">Get Started</button>
+
+// Programmatic: with context
+await umami.track("Step Complete", { step: 1, field: "state", value: "CA" });
+```
+
+## 5. Constants File Pattern
+
+Keep configuration values in a separate constants file for maintainability:
+
+```tsx
+// app/[route-name]/constants.ts
+/**
+ * Pricing and configuration constants
+ */
+
+/**
+ * Regular pricing
+ */
+export const REGULAR_PRICE = 499;
+
+/**
+ * Early access pricing
+ * $100 discount off the regular price for early signups
+ */
+export const EARLY_ACCESS_PRICE = REGULAR_PRICE - 100;
+
+// Other useful constants
+export const MAX_SIGNUP_LIMIT = 1000;
+export const LAUNCH_DATE = "2025-03-01";
+```
+
+**Usage in components:**
+```tsx
+import { EARLY_ACCESS_PRICE, REGULAR_PRICE } from './constants';
+
+<p className="text-lg">
+  Early access pricing: ${EARLY_ACCESS_PRICE} (Save ${REGULAR_PRICE - EARLY_ACCESS_PRICE})
+</p>
+```
+
+## 6. Multi-Step Questionnaire Pattern
+
+Collect segmentation data before email capture:
+
+```tsx
+// app/[route-name]/Questionnaire.tsx
+"use client";
+
+import { useState } from "react";
+import umami from "@umami/node";
+
+export function Questionnaire() {
+  const [step, setStep] = useState(0);
+  const [data, setData] = useState({});
+
+  const handleNext = async (field: string, value: string) => {
+    setData({ ...data, [field]: value });
+    await umami.track(`Step ${step}`, { field, value });
+    setStep(step + 1);
+  };
+
   return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-      </body>
-    </html>
+    <div>
+      {/* Progress bar */}
+      <div className="h-2 bg-gray-200 rounded-full">
+        <div className="h-full bg-blue-500" style={{ width: `${(step / 3) * 100}%` }} />
+      </div>
+
+      {/* Question steps */}
+      {step === 0 && (
+        <div>
+          <h3>What state are you in?</h3>
+          <select onChange={(e) => handleNext("state", e.target.value)}>
+            <option value="">Select...</option>
+            <option value="CA">California</option>
+            {/* ... */}
+          </select>
+        </div>
+      )}
+
+      {step === 1 && (
+        <div>
+          <button onClick={() => setStep(0)}>← Back</button>
+          <h3>What's your situation?</h3>
+          {["Option 1", "Option 2"].map((opt) => (
+            <button key={opt} onClick={() => handleNext("situation", opt)}>
+              {opt}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {/* Final: Email + Summary */}
+      {step === 2 && (
+        <div>
+          <p>State: {data.state}</p>
+          <p>Situation: {data.situation}</p>
+          <input type="email" placeholder="Your email" />
+          <button>Submit</button>
+        </div>
+      )}
+    </div>
   );
 }
 ```
 
-### Track Custom Events
+**Core pattern:** Progress bar → Questions with back nav → Summary + email
+
+## 7. Collapsible FAQ Component
 
 ```tsx
-// Track button clicks, form submissions, etc.
-const trackEvent = (eventName: string, properties?: Record<string, any>) => {
-  if (typeof window !== "undefined" && (window as any).gtag) {
-    (window as any).gtag("event", eventName, properties);
-  }
-};
+"use client";
+import { useState } from "react";
 
-// Usage
-<button onClick={() => trackEvent("cta_click", { location: "hero" })}>
-  Click Me
-</button>
+export function CollapsibleFAQs({ faqs }: { faqs: {question: string, answer: string}[] }) {
+  const [openIndex, setOpenIndex] = useState(0);
+
+  return (
+    <div className="space-y-4">
+      {faqs.map((faq, i) => (
+        <div key={i} className="border rounded-xl overflow-hidden">
+          <button
+            onClick={() => setOpenIndex(openIndex === i ? -1 : i)}
+            className="w-full text-left px-6 py-5 flex justify-between"
+          >
+            <h3 className="font-semibold">{faq.question}</h3>
+            <span className={openIndex === i ? "rotate-180" : ""}>▼</span>
+          </button>
+          {openIndex === i && (
+            <div className="px-6 pb-5 bg-gray-50">
+              <p>{faq.answer}</p>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+}
 ```
 
-## 5. Common Section Templates
+## 8. Common Section Templates
 
 ### Features Section
 ```tsx

@@ -110,8 +110,10 @@ npm run dev
 
 - **Metadata**: SEO-optimized title, description, and Open Graph tags
 - **Responsive**: Mobile-first design with breakpoints (sm, md, lg, xl)
-- **Components**: Extract reusable components (Questionnaire, FAQ, EmailForm)
-- **Analytics**: gtag event tracking for conversions
+- **Components**: Extract reusable components (Questionnaire, CollapsibleFAQs, EmailForm)
+- **Analytics**: Umami event tracking with data attributes and programmatic calls
+- **Database**: MongoDB for email collection with landing page type field
+- **Constants**: Shared constants file for landing page identifiers
 - **Loading States**: Handle form submissions with proper feedback
 - **Validation**: Email validation and error handling
 
@@ -122,7 +124,8 @@ npm run dev
 - **Route:** `/estate-beacon`
 - **Description:** State-specific guidance for estate executors. Provides customized checklists, contact tracking, and step-by-step guidance for estate settlement based on the user's state.
 - **Features:** State-specific checklists, institution contact log, asset inventory tracker, document storage, beneficiary communication, deadline reminders
-- **Status:** ✅ Complete - Reference implementation
+- **Tech Stack:** Umami analytics, MongoDB email collection, multi-step questionnaire pattern
+- **Status:** ✅ Complete
 
 ## Documentation
 

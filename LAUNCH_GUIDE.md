@@ -69,227 +69,99 @@ export const metadata: Metadata = {
 
 ## Analytics & Tracking
 
-### Option 1: Vercel Analytics (Easiest)
-
-**Why:** Zero config, privacy-friendly, built-in Web Vitals
+### Umami Analytics
 
 ```bash
-npm i @vercel/analytics @vercel/speed-insights
+npm i @umami/node
 ```
+
+**Setup:**
+1. Create account at umami.is
+2. Add website, get Website ID
+3. Add to `.env.local`: `NEXT_PUBLIC_UMAMI_WEBSITE_ID=your-id`
+
+**Track events:**
 
 ```tsx
-// app/layout.tsx
-import { Analytics } from "@vercel/analytics/react";
-import { SpeedInsights } from "@vercel/speed-insights/next";
+import umami from "@umami/node";
 
-export default function Layout({ children }) {
-  return (
-    <html>
-      <body>
-        {children}
-        <Analytics />
-        <SpeedInsights />
-      </body>
-    </html>
-  );
-}
+// Data attribute (auto-tracked)
+<button data-umami-event="Get Started Button">Get Started</button>
+
+// Programmatic with context
+await umami.track("Step Complete", { step, field, value });
 ```
-
-**Cost:** Free tier: 2,500 events/month
-
-### Option 2: Google Analytics 4 (GA4)
-
-**Why:** Free, detailed insights, funnels, audience data
-
-1. Create GA4 property: https://analytics.google.com
-2. Get Measurement ID (G-XXXXXXXXXX)
-3. Add to your landing page:
-
-```tsx
-// app/layout.tsx or per-page
-import Script from "next/script";
-
-<Script
-  src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-  strategy="afterInteractive"
-/>
-<Script id="google-analytics" strategy="afterInteractive">
-  {`
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');
-  `}
-</Script>
-```
-
-**Track conversions:**
-```tsx
-// When email is captured
-gtag('event', 'conversion', {
-  event_category: 'email_signup',
-  event_label: 'hero_form',
-  value: 1
-});
-```
-
-### Option 3: Plausible / Fathom (Privacy-focused)
-
-**Why:** GDPR-compliant, simple, lightweight
-
-- **Plausible:** $9/mo for 10k pageviews
-- **Fathom:** $14/mo for 100k pageviews
-
-### Option 4: Mixpanel / Amplitude (Advanced)
-
-**Why:** User behavior tracking, cohort analysis, funnel optimization
-
-Use for more mature validation or if you need detailed user journeys.
-
-### Recommended Stack for Validation
-
-**Minimum (Free):**
-- Vercel Analytics OR Google Analytics 4
-
-**Better (if budget allows):**
-- Plausible/Fathom for pageviews
-- Google Analytics for detailed funnels
-- Hotjar/Microsoft Clarity for session recordings (see user behavior)
 
 ---
 
 ## Email Collection
 
-Your #1 validation metric is **email signups**. You need a place to send and store them.
+### MongoDB
 
-### Service Options
-
-#### 1. **Loops** (Recommended for developers)
-- **Why:** API-first, simple, built for developers
-- **Cost:** Free up to 1,000 contacts
-- **Use case:** Transactional emails, simple newsletters
-- **Setup:** https://loops.so
-
-```tsx
-// Example API call
-const response = await fetch("https://app.loops.so/api/v1/contacts/create", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.LOOPS_API_KEY}`,
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    email: email,
-    source: "landing-page-name"
-  })
-});
-```
-
-#### 2. **Resend** (Email sending)
-- **Why:** Modern API, great DX, transactional focus
-- **Cost:** Free up to 3,000 emails/month
-- **Use case:** Send confirmation emails, updates
-- **Setup:** https://resend.com
+**Setup:** Create cluster at mongodb.com/atlas → Get connection string → Add to `.env.local`
 
 ```bash
-npm i resend
+npm i mongodb
 ```
 
 ```tsx
 // app/api/subscribe/route.ts
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
+import { MongoClient } from 'mongodb';
+import { LANDING_PAGE_TYPES } from '@/lib/constants';
 
 export async function POST(request: Request) {
-  const { email } = await request.json();
+  const { email, landingPageType, questionnaireData } = await request.json();
 
-  // Send welcome email
-  await resend.emails.send({
-    from: 'onboarding@yourdomain.com',
-    to: email,
-    subject: 'Thanks for joining!',
-    html: '<p>Welcome to the waitlist...</p>'
+  const client = await MongoClient.connect(process.env.MONGODB_URI!);
+  await client.db('landing-pages').collection('emails').insertOne({
+    email,
+    type: landingPageType,
+    questionnaireData,
+    createdAt: new Date(),
   });
 
   return Response.json({ success: true });
 }
 ```
 
-#### 3. **ConvertKit**
-- **Why:** Built for creators, automations, landing pages
-- **Cost:** Free up to 1,000 subscribers
-- **Use case:** Email marketing, sequences, broadcasts
-
-#### 4. **Mailchimp**
-- **Why:** Popular, full-featured
-- **Cost:** Free up to 500 contacts, 1,000 sends/month
-- **Use case:** Traditional email marketing
-
-#### 5. **Airtable** (Dead simple)
-- **Why:** Spreadsheet as database, easy to view/export
-- **Cost:** Free tier available
-- **Use case:** Quick validation without email service
-
+**Usage:**
 ```tsx
-// Example webhook to Airtable
-await fetch("https://api.airtable.com/v0/YOUR_BASE/Emails", {
-  method: "POST",
-  headers: {
-    "Authorization": `Bearer ${process.env.AIRTABLE_API_KEY}`,
-    "Content-Type": "application/json"
-  },
+await fetch('/api/subscribe', {
+  method: 'POST',
   body: JSON.stringify({
-    fields: {
-      email: email,
-      source: "landing-page-name",
-      timestamp: new Date().toISOString()
-    }
-  })
+    email,
+    landingPageType: LANDING_PAGE_TYPES.ESTATE_BEACON,
+    questionnaireData: data,
+  }),
 });
 ```
 
-#### 6. **Supabase** (Self-hosted data)
-- **Why:** Free Postgres database, real-time, auth built-in
-- **Cost:** Free tier: 500MB database, 2GB bandwidth
-- **Use case:** Full control, can build admin dashboard
+---
+
+## Optional: Email Sending
+
+If you want to send welcome/confirmation emails:
+
+### Resend
+
+Send welcome/confirmation emails (optional):
 
 ```bash
-npm i @supabase/supabase-js
+npm i resend
 ```
 
 ```tsx
-// lib/supabase.ts
-import { createClient } from '@supabase/supabase-js'
+import { Resend } from 'resend';
 
-export const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
-)
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-// app/api/subscribe/route.ts
-import { supabase } from '@/lib/supabase'
-
-export async function POST(request: Request) {
-  const { email } = await request.json();
-
-  const { data, error } = await supabase
-    .from('waitlist')
-    .insert([{ email, source: 'hero', created_at: new Date() }])
-
-  return Response.json({ success: !error });
-}
+await resend.emails.send({
+  from: 'onboarding@yourdomain.com',
+  to: email,
+  subject: 'Thanks for joining!',
+  html: '<p>Welcome!</p>'
+});
 ```
-
-### Recommended Email Stack
-
-**Early validation (0-100 signups):**
-- Loops (free) + Resend (free) for sending emails
-- OR Airtable (dead simple to view submissions)
-
-**Growth phase (100-1,000 signups):**
-- ConvertKit or Loops for automation
-- Resend for transactional emails
 
 ---
 
@@ -331,31 +203,77 @@ export async function POST(request: Request) {
 
 ### Setting Up Event Tracking
 
+**Multi-Step Questionnaire Tracking:**
+
+```tsx
+// In your Questionnaire component
+import umami from "@umami/node";
+
+const handleNext = async (field: string, value: string) => {
+  // Update state
+  setData({ ...data, [field]: value });
+
+  // Track with Umami (includes all context)
+  await umami.track(`Next Step ${currentStep}`, {
+    ...data,
+    field,
+    step: currentStep,
+    value
+  });
+
+  // Move to next step
+  setStep(currentStep + 1);
+};
+
+const handleBack = async () => {
+  await umami.track("Back", { step: currentStep });
+  setStep(Math.max(0, currentStep - 1));
+};
+
+const handleSubmit = async () => {
+  // Track submission with Umami
+  await umami.track("Submit", {
+    source: "questionnaire",
+    ...questionnaireData
+  });
+};
+```
+
+**Simple Button Tracking:**
+
+```tsx
+// Declarative tracking with data attributes (Umami auto-tracks)
+<button data-umami-event="Get Started Button">
+  Get Started →
+</button>
+
+<a href="#questionnaire" data-umami-event="CTA Click" data-umami-event-location="hero">
+  Learn More
+</a>
+```
+
+**Helper Function (Optional):**
+
 ```tsx
 // lib/analytics.ts
-export const trackEvent = (
+import umami from "@umami/node";
+
+export const trackEvent = async (
   eventName: string,
   properties?: Record<string, any>
 ) => {
-  // Google Analytics
-  if (typeof window !== 'undefined' && (window as any).gtag) {
-    (window as any).gtag('event', eventName, properties);
-  }
-
-  // Vercel Analytics (or custom)
-  if (typeof window !== 'undefined' && (window as any).va) {
-    (window as any).va('track', eventName, properties);
-  }
+  await umami.track(eventName, properties);
 };
 
 // Usage in components
 import { trackEvent } from '@/lib/analytics';
 
-<button onClick={() => {
-  trackEvent('cta_click', {
+<button onClick={async () => {
+  await trackEvent('cta_click', {
     location: 'hero',
     text: 'Join Waitlist'
   });
+  handleClick();
 }}>
   Join Waitlist
 </button>
@@ -626,85 +544,12 @@ After 2-4 weeks, score your idea (0-10 each):
 
 ---
 
-## Quick Reference: Recommended Stack
+## Tech Stack
 
-### Minimal (Free Tier)
-
-**Landing Page:**
-- Next.js on Vercel (free)
-
-**Analytics:**
-- Vercel Analytics (free tier)
-- OR Google Analytics 4 (free)
-
-**Email Collection:**
-- Loops (free up to 1k contacts)
-- OR Airtable (quick & dirty)
-
-**Email Sending:**
-- Resend (free up to 3k/month)
-
-**Legal:**
-- Privacy policy generator (free)
-
-**Total monthly cost:** $0
-
-### Better (Small Budget)
-
-**Add:**
-- Plausible Analytics ($9/mo) - cleaner than GA
-- ConvertKit ($0-29/mo) - email automation
-- Hotjar or Microsoft Clarity (free) - heatmaps
-- Custom domain ($10-15/year)
-
-**Total monthly cost:** ~$10-40/mo
-
-### Advanced (Serious Validation)
-
-**Add:**
-- Mixpanel ($0-25/mo) - user analytics
-- Mailchimp or ConvertKit ($29-50/mo) - full email marketing
-- Typeform ($25/mo) - beautiful surveys
-- Sentry ($0-26/mo) - error tracking
-
-**Total monthly cost:** ~$50-100/mo
-
----
-
-## Tools Cheat Sheet
-
-### Analytics
-- **Vercel Analytics**: Free, simple, Web Vitals
-- **Google Analytics 4**: Free, detailed, industry standard
-- **Plausible**: $9/mo, privacy-focused, simple
-- **Fathom**: $14/mo, privacy-focused
-- **Mixpanel**: $0-25/mo, user behavior tracking
-
-### Email Collection & Sending
-- **Loops**: Free-$50/mo, developer-friendly
-- **Resend**: Free-$20/mo, transactional emails
-- **ConvertKit**: Free-$29/mo, email marketing
-- **Mailchimp**: Free-$20/mo, traditional ESP
-- **Airtable**: Free, spreadsheet database
-
-### Heatmaps & Session Recording
-- **Microsoft Clarity**: FREE, unlimited sessions
-- **Hotjar**: $0-99/mo, heatmaps + recordings + surveys
-- **FullStory**: $$$ enterprise
-
-### A/B Testing
-- **Vercel Edge Middleware**: Free, code-based
-- **VWO**: $200+/mo, visual editor
-- **Optimizely**: $$$ enterprise
-
-### Forms & Surveys
-- **Typeform**: $0-25/mo, beautiful forms
-- **Tally**: Free, notion-style forms
-- **Google Forms**: Free, basic but works
-
-### Error Tracking
-- **Sentry**: $0-26/mo, error monitoring
-- **LogRocket**: $99+/mo, session replay + errors
+- **Hosting:** Next.js on Vercel
+- **Analytics:** Umami
+- **Email Storage:** MongoDB Atlas
+- **Email Sending (optional):** Resend
 
 ---
 
