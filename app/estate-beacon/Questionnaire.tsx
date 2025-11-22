@@ -86,16 +86,6 @@ export function Questionnaire() {
     setStep(step + 1);
   };
 
-  const handleMultipleFields = async (fields: Partial<QuestionnaireData>) => {
-    setData({ ...data, ...fields });
-    window.umami?.track(`Next Step ${step}`, {
-      ...data,
-      step,
-      ...fields,
-    })
-    setStep(step + 1);
-  };
-
   const handleBack = async () => {
     window.umami?.track(`Back`, {
       step,
@@ -232,34 +222,29 @@ export function Questionnaire() {
           <div className="space-y-3">
             {[
               {
-                situation: "current_executor",
-                stage: "just_starting",
+                value: "current_executor_just_starting",
                 label: "Currently serving as executor - just starting (within first month)",
               },
               {
-                situation: "current_executor",
-                stage: "in_progress",
+                value: "current_executor_in_progress",
                 label: "Currently serving as executor - in progress (1-6 months in)",
               },
               {
-                situation: "current_executor",
-                stage: "well_underway",
+                value: "current_executor_well_underway",
                 label: "Currently serving as executor - well underway (6+ months in)",
               },
               {
-                situation: "named_not_started",
-                stage: "not_started",
+                value: "named_not_started",
                 label: "Named as executor but haven't started yet",
               },
               {
-                situation: "preparing",
-                stage: "not_started",
+                value: "preparing",
                 label: "Preparing in case I'm named",
               },
             ].map((option) => (
               <button
-                key={`${option.situation}-${option.stage}`}
-                onClick={() => handleMultipleFields({ situation: option.situation, stage: option.stage })}
+                key={option.value}
+                onClick={() => handleNext("situation", option.value)}
                 className="w-full text-left px-6 py-4 rounded-xl border-2 border-gray-200 hover:border-[#4a8177] hover:bg-[#4a8177]/5 transition-all font-light"
               >
                 {option.label}
@@ -376,21 +361,15 @@ export function Questionnaire() {
               </p>
               <p>
                 👤 <strong className="text-gray-900">Status:</strong>{" "}
-                {data.situation === "current_executor"
-                  ? "Currently serving as executor"
+                {data.situation === "current_executor_just_starting"
+                  ? "Currently serving as executor - just starting"
+                  : data.situation === "current_executor_in_progress"
+                  ? "Currently serving as executor - in progress"
+                  : data.situation === "current_executor_well_underway"
+                  ? "Currently serving as executor - well underway"
                   : data.situation === "named_not_started"
                   ? "Named but not started"
                   : "Preparing for role"}
-              </p>
-              <p>
-                📊 <strong className="text-gray-900">Stage:</strong>{" "}
-                {data.stage === "just_starting"
-                  ? "Just starting"
-                  : data.stage === "in_progress"
-                  ? "In progress"
-                  : data.stage === "well_underway"
-                  ? "Well underway"
-                  : "Not started yet"}
               </p>
               <p>
                 ⚖️ <strong className="text-gray-900">Legal help:</strong>{" "}
