@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getMongoDataStorage } from "@/src/server/data";
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,15 +14,14 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the received data to console
-    console.log("=== New Subscription ===");
-    console.log("Email:", email);
-    console.log("Source:", source);
-    console.log("Timestamp:", timestamp);
-    if (questionnaireData) {
-      console.log("Questionnaire Data:", JSON.stringify(questionnaireData, null, 2));
-    }
-    console.log("=======================");
+    // Save to database
+    const storage = getMongoDataStorage();
+    await storage.ctaClickthroughService.saveCTAClickthrough({
+      email,
+      source,
+      questionnaireData,
+      timestamp
+    });
 
     // Return success response
     return NextResponse.json(
@@ -32,7 +32,6 @@ export async function POST(request: NextRequest) {
       { status: 200 }
     );
   } catch (error) {
-    console.error("Error processing subscription:", error);
     return NextResponse.json(
       { error: "Failed to process subscription" },
       { status: 500 }
