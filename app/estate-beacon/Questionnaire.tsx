@@ -105,19 +105,17 @@ export function Questionnaire() {
     setSubmitStatus("loading");
 
     try {
-      // TODO: Send questionnaire data + email to your backend
-      // await fetch("/api/subscribe", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify({
-      //     email,
-      //     source: "estate_beacon_questionnaire",
-      //     questionnaireData: data,
-      //     timestamp: new Date().toISOString(),
-      //   }),
-      // });
+      await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          email,
+          source: "estate_beacon_questionnaire",
+          questionnaireData: data,
+          timestamp: new Date().toISOString(),
+        }),
+      });
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
       window.umami?.track('Submit', data)
 
       setSubmitStatus("success");
