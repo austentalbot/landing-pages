@@ -82,7 +82,7 @@ export function Questionnaire() {
       field,
       step,
       value,
-    })
+    });
     setStep(step + 1);
   };
 
@@ -116,7 +116,7 @@ export function Questionnaire() {
         }),
       });
 
-      window.umami?.track('Submit', data)
+      window.umami?.track("Submit", data);
 
       setSubmitStatus("success");
       setMessage(
@@ -223,15 +223,15 @@ export function Questionnaire() {
             {[
               {
                 value: "current_executor_just_starting",
-                label: "Currently serving as executor - just starting (within first month)",
+                label: "Currently serving as executor - within first month",
               },
               {
                 value: "current_executor_in_progress",
-                label: "Currently serving as executor - in progress (1-6 months in)",
+                label: "Currently serving as executor - 1-6 months in",
               },
               {
                 value: "current_executor_well_underway",
-                label: "Currently serving as executor - well underway (6+ months in)",
+                label: "Currently serving as executor - 6+ months in",
               },
               {
                 value: "named_not_started",
