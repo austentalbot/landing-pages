@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, FormEvent } from "react";
+import { useState, FormEvent, useRef, useEffect } from "react";
 import { EARLY_ACCESS_PRICE } from "./constants";
 
 interface QuestionnaireData {
@@ -72,8 +72,24 @@ export function Questionnaire() {
     "idle" | "loading" | "success" | "error"
   >("idle");
   const [message, setMessage] = useState("");
+  const emailInputRef = useRef<HTMLInputElement>(null);
+  const emailFormRef = useRef<HTMLDivElement>(null);
 
   const totalSteps = 4;
+
+  // Auto-focus and scroll to email input when reaching final step
+  useEffect(() => {
+    if (step === 4) {
+      // Small delay to ensure DOM is updated
+      setTimeout(() => {
+        emailInputRef.current?.focus();
+        emailFormRef.current?.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }, 100);
+    }
+  }, [step]);
 
   const handleNext = async (field: keyof QuestionnaireData, value: string) => {
     setData({ ...data, [field]: value });
@@ -344,21 +360,63 @@ export function Questionnaire() {
           </button>
 
           <div className="text-center">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#4a8177]/10 mb-6">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#4a8177]/10 mb-4">
               <span className="text-3xl">📋</span>
             </div>
-            <h3 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
-              Thank you for sharing these details
+            <h3 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
+              Perfect! Here's what's next
             </h3>
-            <p className="text-lg text-gray-600 font-light mb-8">
-              Based on your answers, we'll create a {data.state}-specific
-              checklist tailored to your situation.
+            <p className="text-base text-gray-600 font-light mb-6">
+              We'll create a {data.state}-specific checklist tailored to your situation
             </p>
           </div>
 
-          {/* Summary */}
-          <div className="bg-gray-50 rounded-2xl p-6 space-y-3 text-left">
-            <h4 className="font-semibold text-gray-900 mb-4">Your details</h4>
+          {/* Email capture - moved up for better visibility */}
+          <div
+            ref={emailFormRef}
+            className="bg-gradient-to-br from-[#4a8177] to-[#3d7068] border-2 border-[#4a8177] rounded-2xl p-8 shadow-xl"
+          >
+            <h4 className="text-2xl font-bold text-white mb-3">
+              Get Notified When We Launch in {data.state}
+            </h4>
+            <p className="text-white/90 font-light mb-6 text-lg">
+              Enter your email below to secure the early access price of ${EARLY_ACCESS_PRICE} and be first to know when Estate Beacon is ready.
+            </p>
+
+            <form onSubmit={handleEmailSubmit} className="space-y-4">
+              <input
+                ref={emailInputRef}
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="your.email@example.com"
+                className="w-full px-6 py-5 rounded-xl border-2 border-white/30 bg-white focus:ring-4 focus:ring-white/50 focus:border-white outline-none text-gray-900 font-medium text-lg placeholder-gray-400 shadow-lg"
+                disabled={submitStatus === "loading"}
+                required
+                autoComplete="email"
+              />
+              <button
+                type="submit"
+                disabled={submitStatus === "loading"}
+                className="w-full px-8 py-5 bg-white text-[#2f5952] font-bold text-lg rounded-xl hover:bg-gray-50 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-xl hover:shadow-2xl hover:-translate-y-1"
+              >
+                {submitStatus === "loading"
+                  ? "Submitting..."
+                  : "Notify Me When Ready →"}
+              </button>
+              {message && submitStatus === "error" && (
+                <p className="text-sm text-white font-medium bg-red-500/20 px-4 py-2 rounded-lg">
+                  {message}
+                </p>
+              )}
+            </form>
+          </div>
+
+          {/* Summary - moved below email form */}
+          <div className="bg-gray-50 rounded-2xl p-6 space-y-3 text-left border border-gray-200">
+            <h4 className="font-semibold text-gray-900 mb-4 text-sm uppercase tracking-wide text-gray-500">
+              Your Details
+            </h4>
             <div className="space-y-2 text-sm text-gray-600 font-light">
               <p>
                 📍 <strong className="text-gray-900">State:</strong>{" "}
@@ -385,41 +443,6 @@ export function Questionnaire() {
                   : "Deciding"}
               </p>
             </div>
-          </div>
-
-          {/* Email capture */}
-          <div className="bg-white border-2 border-[#4a8177]/20 rounded-2xl p-8">
-            <h4 className="text-xl font-semibold text-gray-900 mb-2">
-              Estate Beacon is not yet available in {data.state}
-            </h4>
-            <p className="text-gray-600 font-light mb-6">
-              Enter your email to be notified when we launch in {data.state} and
-              receive the early access price of ${EARLY_ACCESS_PRICE}.
-            </p>
-
-            <form onSubmit={handleEmailSubmit} className="space-y-4">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
-                className="w-full px-5 py-4 rounded-xl border-2 border-gray-200 focus:ring-2 focus:ring-[#4a8177] focus:border-[#4a8177] outline-none text-gray-900 font-light"
-                disabled={submitStatus === "loading"}
-                required
-              />
-              <button
-                type="submit"
-                disabled={submitStatus === "loading"}
-                className="w-full px-8 py-4 bg-[#4a8177] text-white font-semibold rounded-xl hover:bg-[#3d7068] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl hover:-translate-y-0.5"
-              >
-                {submitStatus === "loading"
-                  ? "Submitting..."
-                  : "Notify Me When Ready"}
-              </button>
-              {message && submitStatus === "error" && (
-                <p className="text-sm text-red-600 font-medium">{message}</p>
-              )}
-            </form>
           </div>
         </div>
       )}
