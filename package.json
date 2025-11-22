@@ -10,10 +10,15 @@
     "lint:fix": "next lint --fix",
     "typecheck": "tsc --noEmit",
     "check": "npm run typecheck && npm run lint",
-    "ngrok": "ngrok http --url=$NGROK_FORWARDING_URL 8060"
+    "ngrok": "ngrok http --url=$NGROK_FORWARDING_URL 8060",
+    "db:start": "docker compose up -d",
+    "db:stop": "docker compose down",
+    "db:logs": "docker compose logs -f mongodb",
+    "db:web": "echo 'Opening Mongo Express at http://localhost:8081' && open http://localhost:8081 || xdg-open http://localhost:8081 || echo 'Please open http://localhost:8081 in your browser'"
   },
   "dependencies": {
     "@umami/node": "^0.4.0",
+    "mongodb": "^7.0.0",
     "next": "^15.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
