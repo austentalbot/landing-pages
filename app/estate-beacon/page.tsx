@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Questionnaire } from "./Questionnaire";
 import { CollapsibleFAQs } from "./CollapsibleFAQs";
+import CTAButton from "./CTAButton";
+import StickyButton from "./StickyButton";
 
 export const metadata: Metadata = {
   title: "Estate Beacon - Your Clear Path Through Estate Administration",
@@ -105,6 +107,7 @@ export default function EstateBeacon() {
 
   return (
     <main className="min-h-screen bg-white antialiased">
+      <StickyButton />
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#2d5650] via-[#3d7068] via-[#4a8177] to-[#5a9284]">
         {/* Layered gradient overlay for depth */}
@@ -198,14 +201,10 @@ export default function EstateBeacon() {
 
             {/* Get Started Button */}
             <div className="mb-6">
-              <a
-                data-umami-event="Get Started Button"
-                href="#questionnaire"
-                className="inline-flex items-center px-8 py-4 bg-white text-[#2f5952] font-semibold rounded-xl hover:bg-gray-50 transition-all duration-200 shadow-[0_20px_60px_-15px_rgba(255,255,255,0.3)] hover:shadow-[0_25px_70px_-15px_rgba(255,255,255,0.4)] hover:-translate-y-1 relative group"
-              >
-                <span className="relative z-10">Get Started →</span>
-                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-white via-white to-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-200"></div>
-              </a>
+              <CTAButton
+                text="Get Started"
+                analyticsEvent="Get Started Button"
+              />
             </div>
 
             <p className="text-sm text-white/60 font-light tracking-wide">
@@ -730,6 +729,19 @@ export default function EstateBeacon() {
         </div>
       </section>
 
+      {/* CTA After Product Screenshots */}
+      <section className="py-10 bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight">
+            Ready to bring order to the process?
+          </h3>
+          <CTAButton
+            text="Get Started"
+            analyticsEvent="CTA - After Screenshots"
+          />
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-24 sm:py-8 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -795,6 +807,19 @@ export default function EstateBeacon() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* CTA After How It Works */}
+      <section className="py-10 bg-gradient-to-br from-[#3d7068] via-[#4a8177] to-[#2f5952]">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-3xl sm:text-4xl font-bold text-white mb-6 tracking-tight">
+            Start your journey to clarity today
+          </h3>
+          <CTAButton
+            text="Begin Now"
+            analyticsEvent="CTA - After How It Works"
+          />
         </div>
       </section>
 
