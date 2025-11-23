@@ -90,6 +90,8 @@ npm run dev
    - Summary of user's answers
    - Email capture with clear value proposition
    - Success state confirmation
+   - **URL tracking:** Each step updates URL (`/step-1`, `/step-2`, etc.) for analytics tracking
+   - **Thank-you page:** URL changes to `/thank-you` on completion for conversion tracking
 
 8. **Footer**:
    - Dark background for contrast
@@ -116,6 +118,11 @@ npm run dev
 - **Constants**: Shared constants file for landing page identifiers
 - **Loading States**: Handle form submissions with proper feedback
 - **Validation**: Email validation and error handling
+- **URL Tracking**:
+  - Multi-step forms update URL for each step (`/step-1`, `/step-2`, etc.)
+  - Completion changes URL to `/thank-you` for conversion tracking
+  - Middleware redirects direct access to step URLs back to landing page
+  - Enables funnel analysis and drop-off tracking in analytics
 
 ## Landing Pages
 

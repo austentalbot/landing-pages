@@ -291,17 +291,36 @@ Collect segmentation data before email capture:
 // app/[route-name]/Questionnaire.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import umami from "@umami/node";
 
 export function Questionnaire() {
   const [step, setStep] = useState(0);
   const [data, setData] = useState({});
 
+  // Update URL when step changes for tracking purposes
+  useEffect(() => {
+    if (step >= 1 && step <= 3) {
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", `/[route-name]/step-${step}`);
+      }
+    }
+  }, [step]);
+
   const handleNext = async (field: string, value: string) => {
     setData({ ...data, [field]: value });
     await umami.track(`Step ${step}`, { field, value });
     setStep(step + 1);
+  };
+
+  const handleEmailSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    // ... email validation and submission logic
+
+    // Update URL for conversion tracking without navigation
+    if (typeof window !== "undefined") {
+      window.history.pushState({}, "", "/[route-name]/thank-you");
+    }
   };
 
   return (
@@ -340,8 +359,10 @@ export function Questionnaire() {
         <div>
           <p>State: {data.state}</p>
           <p>Situation: {data.situation}</p>
-          <input type="email" placeholder="Your email" />
-          <button>Submit</button>
+          <form onSubmit={handleEmailSubmit}>
+            <input type="email" placeholder="Your email" />
+            <button>Submit</button>
+          </form>
         </div>
       )}
     </div>
@@ -350,6 +371,52 @@ export function Questionnaire() {
 ```
 
 **Core pattern:** Progress bar → Questions with back nav → Summary + email
+
+**URL Tracking for Steps:**
+- Each step automatically updates the URL to `/[route-name]/step-1`, `/step-2`, etc.
+- Final submission updates URL to `/[route-name]/thank-you` using `pushState`
+- URLs are for tracking only - direct access redirects to main landing page (see middleware setup below)
+- This allows analytics platforms to track drop-off at each step
+
+### Middleware Setup for URL Protection
+
+Add redirect logic to prevent users from accessing step URLs directly:
+
+```tsx
+// middleware.ts (at project root)
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Redirect direct access to form step URLs back to the main landing page
+  // This prevents users from skipping steps or accessing incomplete forms
+  if (
+    pathname.match(/^\/[route-name]\/step-[1-4]$/) ||
+    pathname === "/[route-name]/thank-you"
+  ) {
+    return NextResponse.redirect(new URL("/[route-name]", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    "/[route-name]/step-:step",
+    "/[route-name]/thank-you",
+    // Add other landing pages here as they adopt this pattern
+  ],
+};
+```
+
+**How it works:**
+- Normal form progression uses `window.history.pushState()` which doesn't trigger middleware or page navigation
+- Direct navigation (e.g., typing URL, bookmark, external link) triggers middleware and redirects
+- Users always start from the beginning of the questionnaire
+- Prevents incomplete form submissions and maintains data integrity
+- Analytics tools track the URL changes for funnel analysis
 
 ## 7. Collapsible FAQ Component
 

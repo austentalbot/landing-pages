@@ -77,6 +77,15 @@ export function Questionnaire() {
 
   const totalSteps = 4;
 
+  // Update URL when step changes for tracking purposes
+  useEffect(() => {
+    if (step >= 1 && step <= 4) {
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", `/estate-beacon/step-${step}`);
+      }
+    }
+  }, [step]);
+
   // Auto-focus and scroll to email input when reaching final step
   useEffect(() => {
     if (step === 4) {

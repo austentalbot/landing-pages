@@ -7,16 +7,9 @@ export default function EstateBeaconLayout({
 }) {
   return (
     <>
-      {/* Google tag (gtag.js) */}
-      <Script
-        src="https://www.googletagmanager.com/gtag/js?id=AW-17752314150"
-        strategy="afterInteractive"
-      />
+      {/* Google Ads configuration (gtag.js loaded globally in root layout) */}
       <Script id="google-ads-config" strategy="afterInteractive">
         {`
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
           gtag('config', 'AW-17752314150');
         `}
       </Script>
