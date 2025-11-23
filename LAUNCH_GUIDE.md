@@ -196,6 +196,107 @@ You can also monitor pageviews to the `/thank-you` URL path in your analytics da
 
 **Pro Tip:** The URL changes to `/thank-you` but the user stays on the same page with the success message. This provides a seamless experience while still enabling conversion tracking.
 
+### Step-by-Step URL Tracking (Multi-Step Forms)
+
+For multi-step questionnaires, you can track each step with unique URLs to measure drop-off rates and optimize your funnel:
+
+**Implementation Pattern:**
+
+```tsx
+"use client";
+
+import { useState, useEffect } from "react";
+
+export function Questionnaire() {
+  const [step, setStep] = useState(0);
+
+  // Update URL when step changes for tracking purposes
+  useEffect(() => {
+    if (step >= 1 && step <= 4) {
+      if (typeof window !== "undefined") {
+        window.history.pushState({}, "", `/[your-landing-page]/step-${step}`);
+      }
+    }
+  }, [step]);
+
+  // ... rest of your questionnaire logic
+}
+```
+
+**Benefits:**
+- Track drop-off at each step in your analytics
+- Identify which questions cause users to abandon
+- Measure conversion rate improvements from form changes
+- Use URL-based goals in Google Analytics and ad platforms
+
+**URL Structure:**
+- Step 1: `/[landing-page]/step-1`
+- Step 2: `/[landing-page]/step-2`
+- Step N: `/[landing-page]/step-N`
+- Completion: `/[landing-page]/thank-you`
+
+**Important: Protect Step URLs**
+
+Add middleware to prevent users from accessing step URLs directly (which would skip required data collection):
+
+```tsx
+// middleware.ts (at project root)
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
+
+export function middleware(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+
+  // Redirect direct access to form step URLs back to the main landing page
+  if (
+    pathname.match(/^\/[landing-page]\/step-[1-4]$/) ||
+    pathname === "/[landing-page]/thank-you"
+  ) {
+    return NextResponse.redirect(new URL("/[landing-page]", request.url));
+  }
+
+  return NextResponse.next();
+}
+
+export const config = {
+  matcher: [
+    "/[landing-page]/step-:step",
+    "/[landing-page]/thank-you",
+  ],
+};
+```
+
+**How Middleware Works:**
+- Normal form progression uses `window.history.pushState()` which doesn't trigger middleware
+- Direct navigation (typing URL, bookmark, external link) triggers middleware and redirects
+- Users always start from the beginning, ensuring complete data collection
+- Analytics still tracks all step URLs during normal progression
+- The URL changes in the browser without any page navigation or reload
+
+**Analytics Setup for Step Tracking:**
+
+1. **Google Analytics 4:**
+   - Go to Events → Create Custom Event
+   - Track pageviews for `/step-1`, `/step-2`, etc.
+   - Create a funnel visualization in Explore
+
+2. **Umami:**
+   - Step URLs automatically appear in Pages report
+   - Create a funnel: Landing → Step 1 → Step 2 → ... → Thank You
+   - Track drop-off percentage at each step
+
+3. **Facebook Pixel:**
+   ```tsx
+   // Track step completion
+   window.fbq?.("trackCustom", "StepComplete", { step: stepNumber });
+   ```
+
+**Optimization Tips:**
+- If a step has >30% drop-off, consider simplifying the question
+- Test different question orders to maximize completion
+- Use progress indicators to set expectations
+- Keep total steps to 4 or fewer for best completion rates
+
 ---
 
 ## Email Collection
