@@ -18,6 +18,7 @@
   },
   "dependencies": {
     "@umami/node": "^0.4.0",
+    "lucide-react": "^0.554.0",
     "mongodb": "^7.0.0",
     "next": "^15.0.0",
     "react": "^19.0.0",

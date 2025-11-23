@@ -1,0 +1,51 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+
+interface StickyButtonProps {
+  onClick: () => void;
+  children: React.ReactNode;
+}
+
+export default function StickyButton({ onClick, children }: StickyButtonProps) {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const toggleVisibility = () => {
+      // Show button after scrolling down 300px
+      if (window.scrollY > 300) {
+        setIsVisible(true);
+      } else {
+        setIsVisible(false);
+      }
+    };
+
+    window.addEventListener("scroll", toggleVisibility);
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, []);
+
+  const handleClick = () => {
+    // Track with Umami if available
+    if (typeof window !== "undefined" && (window as any).umami) {
+      (window as any).umami.track("Sticky Button Click");
+    }
+    onClick();
+  };
+
+  return (
+    <div
+      className={`fixed bottom-6 right-6 z-50 transition-all duration-300 ${
+        isVisible
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 translate-y-12 pointer-events-none"
+      }`}
+    >
+      <button
+        onClick={handleClick}
+        className="bg-gradient-to-r from-[#f97316] to-[#fb923c] text-white px-6 py-3 rounded-full shadow-2xl hover:shadow-orange-500/50 hover:scale-110 transition-all duration-200 font-semibold text-lg"
+      >
+        {children}
+      </button>
+    </div>
+  );
+}
