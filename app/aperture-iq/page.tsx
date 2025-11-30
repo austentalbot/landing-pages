@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useState, useId } from "react";
 import {
   Clock,
@@ -47,6 +48,189 @@ const iconMap: Record<string, React.ElementType> = {
 type SignalTone = "positive" | "caution" | "negative";
 type IllustrationVariant = "recruiter" | "hiring";
 
+const encodePublicAssetPath = (fileName: string) =>
+  `/${encodeURIComponent(fileName).replace(/%2F/g, "/")}`;
+
+const ILLUSTRATIONS = {
+  recruiter: encodePublicAssetPath(
+    "Nature and Ecology _ birds, flying, wildlife, nature, Vector illustration.svg"
+  ),
+  hiring: encodePublicAssetPath(
+    "Health and Wellness _ body, pain, massage, treatment, Vector illustration.svg"
+  ),
+  overwhelmed: encodePublicAssetPath(
+    "Lifestyle and Leisure _ sleeping, rest, relaxation, man, silhouette, Vector illustration.svg"
+  ),
+};
+
+const VARIANT_ILLUSTRATIONS: Record<
+  IllustrationVariant,
+  { src: string; alt: string }
+> = {
+  recruiter: {
+    src: ILLUSTRATIONS.recruiter,
+    alt: "Nature illustration representing nimble recruiter workflows",
+  },
+  hiring: {
+    src: ILLUSTRATIONS.hiring,
+    alt: "Health-inspired illustration symbolizing hiring manager focus",
+  },
+};
+
+const VARIANT_IMAGE_WRAPPERS: Record<IllustrationVariant, string> = {
+  recruiter: "bg-[rgba(216,140,154,0.12)]",
+  hiring: "bg-[rgba(153,193,185,0.15)]",
+};
+
+const HeroBackdrop = () => {
+  const waveGradientId = useId();
+
+  return (
+    <div className="absolute inset-0 -z-20 overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf6] via-[#f3d7c7] to-[#e6c4ba]" />
+      <div
+        className="absolute inset-0 opacity-75 mix-blend-multiply"
+        style={{
+          background:
+            "radial-gradient(circle at 18% 22%, rgba(255,255,255,0.9) 0%, transparent 50%), radial-gradient(circle at 84% 12%, rgba(153,193,185,0.5) 0%, transparent 35%), radial-gradient(circle at 62% 70%, rgba(216,140,154,0.5) 0%, transparent 55%), radial-gradient(circle at 40% 85%, rgba(242,208,169,0.45) 0%, transparent 50%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-25"
+        style={{
+          background:
+            "linear-gradient(120deg, rgba(216,140,154,0.12) 10%, transparent 35%), linear-gradient(200deg, rgba(153,193,185,0.18) 15%, transparent 42%)",
+        }}
+      />
+      <div
+        className="absolute inset-0 opacity-35"
+        style={{
+          background:
+            "repeating-linear-gradient(125deg, rgba(60,42,47,0.08) 0px, rgba(60,42,47,0.08) 1px, transparent 1px, transparent 14px)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          opacity: 0.14,
+          backgroundImage:
+            "linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+          backgroundSize: "140px 140px",
+          maskImage:
+            "radial-gradient(circle at 55% 45%, black 0%, transparent 70%)",
+          WebkitMaskImage:
+            "radial-gradient(circle at 55% 45%, black 0%, transparent 70%)",
+        }}
+      />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          opacity: 0.14,
+          backgroundImage:
+            "radial-gradient(rgba(60,42,47,0.16) 1px, transparent 0), radial-gradient(rgba(60,42,47,0.12) 1px, transparent 0)",
+          backgroundSize: "18px 18px",
+          backgroundPosition: "0 0, 9px 9px",
+        }}
+      />
+      <div className="pointer-events-none absolute -right-16 top-8 h-[420px] w-[420px] rounded-full bg-[rgba(216,140,154,0.45)] blur-[160px]" />
+      <div className="pointer-events-none absolute -left-24 top-1/4 h-[360px] w-[360px] rounded-full bg-[rgba(153,193,185,0.45)] blur-[140px]" />
+      <div className="pointer-events-none absolute inset-x-0 -top-24 h-48 bg-gradient-to-b from-white/50 via-white/20 to-transparent blur-2xl" />
+      <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-screen">
+        <svg
+          viewBox="0 0 1440 320"
+          className="absolute -bottom-[140px] right-[-120px] h-[280px] w-[900px]"
+        >
+          <defs>
+            <linearGradient
+              id={waveGradientId}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="rgba(216,140,154,0.8)" />
+              <stop offset="50%" stopColor="rgba(242,208,169,0.7)" />
+              <stop offset="100%" stopColor="rgba(153,193,185,0.75)" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 200 C 180 120 320 260 540 180 C 760 100 950 240 1200 150 C 1320 110 1440 170 1440 170 L1440 320 L0 320 Z"
+            fill={`url(#${waveGradientId})`}
+            opacity="0.45"
+          />
+        </svg>
+      </div>
+      <div className="pointer-events-none absolute inset-x-[-6%] bottom-[-60px] h-[360px]">
+        <svg
+          viewBox="0 0 1200 360"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+        >
+          <defs>
+            <linearGradient
+              id="waveLineGradient"
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="rgba(216,140,154,0.8)" />
+              <stop offset="50%" stopColor="rgba(153,193,185,0.9)" />
+              <stop offset="100%" stopColor="rgba(242,208,169,0.85)" />
+            </linearGradient>
+          </defs>
+          <g
+            fill="none"
+            stroke="url(#waveLineGradient)"
+            strokeLinecap="round"
+            strokeWidth="3"
+            strokeOpacity="0.7"
+          >
+            <path
+              d="M-40 160 Q120 110 260 140 T520 150 T780 140 T1040 160 T1300 150"
+              strokeDasharray="14 12"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="-280"
+                dur="12s"
+                repeatCount="indefinite"
+              />
+            </path>
+            <path
+              d="M-40 220 Q140 260 280 230 T540 210 T820 235 T1080 215 T1320 230"
+              strokeDasharray="18 14"
+              strokeOpacity="0.55"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="0"
+                to="320"
+                dur="14s"
+                repeatCount="indefinite"
+              />
+            </path>
+            <path
+              d="M-20 280 Q160 240 340 270 T620 260 T900 275 T1180 255"
+              strokeDasharray="12 10"
+              strokeOpacity="0.6"
+            >
+              <animate
+                attributeName="stroke-dashoffset"
+                from="-180"
+                to="180"
+                dur="16s"
+                repeatCount="indefinite"
+              />
+            </path>
+          </g>
+        </svg>
+      </div>
+    </div>
+  );
+};
+
 const HERO_SIGNALS: { label: string; value: string; tone: SignalTone }[] = [
   { label: "System Design Depth", value: "4.8 / 5", tone: "positive" },
   { label: "Ownership Evidence", value: "4.6 / 5", tone: "positive" },
@@ -77,7 +261,7 @@ const HERO_SCORE_LINES = [
 ];
 
 const HeroScorecard = () => (
-  <div className="relative w-full max-w-xs rounded-[24px] border border-border-primary bg-surface-background p-5 shadow-warm">
+  <div className="relative w-full max-w-[300px] rounded-[24px] border border-border-primary bg-surface-background p-5 shadow-warm">
     <div className="grain-overlay" />
     <div className="relative z-10 space-y-4">
       <div className="flex items-start justify-between gap-3">
@@ -203,15 +387,22 @@ export default function ApertureIQPage() {
       {/* Section 1: Hero */}
 
       <section className="relative overflow-hidden bg-base-background text-text-primary">
+        <HeroBackdrop />
         <div className="grain-overlay" aria-hidden="true" />
-        <div className="relative mx-auto max-w-6xl px-4 py-12 sm:px-6 lg:px-8 sm:py-16">
-          <div className="grid items-center gap-10 lg:grid-cols-2">
-            <div className="space-y-6">
+        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-10 sm:py-16">
+          <div className="pointer-events-none absolute left-4 top-8 hidden h-24 w-24 rounded-full bg-[rgba(153,193,185,0.25)] blur-3xl lg:block" />
+          <div className="pointer-events-none absolute right-10 top-6 hidden h-28 w-28 rounded-full bg-[rgba(216,140,154,0.22)] blur-3xl lg:block" />
+          <div className="grid items-center gap-12 lg:grid-cols-3">
+            <div className="space-y-8 col-span-2">
               <FadeInSection>
-                <div className="space-y-4">
-                  <p className="text-xs uppercase tracking-[0.4em] text-text-secondary">
+                <div className="space-y-5">
+                  <div className="inline-flex items-center gap-3 rounded-full border border-[rgba(60,42,47,0.08)] bg-surface-background px-4 py-2 text-[11px] uppercase tracking-[0.32em] text-text-secondary shadow-warm backdrop-blur">
+                    <span className="flex h-2 w-2 rounded-full bg-brand-primary" />
                     Adaptive voice interviews
-                  </p>
+                    <span className="rounded-full bg-[rgba(216,140,154,0.14)] px-2 py-1 text-[10px] font-semibold text-text-primary">
+                      Built for engineering
+                    </span>
+                  </div>
                   <h1 className="font-display text-4xl leading-tight sm:text-5xl lg:text-6xl">
                     The AI Interviewer Built for Engineering Teams
                   </h1>
@@ -224,7 +415,7 @@ export default function ApertureIQPage() {
                   competency-based scorecards. Without scheduling a single call.
                 </p>
               </FadeInSection>
-              <FadeInSection delay={140}>
+              <FadeInSection delay={120}>
                 <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
                   <CTAButton
                     onClick={() => setShowWaitlistModal(true)}
@@ -246,34 +437,42 @@ export default function ApertureIQPage() {
                     Watch Demo
                   </CTAButton>
                 </div>
+                <div className="mt-3 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-text-secondary">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-brand-primary" />
+                  More candidates. No scheduling. Signal-first scorecards.
+                </div>
               </FadeInSection>
             </div>
-            <FadeInSection delay={120}>
-              <div className="space-y-6">
-                <div className="-mt-6 flex justify-center">
+            <FadeInSection delay={140}>
+              <div className="relative -mt-6 flex justify-center lg:justify-end">
+                <div className="pointer-events-none absolute -right-16 bottom-10 hidden h-32 w-32 rounded-full bg-[rgba(216,140,154,0.28)] blur-3xl lg:block" />
+                <div className="relative flex w-full max-w-[300px] flex-col items-center gap-4 lg:items-end">
                   <HeroScorecard />
+                  <div
+                    className="w-full max-w-[300px] rounded-2xl border border-border-primary bg-surface-background p-4 text-sm shadow-warm backdrop-blur"
+                    style={{
+                      backgroundColor:
+                        "rgba(var(--surface-background-rgb), 0.92)",
+                    }}
+                  >
+                    <div className="flex items-center gap-2 text-[11px] uppercase tracking-[0.28em] text-text-secondary">
+                      <Mic className="h-4 w-4 text-brand-primary" />
+                      Your best interviewer on repeat.
+                    </div>
+                    <p className="mt-2 text-text-secondary">
+                      Same rigor. Same standards. Zero drift. Across every
+                      single candidate.
+                    </p>
+                  </div>
                 </div>
               </div>
             </FadeInSection>
           </div>
         </div>
         <div className="flex justify-center align-middle">
-          <div>
-            <FadeInSection delay={200}>
-              <div
-                className="mt-6 max-w-xl rounded-2xl border border-border-primary p-4 text-sm text-text-primary backdrop-blur-sm"
-                style={{
-                  backgroundColor: "rgba(var(--surface-background-rgb), 0.8)",
-                }}
-              >
-                Built by a former hiring decision-maker with experience at
-                Netflix, Snap, and top startups.
-              </div>
-            </FadeInSection>
-            <FadeInSection delay={200} className="flex justify-center">
-              <SmoothVoiceWave />
-            </FadeInSection>
-          </div>
+          <FadeInSection delay={240} className="flex justify-center">
+            <SmoothVoiceWave />
+          </FadeInSection>
         </div>
       </section>
       <div className="section-divider" aria-hidden="true" />
@@ -282,12 +481,28 @@ export default function ApertureIQPage() {
 
       <section className="section-shell section-shell--surface bg-base-background py-20">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <FadeInSection>
-            <h2 className="mb-4 text-center text-4xl font-bold text-text-primary sm:text-5xl">
-              Your recruiters are drowning in first-round screens
-            </h2>
-          </FadeInSection>
-
+          <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:gap-12">
+            <FadeInSection className="w-full lg:w-1/2">
+              <h2 className="mb-6 text-center text-4xl font-bold text-text-primary sm:text-5xl lg:text-left">
+                Your recruiters are drowning in first-round screens
+              </h2>
+            </FadeInSection>
+            <FadeInSection
+              delay={80}
+              className="flex w-full justify-center lg:w-1/2"
+            >
+              <div className="flex justify-center">
+                <Image
+                  src={ILLUSTRATIONS.overwhelmed}
+                  alt="Illustration of overwhelmed recruiter resting to highlight screening fatigue"
+                  width={320}
+                  height={220}
+                  className="h-auto w-full max-w-[260px] rounded-[32px] shadow-warm"
+                  sizes="(min-width: 1024px) 280px, 60vw"
+                />
+              </div>
+            </FadeInSection>
+          </div>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             {PROBLEM_POINTS.map((point, index) => {
               const IconComponent = iconMap[point.icon];
@@ -311,7 +526,6 @@ export default function ApertureIQPage() {
               );
             })}
           </div>
-
           <FadeInSection delay={200}>
             <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-brand-primary-cta bg-surface-background p-6 text-center">
               <p className="text-lg font-semibold text-text-primary">
@@ -346,6 +560,7 @@ export default function ApertureIQPage() {
               const IconComponent = iconMap[benefit.icon];
               const variant: IllustrationVariant =
                 index === 0 ? "recruiter" : "hiring";
+              const variantIllustration = VARIANT_ILLUSTRATIONS[variant];
 
               return (
                 <FadeInSection
@@ -355,7 +570,7 @@ export default function ApertureIQPage() {
                     index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                   }`}
                 >
-                  <div className="w-full rounded-[32px] border border-border-primary bg-surface-background p-8 shadow-warm">
+                  <div className="w-full flex-1 rounded-[32px] border border-border-primary bg-surface-background p-8 shadow-warm">
                     <div className="mb-6 flex items-start gap-4">
                       <div className="rounded-2xl bg-brand-primary p-3">
                         <IconComponent className="h-6 w-6 text-text-primary" />
@@ -380,6 +595,20 @@ export default function ApertureIQPage() {
                         </li>
                       ))}
                     </ul>
+                  </div>
+                  <div className="flex w-full flex-1 justify-center">
+                    <div
+                      className={`flex w-full max-w-[260px] justify-center rounded-[36px] p-4 shadow-warm ${VARIANT_IMAGE_WRAPPERS[variant]}`}
+                    >
+                      <Image
+                        src={variantIllustration.src}
+                        alt={variantIllustration.alt}
+                        width={280}
+                        height={200}
+                        className="h-auto w-full max-w-[220px]"
+                        sizes="(min-width: 1024px) 220px, 60vw"
+                      />
+                    </div>
                   </div>
                 </FadeInSection>
               );
