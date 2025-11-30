@@ -83,150 +83,95 @@ const VARIANT_IMAGE_WRAPPERS: Record<IllustrationVariant, string> = {
 };
 
 const HeroBackdrop = () => {
-  const waveGradientId = useId();
+  const topWaveGradientId = useId();
+  const bottomWaveGradientId = useId();
+  const glowGradientId = useId();
 
   return (
-    <div className="absolute inset-0 -z-20 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-[#fffaf6] via-[#f3d7c7] to-[#e6c4ba]" />
+    <div className="absolute inset-0 z-0 overflow-hidden">
       <div
-        className="absolute inset-0 opacity-75 mix-blend-multiply"
+        className="absolute inset-0"
         style={{
           background:
-            "radial-gradient(circle at 18% 22%, rgba(255,255,255,0.9) 0%, transparent 50%), radial-gradient(circle at 84% 12%, rgba(153,193,185,0.5) 0%, transparent 35%), radial-gradient(circle at 62% 70%, rgba(216,140,154,0.5) 0%, transparent 55%), radial-gradient(circle at 40% 85%, rgba(242,208,169,0.45) 0%, transparent 50%)",
+            "radial-gradient(circle at 18% 18%, rgba(216,140,154,0.22) 0%, transparent 40%), radial-gradient(circle at 82% 12%, rgba(153,193,185,0.22) 0%, transparent 34%), radial-gradient(circle at 65% 76%, rgba(242,208,169,0.18) 0%, transparent 50%), linear-gradient(135deg, #fffaf6 0%, #f4e5d8 42%, #e9f1ed 100%)",
         }}
       />
-      <div
-        className="absolute inset-0 opacity-25"
-        style={{
-          background:
-            "linear-gradient(120deg, rgba(216,140,154,0.12) 10%, transparent 35%), linear-gradient(200deg, rgba(153,193,185,0.18) 15%, transparent 42%)",
-        }}
-      />
-      <div
-        className="absolute inset-0 opacity-35"
-        style={{
-          background:
-            "repeating-linear-gradient(125deg, rgba(60,42,47,0.08) 0px, rgba(60,42,47,0.08) 1px, transparent 1px, transparent 14px)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          opacity: 0.14,
-          backgroundImage:
-            "linear-gradient(90deg, rgba(255,255,255,0.45) 1px, transparent 1px), linear-gradient(0deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-          backgroundSize: "140px 140px",
-          maskImage:
-            "radial-gradient(circle at 55% 45%, black 0%, transparent 70%)",
-          WebkitMaskImage:
-            "radial-gradient(circle at 55% 45%, black 0%, transparent 70%)",
-        }}
-      />
-      <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          opacity: 0.14,
-          backgroundImage:
-            "radial-gradient(rgba(60,42,47,0.16) 1px, transparent 0), radial-gradient(rgba(60,42,47,0.12) 1px, transparent 0)",
-          backgroundSize: "18px 18px",
-          backgroundPosition: "0 0, 9px 9px",
-        }}
-      />
-      <div className="pointer-events-none absolute -right-16 top-8 h-[420px] w-[420px] rounded-full bg-[rgba(216,140,154,0.45)] blur-[160px]" />
-      <div className="pointer-events-none absolute -left-24 top-1/4 h-[360px] w-[360px] rounded-full bg-[rgba(153,193,185,0.45)] blur-[140px]" />
-      <div className="pointer-events-none absolute inset-x-0 -top-24 h-48 bg-gradient-to-b from-white/50 via-white/20 to-transparent blur-2xl" />
-      <div className="pointer-events-none absolute inset-0 opacity-40 mix-blend-screen">
+
+      <div className="pointer-events-none absolute inset-x-[-12%] top-[-14%] h-[70%] opacity-85 mix-blend-screen">
         <svg
-          viewBox="0 0 1440 320"
-          className="absolute -bottom-[140px] right-[-120px] h-[280px] w-[900px]"
-        >
-          <defs>
-            <linearGradient
-              id={waveGradientId}
-              x1="0%"
-              y1="0%"
-              x2="100%"
-              y2="0%"
-            >
-              <stop offset="0%" stopColor="rgba(216,140,154,0.8)" />
-              <stop offset="50%" stopColor="rgba(242,208,169,0.7)" />
-              <stop offset="100%" stopColor="rgba(153,193,185,0.75)" />
-            </linearGradient>
-          </defs>
-          <path
-            d="M0 200 C 180 120 320 260 540 180 C 760 100 950 240 1200 150 C 1320 110 1440 170 1440 170 L1440 320 L0 320 Z"
-            fill={`url(#${waveGradientId})`}
-            opacity="0.45"
-          />
-        </svg>
-      </div>
-      <div className="pointer-events-none absolute inset-x-[-6%] bottom-[-60px] h-[360px]">
-        <svg
-          viewBox="0 0 1200 360"
+          viewBox="0 0 1600 900"
           preserveAspectRatio="none"
           className="h-full w-full"
         >
           <defs>
             <linearGradient
-              id="waveLineGradient"
+              id={topWaveGradientId}
               x1="0%"
               y1="0%"
               x2="100%"
               y2="0%"
             >
               <stop offset="0%" stopColor="rgba(216,140,154,0.8)" />
-              <stop offset="50%" stopColor="rgba(153,193,185,0.9)" />
-              <stop offset="100%" stopColor="rgba(242,208,169,0.85)" />
+              <stop offset="50%" stopColor="rgba(242,208,169,0.75)" />
+              <stop offset="100%" stopColor="rgba(153,193,185,0.8)" />
+            </linearGradient>
+            <linearGradient
+              id={glowGradientId}
+              x1="0%"
+              y1="0%"
+              x2="0%"
+              y2="100%"
+            >
+              <stop offset="0%" stopColor="rgba(255,255,255,0.52)" />
+              <stop offset="65%" stopColor="rgba(255,255,255,0.06)" />
+              <stop offset="100%" stopColor="transparent" />
             </linearGradient>
           </defs>
-          <g
-            fill="none"
-            stroke="url(#waveLineGradient)"
-            strokeLinecap="round"
-            strokeWidth="3"
-            strokeOpacity="0.7"
-          >
-            <path
-              d="M-40 160 Q120 110 260 140 T520 150 T780 140 T1040 160 T1300 150"
-              strokeDasharray="14 12"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="-280"
-                dur="12s"
-                repeatCount="indefinite"
-              />
-            </path>
-            <path
-              d="M-40 220 Q140 260 280 230 T540 210 T820 235 T1080 215 T1320 230"
-              strokeDasharray="18 14"
-              strokeOpacity="0.55"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="0"
-                to="320"
-                dur="14s"
-                repeatCount="indefinite"
-              />
-            </path>
-            <path
-              d="M-20 280 Q160 240 340 270 T620 260 T900 275 T1180 255"
-              strokeDasharray="12 10"
-              strokeOpacity="0.6"
-            >
-              <animate
-                attributeName="stroke-dashoffset"
-                from="-180"
-                to="180"
-                dur="16s"
-                repeatCount="indefinite"
-              />
-            </path>
-          </g>
+          <path
+            d="M0 260 C 260 180 520 380 820 310 C 1140 240 1360 340 1600 250 L1600 0 L0 0 Z"
+            fill={`url(#${topWaveGradientId})`}
+          />
+          <path
+            d="M0 240 C 200 160 520 280 760 250 C 1100 210 1320 280 1600 200 L1600 0 L0 0 Z"
+            fill={`url(#${glowGradientId})`}
+            opacity="0.5"
+          />
         </svg>
       </div>
+
+      <div className="pointer-events-none absolute inset-x-[-12%] bottom-[-12%] h-[78%] opacity-90 mix-blend-normal">
+        <svg
+          viewBox="0 0 1600 900"
+          preserveAspectRatio="none"
+          className="h-full w-full"
+        >
+          <defs>
+            <linearGradient
+              id={bottomWaveGradientId}
+              x1="0%"
+              y1="0%"
+              x2="100%"
+              y2="0%"
+            >
+              <stop offset="0%" stopColor="rgba(153,193,185,0.9)" />
+              <stop offset="45%" stopColor="rgba(242,208,169,0.75)" />
+              <stop offset="100%" stopColor="rgba(216,140,154,0.85)" />
+            </linearGradient>
+          </defs>
+          <path
+            d="M0 520 C 240 640 520 540 820 620 C 1120 700 1340 620 1600 700 L1600 900 L0 900 Z"
+            fill={`url(#${bottomWaveGradientId})`}
+          />
+        </svg>
+      </div>
+
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(circle at 32% 60%, rgba(216,140,154,0.12) 0%, transparent 42%), radial-gradient(circle at 72% 62%, rgba(153,193,185,0.12) 0%, transparent 40%), radial-gradient(circle at 50% 30%, rgba(255,255,255,0.3) 0%, transparent 50%)",
+        }}
+      />
     </div>
   );
 };
@@ -261,7 +206,7 @@ const HERO_SCORE_LINES = [
 ];
 
 const HeroScorecard = () => (
-  <div className="relative w-full max-w-[300px] rounded-[24px] border border-border-primary bg-surface-background p-5 shadow-warm">
+  <div className="relative w-full max-w-[280px] rounded-[24px] border border-border-primary bg-surface-background p-5 shadow-warm">
     <div className="grain-overlay" />
     <div className="relative z-10 space-y-4">
       <div className="flex items-start justify-between gap-3">
@@ -389,7 +334,7 @@ export default function ApertureIQPage() {
       <section className="relative overflow-hidden bg-base-background text-text-primary">
         <HeroBackdrop />
         <div className="grain-overlay" aria-hidden="true" />
-        <div className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-10 sm:py-16">
+        <div className="relative z-10 mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-10 sm:py-16">
           <div className="pointer-events-none absolute left-4 top-8 hidden h-24 w-24 rounded-full bg-[rgba(153,193,185,0.25)] blur-3xl lg:block" />
           <div className="pointer-events-none absolute right-10 top-6 hidden h-28 w-28 rounded-full bg-[rgba(216,140,154,0.22)] blur-3xl lg:block" />
           <div className="grid items-center gap-12 lg:grid-cols-3">
@@ -416,7 +361,7 @@ export default function ApertureIQPage() {
                 </p>
               </FadeInSection>
               <FadeInSection delay={120}>
-                <div className="flex flex-col items-center gap-4 sm:flex-row sm:justify-start">
+                <div className="flex flex-row flex-nowrap items-center gap-4">
                   <CTAButton
                     onClick={() => setShowWaitlistModal(true)}
                     variant="primary"
@@ -424,7 +369,7 @@ export default function ApertureIQPage() {
                     eventName="Hero CTA Click"
                     className="min-w-[200px]"
                   >
-                    Start Free Trial
+                    Sign Up Now
                   </CTAButton>
                   <CTAButton
                     onClick={() => setShowDemoVideo(true)}
@@ -446,10 +391,10 @@ export default function ApertureIQPage() {
             <FadeInSection delay={140}>
               <div className="relative -mt-6 flex justify-center lg:justify-end">
                 <div className="pointer-events-none absolute -right-16 bottom-10 hidden h-32 w-32 rounded-full bg-[rgba(216,140,154,0.28)] blur-3xl lg:block" />
-                <div className="relative flex w-full max-w-[300px] flex-col items-center gap-4 lg:items-end">
+                <div className="relative flex w-full max-w-[640px] flex-wrap items-center justify-center gap-4 xl:max-w-[300px] xl:flex-col xl:items-end">
                   <HeroScorecard />
                   <div
-                    className="w-full max-w-[300px] rounded-2xl border border-border-primary bg-surface-background p-4 text-sm shadow-warm backdrop-blur"
+                    className="w-full max-w-[280px] rounded-2xl border border-border-primary bg-surface-background p-4 text-sm shadow-warm backdrop-blur"
                     style={{
                       backgroundColor:
                         "rgba(var(--surface-background-rgb), 0.92)",
@@ -468,11 +413,6 @@ export default function ApertureIQPage() {
               </div>
             </FadeInSection>
           </div>
-        </div>
-        <div className="flex justify-center align-middle">
-          <FadeInSection delay={240} className="flex justify-center">
-            <SmoothVoiceWave />
-          </FadeInSection>
         </div>
       </section>
       <div className="section-divider" aria-hidden="true" />
@@ -852,19 +792,6 @@ export default function ApertureIQPage() {
               </div>
             </FadeInSection>
           </div>
-
-          <FadeInSection delay={200}>
-            <div className="mt-12 space-y-2 text-center text-text-secondary">
-              <p className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-brand-primary" />
-                14-day free trial available—no credit card required
-              </p>
-              <p className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5 text-brand-primary" />
-                Add-ons include extra screens or premium support
-              </p>
-            </div>
-          </FadeInSection>
         </div>
       </section>
       <div className="section-divider" aria-hidden="true" />
@@ -873,9 +800,6 @@ export default function ApertureIQPage() {
 
       <section className="relative overflow-hidden bg-brand-primary py-20 text-surface-background">
         <div className="grain-overlay" aria-hidden="true" />
-        <div className="pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 opacity-70">
-          <SmoothVoiceWave tone="light" />
-        </div>
         <div className="relative mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
           <FadeInSection>
             <h2 className="mb-6 text-4xl font-bold sm:text-5xl">

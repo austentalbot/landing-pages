@@ -287,11 +287,6 @@ export const FAQS = [
       'The full transcript is always available. If something seems off, you can read the exact exchange and make your own judgment. We also flag "low confidence" assessments when the AI is uncertain.',
   },
   {
-    question: "Does this replace hiring managers?",
-    answer:
-      "No. This handles the initial screening bottleneck. Your hiring managers still conduct deep technical, cultural, and final-round interviews. We just make sure they're only talking to candidates worth their time.",
-  },
-  {
     question: "Can I customize the evaluation criteria?",
     answer:
       "The five core competencies are standardized for IC engineering roles—Communication Clarity, Technical Depth & Judgment, Ownership & Initiative, Collaboration & Teamwork, and Growth Trajectory. You customize by uploading your job description and engineering values, which tailors question focus, technical depth, and role-fit assessment to your specific bar.",

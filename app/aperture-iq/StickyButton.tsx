@@ -43,7 +43,7 @@ export default function StickyButton({ onClick }: StickyButtonProps) {
         onClick={handleClick}
         className="bg-brand-primary-cta text-surface-background px-6 py-3 rounded-full shadow-warm hover:translate-y-[-1px] transition-all duration-200 font-semibold text-lg"
       >
-        Join Waitlist
+        Sign Up Now
       </button>
     </div>
   );
