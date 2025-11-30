@@ -261,7 +261,7 @@ export const PRICING_PLANS = {
     duration: "30-minute interview",
     features: [
       "Complete scorecard with transcript and evidence",
-      "Deep technical judgment and decision-making assessment",
+      "Technical and decision-making assessment",
       "Side-by-side candidate comparison",
       "Level calibration and role-fit analysis",
     ],

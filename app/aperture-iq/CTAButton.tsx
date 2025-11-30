@@ -28,14 +28,15 @@ export default function CTAButton({
   };
 
   const baseStyles =
-    "font-semibold rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] shadow-warm";
+    "font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-0.5 active:translate-y-0 shadow-warm focus-outline-brand relative overflow-hidden";
 
   const variantStyles = {
     primary:
-      "bg-brand-primary-cta text-surface-background hover:bg-gradient-rose-cta-hover",
+      "bg-brand-primary-cta text-surface-background border-2 border-brand-primary-cta hover-bg-surface-background-80 hover:text-text-primary",
     secondary:
-      "bg-surface-background text-text-primary border-2 border-brand-primary hover:bg-surface-background-80",
-    teal: "bg-brand-primary text-surface-background hover:bg-brand-primary-80",
+      "bg-surface-background text-text-primary border-2 border-brand-primary-cta hover-bg-surface-background-80",
+    teal:
+      "bg-brand-primary text-surface-background border-2 border-brand-primary hover-bg-brand-primary-80",
   };
 
   const sizeStyles = {
