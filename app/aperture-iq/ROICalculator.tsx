@@ -43,10 +43,10 @@ export default function ROICalculator() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-text-primary mb-4">
-          Calculate Your Time Savings
+          Understand Your Screening Capacity
         </h2>
         <p className="text-xl text-text-secondary">
-          See how much time and money you could save with AI-powered screening
+          On-demand interviewing removes calendar constraints. See how many more candidates you could evaluate.
         </p>
       </div>
 
@@ -182,28 +182,28 @@ export default function ROICalculator() {
             </div>
           </div>
 
-          {/* Savings Highlight */}
+          {/* Capacity Difference */}
           <div className="bg-surface-background rounded-xl p-8 text-center border-2 border-brand-primary-cta">
             <div className="text-sm font-semibold text-text-secondary uppercase tracking-wide mb-2">
-              Your Quarterly Savings
+              Potential Quarterly Capacity Gain
             </div>
             <div className="flex items-center justify-center gap-8 flex-wrap">
               <div>
                 <div className="text-5xl font-bold text-text-primary mb-1">
                   {formatHours(timeSavedPerQuarter)} hrs
                 </div>
-                <div className="text-sm text-text-secondary">Time saved</div>
+                <div className="text-sm text-text-secondary">Recruiter hours freed</div>
               </div>
               <div className="text-4xl text-brand-primary-cta">+</div>
               <div>
                 <div className="text-5xl font-bold text-text-primary mb-1">
                   {formatCurrency(costSavedPerQuarter)}
                 </div>
-                <div className="text-sm text-text-secondary">Money saved</div>
+                <div className="text-sm text-text-secondary">Capacity value</div>
               </div>
             </div>
             <div className="mt-6 pt-6 border-t border-border-primary">
-              <div className="text-sm text-text-secondary mb-1">Annual Savings</div>
+              <div className="text-sm text-text-secondary mb-1">Annual Capacity Value</div>
               <div className="text-4xl font-bold text-brand-primary-cta">
                 {formatCurrency(annualSavings)}
               </div>
@@ -212,7 +212,7 @@ export default function ROICalculator() {
 
           {/* Additional benefit */}
           <p className="text-center text-text-secondary mt-6 italic">
-            Plus: interview 2-3x more candidates in the same time = better hires.
+            The on-demand model lets you scale candidate evaluation without scheduling overhead—interview more candidates in the same timeframe.
           </p>
         </div>
       </div>

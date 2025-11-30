@@ -186,11 +186,8 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             </div>
 
             <div className="bg-surface-background border-l-4 border-brand-primary-cta p-6 mb-6 rounded-lg">
-              <p className="font-semibold text-text-primary mb-2">
-                We're launching in Q2 2025
-              </p>
               <p className="text-text-secondary">
-                We're currently in private beta with a limited group of companies, refining the experience based on real recruiting workflows.
+                We're in private beta with select engineering teams, refining the voice-based interview experience and competency scoring framework.
               </p>
             </div>
 
@@ -206,7 +203,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                 <li className="flex items-start">
                   <span className="text-brand-primary mr-2">✓</span>
                   <span>
-                    You'll get <strong>50% off your first 3 months</strong> when we launch
+                    You'll get <strong>early access pricing</strong> when you join the beta program
                   </span>
                 </li>
                 <li className="flex items-start">
