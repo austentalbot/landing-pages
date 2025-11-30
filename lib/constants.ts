@@ -8,6 +8,7 @@
 export enum LANDING_PAGE_TYPES {
   ESTATE_BEACON = "estate-beacon",
   CALL_CLERK = "call-clerk",
+  APERTURE_IQ = "aperture-iq",
   // Add more as you create them:
   // EXAMPLE = "example-landing-page",
 }
