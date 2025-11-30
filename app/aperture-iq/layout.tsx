@@ -1,4 +1,11 @@
 import type { Metadata } from "next";
+import { Inter_Tight } from "next/font/google";
+import "./theme.css";
+
+const interTight = Inter_Tight({
+  subsets: ["latin"],
+  weight: ["300", "400", "600", "700"],
+});
 
 export const metadata: Metadata = {
   title: "ApertureIQ - AI-Powered Interview Screening for Engineering Roles",
@@ -26,5 +33,9 @@ export default function ApertureIQLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <div className={`${interTight.className} aperture-iq-theme`}>
+      {children}
+    </div>
+  );
 }

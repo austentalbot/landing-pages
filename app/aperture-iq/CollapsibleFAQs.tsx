@@ -26,21 +26,20 @@ export default function CollapsibleFAQs({ faqs }: CollapsibleFAQsProps) {
   return (
     <div className="space-y-4">
       {faqs.map((faq, index) => (
-        <div
-          key={index}
-          className="bg-white rounded-lg shadow-md overflow-hidden border border-[#E5D8D0]"
-        >
-          <button
-            onClick={() => toggleFAQ(index)}
-            className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-[#F1E3D3] transition-colors duration-200"
-          >
-            <span className="font-semibold text-[#3C2A2F] text-lg">
+                  <div
+                    key={index}
+                    className="bg-surface-background rounded-lg shadow-warm overflow-hidden border border-border-primary"
+                  >
+                    <button
+                      onClick={() => toggleFAQ(index)}
+                      className="w-full px-6 py-4 text-left flex justify-between items-center hover-bg-surface-background-80 transition-colors duration-200"
+                    >            <span className="font-semibold text-text-primary text-lg">
               {faq.question}
             </span>
             {openIndex === index ? (
-              <ChevronUp className="w-5 h-5 text-[#D88C9A] flex-shrink-0 ml-4" />
+              <ChevronUp className="w-5 h-5 text-brand-primary-cta flex-shrink-0 ml-4" />
             ) : (
-              <ChevronDown className="w-5 h-5 text-[#D88C9A] flex-shrink-0 ml-4" />
+              <ChevronDown className="w-5 h-5 text-brand-primary-cta flex-shrink-0 ml-4" />
             )}
           </button>
           <div
@@ -50,7 +49,7 @@ export default function CollapsibleFAQs({ faqs }: CollapsibleFAQsProps) {
                 : "max-h-0 opacity-0"
             } overflow-hidden`}
           >
-            <div className="px-6 py-4 text-[#446B67] leading-relaxed border-t border-[#E5D8D0]">
+            <div className="px-6 py-4 text-text-secondary leading-relaxed border-t border-border-primary">
               {faq.answer}
             </div>
           </div>

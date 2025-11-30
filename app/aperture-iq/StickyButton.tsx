@@ -41,7 +41,7 @@ export default function StickyButton({ onClick }: StickyButtonProps) {
     >
       <button
         onClick={handleClick}
-        className="bg-gradient-to-r from-[#99C1B9] to-[#D88C9A] text-white px-6 py-3 rounded-full shadow-2xl hover:shadow-[#D88C9A]/50 hover:scale-110 transition-all duration-200 font-semibold text-lg"
+        className="bg-brand-primary-cta text-surface-background px-6 py-3 rounded-full shadow-warm hover:translate-y-[-1px] transition-all duration-200 font-semibold text-lg"
       >
         Join Waitlist
       </button>
