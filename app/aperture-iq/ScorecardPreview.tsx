@@ -16,7 +16,7 @@ export default function ScorecardPreview() {
             <div className="w-3 h-3 rounded-full bg-[#F2D0A9]"></div>
             <div className="w-3 h-3 rounded-full bg-[#99C1B9]"></div>
           </div>
-          <div className="flex-1 bg-white/60 rounded px-3 py-1 text-xs text-[#446B67] ml-2">
+          <div className="flex-1 bg-white/60 rounded px-3 py-1 text-xs text-text-secondary ml-2">
             app.apertureiq.com/scorecards/{MOCK_SCORECARD.candidateName.toLowerCase().replace(' ', '-')}
           </div>
         </div>
@@ -29,8 +29,8 @@ export default function ScorecardPreview() {
               <h2 className="text-3xl font-bold text-[#3C2A2F] mb-1">
                 {MOCK_SCORECARD.candidateName}
               </h2>
-              <p className="text-[#446B67] text-lg">{MOCK_SCORECARD.position}</p>
-              <p className="text-sm text-[#446B67] mt-1">
+              <p className="text-text-secondary text-lg">{MOCK_SCORECARD.position}</p>
+              <p className="text-sm text-text-secondary mt-1">
                 Interviewed: {MOCK_SCORECARD.interviewDate} • Applied: {MOCK_SCORECARD.appliedDate}
               </p>
             </div>
@@ -53,7 +53,7 @@ export default function ScorecardPreview() {
             <div className="bg-white rounded-lg p-4 border border-[#E5D8D0]">
               <h4 className="font-semibold text-[#3C2A2F] text-sm mb-2">Level Assessment</h4>
               <p className="text-[#446B67]">{MOCK_SCORECARD.level}</p>
-              <p className="text-xs text-[#99C1B9] mt-1">({MOCK_SCORECARD.levelConfidence} confidence)</p>
+              <p className="text-xs text-text-secondary mt-1">({MOCK_SCORECARD.levelConfidence} confidence)</p>
             </div>
             <div className="bg-white rounded-lg p-4 border border-[#E5D8D0]">
               <h4 className="font-semibold text-[#3C2A2F] text-sm mb-2">Role Fit</h4>

@@ -5,7 +5,7 @@ import React from "react";
 interface CTAButtonProps {
   onClick: () => void;
   children: React.ReactNode;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "teal";
   size?: "sm" | "md" | "lg";
   className?: string;
   eventName?: string;
@@ -28,13 +28,14 @@ export default function CTAButton({
   };
 
   const baseStyles =
-    "font-semibold rounded-lg transition-all duration-200 transform hover:scale-105 hover:shadow-xl";
+    "font-semibold rounded-lg transition-all duration-200 transform hover:translate-y-[-1px] shadow-warm";
 
   const variantStyles = {
     primary:
-      "bg-gradient-to-r from-[#D88C9A] to-[#F2D0A9] text-[#3C2A2F] hover:from-[#c67b8a] hover:to-[#e6c199] shadow-lg",
+      "bg-brand-primary-cta text-surface-background hover:bg-gradient-rose-cta-hover",
     secondary:
-      "bg-white text-[#3C2A2F] border-2 border-[#D88C9A] hover:bg-[#F1E3D3]",
+      "bg-surface-background text-text-primary border-2 border-brand-primary hover:bg-surface-background-80",
+    teal: "bg-brand-primary text-surface-background hover:bg-brand-primary-80",
   };
 
   const sizeStyles = {

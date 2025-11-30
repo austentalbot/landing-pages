@@ -30,27 +30,27 @@ export default function CollapsibleFeatures() {
         return (
           <div
             key={feature.id}
-            className="bg-white rounded-xl shadow-md overflow-hidden border-2 border-[#E5D8D0] hover:border-[#D88C9A] transition-all duration-200"
+            className="bg-surface-background rounded-xl shadow-warm overflow-hidden border-2 border-border-primary hover:border-brand-primary-cta transition-all duration-200"
           >
             <button
               onClick={() => toggleFeature(index)}
-              className="w-full px-6 py-5 text-left flex items-center gap-4 hover:bg-[#F1E3D3] transition-colors duration-200"
+              className="w-full px-6 py-5 text-left flex items-center gap-4 hover-bg-surface-background-80 transition-colors duration-200"
             >
-              <div className="bg-gradient-to-br from-[#99C1B9] to-[#D88C9A] p-3 rounded-lg flex-shrink-0">
-                <IconComponent className="w-6 h-6 text-white" />
+              <div className="bg-brand-primary p-3 rounded-lg flex-shrink-0">
+                <IconComponent className="w-6 h-6 text-text-primary" />
               </div>
               <div className="flex-1">
-                <h3 className="font-bold text-[#3C2A2F] text-xl mb-1">
+                <h3 className="font-bold text-text-primary text-xl mb-1">
                   {feature.title}
                 </h3>
-                <p className="text-[#446B67] text-sm">
+                <p className="text-text-secondary text-sm">
                   {feature.shortDescription}
                 </p>
               </div>
               {openIndex === index ? (
-                <ChevronUp className="w-6 h-6 text-[#D88C9A] flex-shrink-0" />
+                <ChevronUp className="w-6 h-6 text-brand-primary-cta flex-shrink-0" />
               ) : (
-                <ChevronDown className="w-6 h-6 text-[#D88C9A] flex-shrink-0" />
+                <ChevronDown className="w-6 h-6 text-brand-primary-cta flex-shrink-0" />
               )}
             </button>
 
@@ -61,20 +61,20 @@ export default function CollapsibleFeatures() {
                   : "max-h-0 opacity-0"
               } overflow-hidden`}
             >
-              <div className="px-6 py-6 border-t border-[#E5D8D0] bg-[#F6F2EE]">
-                <p className="text-[#446B67] leading-relaxed mb-4">
+              <div className="px-6 py-6 border-t border-border-primary bg-surface-background">
+                <p className="text-text-secondary leading-relaxed mb-4">
                   {feature.detailedContent.description}
                 </p>
 
                 {/* Example dialogue for Adaptive Interviewing */}
                 {'example' in feature.detailedContent && feature.detailedContent.example && (
-                  <div className="bg-white rounded-lg p-4 mb-4 border border-[#E5D8D0]">
-                    <h4 className="font-semibold text-[#3C2A2F] mb-3 text-sm uppercase tracking-wide">
+                  <div className="bg-surface-background rounded-lg p-4 mb-4 border border-border-primary">
+                    <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">
                       Example Conversation:
                     </h4>
                     <div className="space-y-2">
                       {feature.detailedContent.example.lines.map((line, i) => (
-                        <div key={i} className={`text-sm ${line.speaker === 'AI' ? 'text-[#446B67]' : 'text-[#3C2A2F]'}`}>
+                        <div key={i} className={`text-sm ${line.speaker === 'AI' ? 'text-text-secondary' : 'text-text-primary'}`}>
                           <span className="font-semibold">{line.speaker}:</span> "{line.text}"
                         </div>
                       ))}
@@ -85,10 +85,10 @@ export default function CollapsibleFeatures() {
                 {/* Dimensions for Engineered Evaluation */}
                 {'dimensions' in feature.detailedContent && feature.detailedContent.dimensions && (
                   <div className="mb-4">
-                    <h4 className="font-semibold text-[#3C2A2F] mb-3">
+                    <h4 className="font-semibold text-text-primary mb-3">
                       5 Core Dimensions:
                     </h4>
-                    <ol className="list-decimal list-inside space-y-1 text-[#446B67]">
+                    <ol className="list-decimal list-inside space-y-1 text-text-secondary">
                       {feature.detailedContent.dimensions.map((dim, i) => (
                         <li key={i}>{dim}</li>
                       ))}
@@ -100,8 +100,8 @@ export default function CollapsibleFeatures() {
                 {'bullets' in feature.detailedContent && feature.detailedContent.bullets && (
                   <ul className="space-y-2">
                     {feature.detailedContent.bullets.map((bullet, i) => (
-                      <li key={i} className="flex items-start gap-2 text-[#446B67]">
-                        <span className="text-[#99C1B9] mt-1">✓</span>
+                      <li key={i} className="flex items-start gap-2 text-text-secondary">
+                        <span className="text-brand-primary mt-1">✓</span>
                         <span>{bullet}</span>
                       </li>
                     ))}
