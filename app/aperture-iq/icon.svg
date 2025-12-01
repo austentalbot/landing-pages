@@ -1,0 +1,14 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="apertureBg" x1="8" y1="6" x2="56" y2="58" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#d88c9a" />
+      <stop offset="1" stop-color="#99c1b9" />
+    </linearGradient>
+  </defs>
+
+  <rect width="64" height="64" rx="16" fill="url(#apertureBg)" />
+  <path
+    d="M32 14L46.5 50H39.5L33.6 35.8H30.4L24.5 50H17.5L32 14Z"
+    fill="white"
+  />
+</svg>
