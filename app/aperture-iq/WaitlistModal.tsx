@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { X } from "lucide-react";
 import { isValidEmail } from "@/lib/utils";
+import { pushVirtualPage, trackAnalyticsEvent } from "./lib/analytics";
 import {
   TEAM_SIZE_OPTIONS,
   ROLES_PER_QUARTER_OPTIONS,
@@ -24,11 +25,20 @@ interface FormData {
   painPoint: string;
 }
 
+const SIGNUP_BASE_PATH = "/aperture-iq";
+const SIGNUP_STEP_PATHS: Record<number, string> = {
+  1: `${SIGNUP_BASE_PATH}/signup-step-1`,
+  2: `${SIGNUP_BASE_PATH}/signup-step-2`,
+  3: `${SIGNUP_BASE_PATH}/signup-step-3`,
+};
+const SIGNUP_SUCCESS_PATH = `${SIGNUP_BASE_PATH}/signup-complete`;
+
 export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   const [step, setStep] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const defaultPathRef = useRef<string | null>(null);
 
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -41,6 +51,49 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
   });
 
   const totalSteps = 3;
+
+  useEffect(() => {
+    if (!isOpen || typeof window === "undefined") return;
+
+    if (!defaultPathRef.current) {
+      defaultPathRef.current =
+        window.location.pathname + window.location.search;
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (isOpen || typeof window === "undefined") return;
+
+    if (defaultPathRef.current) {
+      window.history.replaceState({}, "", defaultPathRef.current);
+      defaultPathRef.current = null;
+    }
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const targetPath = isSuccess
+      ? SIGNUP_SUCCESS_PATH
+      : SIGNUP_STEP_PATHS[step] ?? `${SIGNUP_BASE_PATH}/signup-step-${step}`;
+
+    pushVirtualPage(targetPath, {
+      eventName: isSuccess
+        ? "Signup Completion Page Viewed"
+        : "Signup Step Viewed",
+      category: "signup_flow",
+      label: isSuccess ? "Success" : `Step ${step}`,
+      payload: isSuccess
+        ? {
+            status: "success",
+            totalSteps,
+          }
+        : {
+            step,
+            totalSteps,
+          },
+    });
+  }, [isOpen, isSuccess, step, totalSteps]);
 
   const handleInputChange = (field: keyof FormData, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
@@ -78,18 +131,51 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
     return true;
   };
 
+  const isStepReady = (currentStep: number): boolean => {
+    if (currentStep === 1) {
+      return (
+        !!formData.name.trim() &&
+        !!formData.email.trim() &&
+        isValidEmail(formData.email)
+      );
+    }
+
+    if (currentStep === 2) {
+      return (
+        !!formData.company.trim() &&
+        !!formData.role &&
+        !!formData.teamSize
+      );
+    }
+
+    if (currentStep === 3) {
+      return !!formData.rolesPerQuarter;
+    }
+
+    return false;
+  };
+
   const handleNext = () => {
     if (!validateStep(step)) return;
 
-    // Track step completion
-    if (typeof window !== "undefined" && (window as any).umami) {
-      (window as any).umami.track("Waitlist Step Complete", { step });
-    }
+    trackAnalyticsEvent("Signup Step Completed", {
+      category: "signup_flow",
+      label: `Step ${step}`,
+      payload: { step, totalSteps },
+    });
 
     setStep(step + 1);
   };
 
   const handleBack = () => {
+    if (step === 1) return;
+
+    trackAnalyticsEvent("Signup Step Back", {
+      category: "signup_flow",
+      label: `Step ${step}`,
+      payload: { step, totalSteps },
+    });
+
     setStep(step - 1);
     setError(null);
   };
@@ -123,13 +209,14 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         throw new Error("Failed to submit form");
       }
 
-      // Track successful submission
-      if (typeof window !== "undefined" && (window as any).umami) {
-        (window as any).umami.track("Waitlist Success", {
+      trackAnalyticsEvent("Signup Submission Success", {
+        category: "signup_flow",
+        label: "Waitlist Success",
+        payload: {
           role: formData.role,
           teamSize: formData.teamSize,
-        });
-      }
+        },
+      });
 
       setIsSuccess(true);
     } catch (err) {
@@ -413,15 +500,24 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
               {step < totalSteps ? (
                 <button
                   onClick={handleNext}
-                  className="px-8 py-2 bg-brand-primary text-surface-background rounded-lg font-semibold hover-bg-brand-primary-80 transition-all"
+                  disabled={!isStepReady(step)}
+                  className={`px-8 py-2 rounded-lg font-semibold transition-all ${
+                    isStepReady(step)
+                      ? "bg-brand-primary-dark text-surface-background hover-bg-brand-primary-dark-80"
+                      : "bg-brand-primary text-surface-background opacity-60 cursor-not-allowed"
+                  }`}
                 >
                   Next
                 </button>
               ) : (
                 <button
                   onClick={handleSubmit}
-                  disabled={isLoading}
-                  className="px-8 py-2 bg-brand-primary text-surface-background rounded-lg font-semibold hover-bg-brand-primary-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={isLoading || !isStepReady(step)}
+                  className={`px-8 py-2 rounded-lg font-semibold transition-all ${
+                    isStepReady(step)
+                      ? "bg-brand-primary-dark text-surface-background hover-bg-brand-primary-dark-80"
+                      : "bg-brand-primary text-surface-background opacity-60 cursor-not-allowed"
+                  } disabled:opacity-50 disabled:cursor-not-allowed`}
                 >
                   {isLoading ? "Submitting..." : "Submit"}
                 </button>

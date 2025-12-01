@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { trackAnalyticsEvent } from "./lib/analytics";
 
 interface CTAButtonProps {
   onClick: () => void;
@@ -20,9 +21,15 @@ export default function CTAButton({
   eventName,
 }: CTAButtonProps) {
   const handleClick = () => {
-    // Track with Umami if available
-    if (eventName && typeof window !== "undefined" && (window as any).umami) {
-      (window as any).umami.track(eventName);
+    if (eventName) {
+      trackAnalyticsEvent(eventName, {
+        category: "cta",
+        label: "CTA Button",
+        payload: {
+          variant,
+          size,
+        },
+      });
     }
     onClick();
   };
