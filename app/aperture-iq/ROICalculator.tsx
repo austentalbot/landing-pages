@@ -43,10 +43,10 @@ export default function ROICalculator() {
     <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold text-text-primary mb-4">
-          Understand Your Screening Capacity
+          See How Much Time You Free Up
         </h2>
         <p className="text-xl text-text-secondary">
-          On-demand interviewing removes calendar constraints. See how many more candidates you could evaluate.
+          On-demand interviews remove calendars so you can move more candidates, faster.
         </p>
       </div>
 
@@ -210,10 +210,6 @@ export default function ROICalculator() {
             </div>
           </div>
 
-          {/* Additional benefit */}
-          <p className="text-center text-text-secondary mt-6 italic">
-            The on-demand model lets you scale candidate evaluation without scheduling overhead—interview more candidates in the same timeframe.
-          </p>
         </div>
       </div>
     </div>

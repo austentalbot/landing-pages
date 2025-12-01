@@ -18,19 +18,19 @@ export const PROBLEM_POINTS = [
   {
     title: "Scheduling Bottleneck",
     description:
-      "Coordinating calendars across time zones for 20+ technical screens per role. Candidates wait days for a 30-minute conversation, and your pipeline goes cold.",
+      "20+ screens per role turn into calendar ping-pong, and great candidates cool off.",
     icon: "clock",
   },
   {
     title: "Inconsistent Evaluation",
     description:
-      "One recruiter asks about tech stack. Another focuses on team dynamics. Your hiring bar fluctuates based on who's available and how deep they can probe on distributed systems.",
+      "Signals vary by interviewer; the hiring bar moves depending on who asks the questions.",
     icon: "trending-down",
   },
   {
     title: "Surface-Level Screens",
     description:
-      'Candidates rehearse answers about "leading a migration." Without follow-up questions, you can\'t tell real ownership from title inflation or team success from individual contribution.',
+      "Rehearsed answers slip through, and you can't tell ownership from participation.",
     icon: "target",
   },
 ] as const;
@@ -38,23 +38,23 @@ export const PROBLEM_POINTS = [
 export const SOLUTION_BENEFITS = [
   {
     title: "Recruiter Screen (20 min)",
-    description: "Engineering fit, communication clarity, and role motivation",
+    description: "Rapid filter for fit, clarity, and motivation",
     icon: "clipboard-check",
     bullets: [
-      "Verify resume claims with behavioral probing",
-      "Surface collaboration and communication patterns",
-      "Fast, consistent filter before engineer time",
+      "Validate resume claims with quick probes",
+      "Capture collaboration and communication patterns",
+      "Consistent yes/no before engineer time",
     ],
   },
   {
     title: "Hiring Manager Screen (30 min)",
     description:
-      "Technical judgment, system design thinking, and ownership depth",
+      "Technical judgment, system design, and ownership depth",
     icon: "search",
     bullets: [
-      "Extract technical decision-making and trade-off reasoning",
-      "Distinguish individual contribution from team success",
-      "Challenge surface-level answers with adaptive follow-ups",
+      "Extract trade-offs and decision paths",
+      "Separate individual contribution from team outcome",
+      "Push past surface answers with adaptive follow-ups",
     ],
   },
 ] as const;
@@ -64,21 +64,21 @@ export const HOW_IT_WORKS_STEPS = [
     step: 1,
     title: "Send Link",
     description:
-      "Generate a role-specific interview link from your dashboard. Send via email or ATS. Candidates interview on their schedule—no calendar coordination required.",
+      "Generate a role-specific link and share it. No scheduling.",
     icon: "send",
   },
   {
     step: 2,
     title: "AI Conducts Interview",
     description:
-      "Voice-based conversation with real-time adaptive probing. Challenges vague answers, asks for specifics, distinguishes ownership from participation—just like a seasoned engineering interviewer.",
+      "Adaptive voice conversation that digs into specifics and ownership.",
     icon: "mic",
   },
   {
     step: 3,
     title: "Review Scorecard",
     description:
-      "Competency-based scorecard with transcript quotes, level assessment, and follow-up questions appears in your dashboard. Review the evidence, compare candidates, make informed decisions.",
+      "Evidence-backed scorecard appears instantly. Compare and decide.",
     icon: "file-text",
   },
 ] as const;
@@ -89,34 +89,14 @@ export const FEATURE_SECTIONS = [
     title: "Adaptive Interviewing",
     icon: "message-square",
     shortDescription:
-      "Challenges surface-level answers in real-time. Asks for technical specifics, distinguishes ownership from team success, and extracts decision-making reasoning—similar to how your most experienced engineering interviewers conduct deep technical conversations.",
+      "Challenges surface answers in real-time and pulls for technical specifics.",
     detailedContent: {
       description:
-        "Every candidate gets different follow-up questions based on their answers. No two interviews are identical. Rehearsed responses get probed until real depth emerges.",
-      example: {
-        lines: [
-          {
-            speaker: "AI",
-            text: "Tell me about a time you had to make a technical trade-off.",
-          },
-          {
-            speaker: "Candidate",
-            text: "We decided to use microservices for our platform.",
-          },
-          {
-            speaker: "AI",
-            text: "What specifically led to that decision? What were the alternatives you considered?",
-          },
-          {
-            speaker: "Candidate",
-            text: "Well, our monolith was getting slow…",
-          },
-          {
-            speaker: "AI",
-            text: "Can you walk me through your role in that decision versus the team's?",
-          },
-        ],
-      },
+        "No two interviews are identical. The AI keeps asking until it reaches depth and clear ownership.",
+      bullets: [
+        "Real-time probes on claims and trade-offs",
+        "Asks for your role, not just the team's outcome",
+      ],
     },
   },
   {
@@ -124,23 +104,14 @@ export const FEATURE_SECTIONS = [
     title: "Engineered Evaluation",
     icon: "bar-chart-3",
     shortDescription:
-      "Competency-based scoring engineered specifically for IC engineering roles. Five dimensions with 1-5 ratings, direct transcript evidence, and level assessment from Junior to Staff+.",
+      "Competency-based scoring for IC engineering roles with evidence attached.",
     detailedContent: {
       description:
-        "Provide your job description and engineering values. The interview adapts question depth, adjusts technical focus by role (Backend, Frontend, DevOps, ML), and calibrates scoring to your bar.",
-      dimensions: [
-        "Communication Clarity",
-        "Technical Depth & Judgment",
-        "Ownership & Initiative",
-        "Collaboration & Teamwork",
-        "Growth Trajectory & Learning Agility",
-      ],
+        "Questions adapt to your role and bar; scores stay consistent across candidates.",
       bullets: [
-        "1-5 competency rating with detailed justification",
-        "Direct quotes from transcript as supporting evidence",
-        "Green flags and red flags with severity assessment",
-        "Level assessment: Junior / Mid / Senior / Staff+",
-        'Alternative role suggestions when skills don\'t match (e.g., "Strong for DevOps despite applying for Backend")',
+        "5 competency scores with justification",
+        "Direct transcript quotes for every rating",
+        "Level and role-fit recommendations",
       ],
     },
   },
@@ -149,16 +120,14 @@ export const FEATURE_SECTIONS = [
     title: "Candidate Experience",
     icon: "users",
     shortDescription:
-      "Natural voice conversation designed for clarity and fairness. Candidates get preparation guidance, practice questions, and on-demand scheduling—a polished experience that helps them showcase their real capabilities.",
+      "Natural voice experience with clear prep, practice, and on-demand scheduling.",
     detailedContent: {
       description:
-        "Candidates deserve a professional, respectful screening experience. We provide clear expectations, technical preparation support, and natural conversation flow—removing anxiety while maintaining rigorous evaluation.",
+        "Polished, fair, voice-only conversation that lets candidates show what they know.",
       bullets: [
-        "Detailed preparation guide: what to expect, how to prepare, sample question formats",
-        "Practice question with audio test to build comfort before the real interview",
-        "Interview anytime, anywhere—no calendar coordination or time zone juggling",
-        "Voice-only format: natural conversation without the awkwardness of being on camera",
-        "Clear, respectful communication throughout the process",
+        "Prep guide and practice question before the interview",
+        "Interview anytime—no time zone juggling or cameras",
+        "Clear expectations and respectful flow",
       ],
     },
   },
@@ -167,16 +136,14 @@ export const FEATURE_SECTIONS = [
     title: "Seamless Workflow",
     icon: "workflow",
     shortDescription:
-      "Integrates into your existing recruiting workflow. Dashboard for scorecard review, side-by-side candidate comparison, exportable reports, and team collaboration—without changing how your team operates.",
+      "Fits your existing recruiting workflow and keeps scorecards in one place.",
     detailedContent: {
       description:
-        "Built for recruiting teams who need better signal without process disruption. Review scorecards, compare candidates, share insights with hiring managers, and export reports—all from a centralized dashboard.",
+        "Centralized review and sharing without changing your process.",
       bullets: [
-        "Side-by-side candidate comparison across all competencies",
-        "Export scorecards as PDF or CSV for hiring manager review",
-        "Full transcript: searchable, timestamped, with highlight capability",
-        "Team collaboration: add notes, flag candidates, tag for follow-up",
-        "Standalone dashboard—no complex integrations required",
+        "Side-by-side candidate comparison",
+        "Exportable scorecards and transcripts",
+        "Notes and flags for hiring managers",
       ],
     },
   },
@@ -282,16 +249,6 @@ export const FAQS = [
       "Every scorecard shows direct transcript quotes as evidence for each competency rating. You review the supporting evidence and make the hiring decision. The structured approach ensures consistent evaluation across all candidates—eliminating the variability of different interviewers asking different questions.",
   },
   {
-    question: "What if the AI misunderstands an answer?",
-    answer:
-      'The full transcript is always available. If something seems off, you can read the exact exchange and make your own judgment. We also flag "low confidence" assessments when the AI is uncertain.',
-  },
-  {
-    question: "Can I customize the evaluation criteria?",
-    answer:
-      "The five core competencies are standardized for IC engineering roles—Communication Clarity, Technical Depth & Judgment, Ownership & Initiative, Collaboration & Teamwork, and Growth Trajectory. You customize by uploading your job description and engineering values, which tailors question focus, technical depth, and role-fit assessment to your specific bar.",
-  },
-  {
     question: "What about bias and fairness?",
     answer:
       "We evaluate the content and reasoning of answers—technical decision-making, ownership examples, collaboration patterns—not speech characteristics. Our methodology is designed to comply with EEOC guidelines. Every scorecard shows the evidence (transcript quotes), so you can audit for bias yourself.",
@@ -300,11 +257,6 @@ export const FAQS = [
     question: "How long does setup take?",
     answer:
       "Under 10 minutes. Create account → upload job description → send first interview link. That's it.",
-  },
-  {
-    question: "What if a candidate is a better fit for a different role?",
-    answer:
-      'The AI will flag this in the scorecard: "Consider for Frontend Engineer—strong UI/UX skills despite applying for Backend." You decide whether to redirect them.',
   },
 ] as const;
 

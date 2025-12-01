@@ -11,7 +11,6 @@ import {
   Send,
   Mic,
   FileText,
-  Play,
   CheckCircle,
   MessageSquare,
   Mail,
@@ -325,7 +324,6 @@ const SmoothVoiceWave = ({
 
 export default function ApertureIQPage() {
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
-  const [showDemoVideo, setShowDemoVideo] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -355,9 +353,8 @@ export default function ApertureIQPage() {
               </FadeInSection>
               <FadeInSection delay={80}>
                 <p className="text-lg leading-relaxed text-text-secondary sm:text-xl">
-                  Adaptive voice interviews that challenge vague answers,
-                  distinguish ownership from participation, and deliver
-                  competency-based scorecards. Without scheduling a single call.
+                  Adaptive voice interviews that expose real ownership and deliver
+                  evidence-backed scorecards—without scheduling a single call.
                 </p>
               </FadeInSection>
               <FadeInSection delay={120}>
@@ -371,20 +368,10 @@ export default function ApertureIQPage() {
                   >
                     Sign Up Now
                   </CTAButton>
-                  <CTAButton
-                    onClick={() => setShowDemoVideo(true)}
-                    variant="secondary"
-                    size="lg"
-                    eventName="Watch Demo Click"
-                    className="min-w-[200px]"
-                  >
-                    <Play className="mr-2 inline h-5 w-5" />
-                    Watch Demo
-                  </CTAButton>
                 </div>
                 <div className="mt-3 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-text-secondary">
                   <span className="inline-flex h-2 w-2 rounded-full bg-brand-primary" />
-                  More candidates. No scheduling. Signal-first scorecards.
+                  More signal. Zero scheduling.
                 </div>
               </FadeInSection>
             </div>
@@ -466,15 +453,6 @@ export default function ApertureIQPage() {
               );
             })}
           </div>
-          <FadeInSection delay={200}>
-            <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-brand-primary-cta bg-surface-background p-6 text-center">
-              <p className="text-lg font-semibold text-text-primary">
-                Result: Your hiring managers waste time on weak candidates,
-                strong engineers fall through, and your pipeline moves at the
-                speed of calendar availability.
-              </p>
-            </div>
-          </FadeInSection>
         </div>
       </section>
       <div className="section-divider" aria-hidden="true" />
@@ -486,11 +464,10 @@ export default function ApertureIQPage() {
           <FadeInSection>
             <div className="text-center">
               <h2 className="mb-4 text-4xl font-bold text-text-primary sm:text-5xl">
-                Voice-Based Interviews That Adapt Like Your Best Hiring Manager
+                Two AI-Led Screens, One Consistent Bar
               </h2>
               <p className="text-xl text-text-secondary">
-                On-demand technical screens with real-time follow-up questions.
-                Two interview depths, engineered for IC roles.
+                Adaptive voice interviews with real follow-ups—no calendars, no drift.
               </p>
             </div>
           </FadeInSection>
@@ -558,9 +535,7 @@ export default function ApertureIQPage() {
           <FadeInSection delay={300}>
             <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-brand-primary bg-surface-background p-6 text-center">
               <p className="text-lg font-semibold text-text-primary">
-                Candidates click the link when they're ready.
-                <br />
-                No calendar Tetris. No waiting.
+                Candidates click the link when they're ready. You get the scorecard minutes later.
               </p>
             </div>
           </FadeInSection>
@@ -574,7 +549,7 @@ export default function ApertureIQPage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <FadeInSection>
             <h2 className="mb-16 text-center text-4xl font-bold text-text-primary sm:text-5xl">
-              Three Steps. Zero Scheduling. Consistent Engineering Signal.
+              How It Works in Three Quick Steps
             </h2>
           </FadeInSection>
 
@@ -617,8 +592,7 @@ export default function ApertureIQPage() {
           </FadeInSection>
           <FadeInSection delay={80}>
             <p className="mb-12 text-center text-xl text-text-secondary">
-              Four capabilities that set voice-based adaptive screening apart
-              from static interview tools
+              Four capabilities that keep signal high without slowing you down
             </p>
           </FadeInSection>
           <FadeInSection delay={120}>
@@ -641,9 +615,7 @@ export default function ApertureIQPage() {
           </FadeInSection>
           <FadeInSection delay={80}>
             <p className="mb-12 text-center text-xl text-text-secondary">
-              Competency-based assessment with level calibration, transcript
-              evidence, and follow-up topics. Built for engineering hiring
-              managers who need signal, not summaries.
+              Evidence-backed scorecards with level calibration and transcript quotes—signal, not summaries.
             </p>
           </FadeInSection>
           <FadeInSection delay={120}>
@@ -808,8 +780,7 @@ export default function ApertureIQPage() {
           </FadeInSection>
           <FadeInSection delay={80}>
             <p className="mb-10 text-xl">
-              Voice-based adaptive interviews with competency-based scorecards.
-              Built for IC engineering hiring.
+              Voice-based adaptive interviews with competency-based scorecards—built for IC engineering.
             </p>
           </FadeInSection>
           <FadeInSection delay={140}>
@@ -1012,20 +983,6 @@ export default function ApertureIQPage() {
         onClose={() => setShowWaitlistModal(false)}
       />
 
-      {/* Demo Video Modal */}
-
-      {showDemoVideo && (
-        <div
-          className="fixed inset-0 bg-black bg-opacity-75 z-50 flex items-center justify-center p-4"
-          onClick={() => setShowDemoVideo(false)}
-        >
-          <div className="bg-surface-background rounded-lg max-w-4xl w-full aspect-video flex items-center justify-center">
-            <p className="text-text-secondary text-xl">
-              Demo Video Coming Soon
-            </p>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
