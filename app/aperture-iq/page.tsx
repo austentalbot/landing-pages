@@ -353,8 +353,9 @@ export default function ApertureIQPage() {
               </FadeInSection>
               <FadeInSection delay={80}>
                 <p className="text-lg leading-relaxed text-text-secondary sm:text-xl">
-                  Adaptive voice interviews that expose real ownership and deliver
-                  evidence-backed scorecards—without scheduling a single call.
+                  Adaptive voice interviews that expose real ownership and
+                  deliver evidence-backed scorecards—without scheduling a single
+                  call.
                 </p>
               </FadeInSection>
               <FadeInSection delay={120}>
@@ -467,7 +468,8 @@ export default function ApertureIQPage() {
                 Two AI-Led Screens, One Consistent Bar
               </h2>
               <p className="text-xl text-text-secondary">
-                Adaptive voice interviews with real follow-ups—no calendars, no drift.
+                Adaptive voice interviews with real follow-ups—no calendars, no
+                drift.
               </p>
             </div>
           </FadeInSection>
@@ -535,7 +537,8 @@ export default function ApertureIQPage() {
           <FadeInSection delay={300}>
             <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-brand-primary bg-surface-background p-6 text-center">
               <p className="text-lg font-semibold text-text-primary">
-                Candidates click the link when they're ready. You get the scorecard minutes later.
+                Candidates click the link when they're ready. You get the
+                scorecard minutes later.
               </p>
             </div>
           </FadeInSection>
@@ -615,7 +618,8 @@ export default function ApertureIQPage() {
           </FadeInSection>
           <FadeInSection delay={80}>
             <p className="mb-12 text-center text-xl text-text-secondary">
-              Evidence-backed scorecards with level calibration and transcript quotes—signal, not summaries.
+              Evidence-backed scorecards with level calibration and transcript
+              quotes—signal, not summaries.
             </p>
           </FadeInSection>
           <FadeInSection delay={120}>
@@ -780,7 +784,8 @@ export default function ApertureIQPage() {
           </FadeInSection>
           <FadeInSection delay={80}>
             <p className="mb-10 text-xl">
-              Voice-based adaptive interviews with competency-based scorecards—built for IC engineering.
+              Voice-based adaptive interviews with competency-based
+              scorecards—built for IC engineering.
             </p>
           </FadeInSection>
           <FadeInSection delay={140}>
@@ -795,7 +800,7 @@ export default function ApertureIQPage() {
             </CTAButton>
           </FadeInSection>
           <FadeInSection delay={200}>
-            <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4 text-sm md:grid-cols-4">
+            <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4 text-sm md:grid-cols-3">
               <div className="flex items-center justify-center gap-2">
                 <CheckCircle className="h-5 w-5" />
                 <span>Free trial interview included</span>
@@ -807,10 +812,6 @@ export default function ApertureIQPage() {
               <div className="flex items-center justify-center gap-2">
                 <CheckCircle className="h-5 w-5" />
                 <span>Integrates with your existing workflow</span>
-              </div>
-              <div className="flex items-center justify-center gap-2">
-                <CheckCircle className="h-5 w-5" />
-                <span>No contracts or commitments</span>
               </div>
             </div>
           </FadeInSection>
@@ -982,7 +983,6 @@ export default function ApertureIQPage() {
         isOpen={showWaitlistModal}
         onClose={() => setShowWaitlistModal(false)}
       />
-
     </div>
   );
 }

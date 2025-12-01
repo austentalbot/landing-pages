@@ -2,6 +2,28 @@
  * Constants for ApertureIQ landing page
  */
 
+export type FeatureExampleLine = {
+  speaker: string;
+  text: string;
+};
+
+export type FeatureDetailedContent = {
+  description: string;
+  bullets?: string[];
+  dimensions?: string[];
+  example?: {
+    lines: FeatureExampleLine[];
+  };
+};
+
+export type FeatureSection = {
+  id: string;
+  title: string;
+  icon: "message-square" | "bar-chart-3" | "users" | "workflow";
+  shortDescription: string;
+  detailedContent: FeatureDetailedContent;
+};
+
 export const COLORS = {
   mutedRose: "#D88C9A",
   warmPeach: "#F2D0A9",
@@ -83,7 +105,7 @@ export const HOW_IT_WORKS_STEPS = [
   },
 ] as const;
 
-export const FEATURE_SECTIONS = [
+export const FEATURE_SECTIONS: FeatureSection[] = [
   {
     id: "adaptive-interviewing",
     title: "Adaptive Interviewing",
