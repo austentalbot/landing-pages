@@ -1,10 +1,16 @@
 import type { Metadata } from "next";
-import { Inter_Tight } from "next/font/google";
+import { Inter_Tight, Fraunces } from "next/font/google";
 import "./theme.css";
 
 const interTight = Inter_Tight({
   subsets: ["latin"],
   weight: ["300", "400", "600", "700"],
+});
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  weight: ["600", "700"],
+  variable: "--font-display",
 });
 
 export const metadata: Metadata = {
@@ -34,7 +40,9 @@ export default function ApertureIQLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={`${interTight.className} aperture-iq-theme`}>
+    <div
+      className={`${interTight.className} ${fraunces.variable} aperture-iq-theme`}
+    >
       {children}
     </div>
   );

@@ -67,7 +67,7 @@ export default function CollapsibleFeatures() {
                 </p>
 
                 {/* Example dialogue for Adaptive Interviewing */}
-                {'example' in feature.detailedContent && feature.detailedContent.example && (
+                {feature.detailedContent.example && (
                   <div className="bg-surface-background rounded-lg p-4 mb-4 border border-border-primary">
                     <h4 className="font-semibold text-text-primary mb-3 text-sm uppercase tracking-wide">
                       Example Conversation:
@@ -83,7 +83,7 @@ export default function CollapsibleFeatures() {
                 )}
 
                 {/* Dimensions for Engineered Evaluation */}
-                {'dimensions' in feature.detailedContent && feature.detailedContent.dimensions && (
+                {feature.detailedContent.dimensions && (
                   <div className="mb-4">
                     <h4 className="font-semibold text-text-primary mb-3">
                       5 Core Dimensions:
@@ -97,7 +97,7 @@ export default function CollapsibleFeatures() {
                 )}
 
                 {/* Bullets */}
-                {'bullets' in feature.detailedContent && feature.detailedContent.bullets && (
+                {feature.detailedContent.bullets && (
                   <ul className="space-y-2">
                     {feature.detailedContent.bullets.map((bullet, i) => (
                       <li key={i} className="flex items-start gap-2 text-text-secondary">

@@ -6,11 +6,20 @@
   --base-background: #f1e3d3;
   --surface-background: #f6f2ee;
   --surface-background-rgb: 246, 242, 238; /* RGB value for #F6F2EE */
+  --base-background-rgb: 241, 227, 211; /* RGB value for #F1E3D3 */
   --text-primary: #3c2a2f;
   --text-secondary: #6b605e;
   --text-secondary-rgb: 107, 96, 94; /* RGB value for #6B605E */
   --text-disabled: #d8b8bc;
   --border-primary: #e5d8d0;
+
+  --wave-rose: rgba(216, 140, 154, 0.75);
+  --wave-rose-muted: rgba(216, 140, 154, 0.4);
+  --wave-teal: rgba(153, 193, 185, 0.75);
+  --wave-cream: rgba(241, 227, 211, 0.9);
+  --wave-line: #c8939f;
+  --wave-line-soft: #9fbfb7;
+  --wave-line-cream: #f6f2ee;
 
   --gradient-teal-depth: linear-gradient(180deg, #99c1b9 0%, #7daaa3 100%);
   --gradient-rose-cta-hover: linear-gradient(180deg, #d88c9a 0%, #c17385 100%);
@@ -65,6 +74,9 @@
 .text-surface-background {
   color: var(--surface-background);
 }
+.hover\:text-text-primary:hover {
+  color: var(--text-primary);
+}
 
 .border-border-primary {
   border-color: var(--border-primary);
@@ -100,4 +112,89 @@
 
 .shadow-warm {
   box-shadow: 0 4px 12px rgba(60, 42, 47, 0.05);
+}
+
+.font-display {
+  font-family: var(--font-display), "Fraunces", serif;
+}
+
+.focus-outline-brand:focus-visible {
+  outline: 2px solid var(--brand-primary-cta);
+  outline-offset: 3px;
+}
+
+.section-shell {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.section-shell::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(var(--surface-background-rgb), 0.45);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section-shell--base::before {
+  background-color: rgba(var(--base-background-rgb), 0.45);
+}
+
+.section-shell--surface::before {
+  background-color: rgba(var(--surface-background-rgb), 0.7);
+}
+
+.section-shell > * {
+  position: relative;
+  z-index: 1;
+}
+
+.section-divider {
+  height: 1px;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  background-color: rgba(var(--text-secondary-rgb), 0.25);
+}
+
+.grain-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='160' height='160' viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='8' cy='8' r='1.2' fill='%2399c1b9' fill-opacity='0.35'/%3E%3Ccircle cx='48' cy='24' r='0.9' fill='%23d88c9a' fill-opacity='0.25'/%3E%3Ccircle cx='96' cy='40' r='1' fill='%23f2d0a9' fill-opacity='0.3'/%3E%3Ccircle cx='136' cy='56' r='0.9' fill='%2399c1b9' fill-opacity='0.3'/%3E%3C/svg%3E");
+  opacity: 0.08;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 0;
+}
+
+.accent-circle {
+  position: absolute;
+  border-radius: 9999px;
+  border: 1px solid rgba(var(--text-secondary-rgb), 0.15);
+  background-color: rgba(var(--brand-accent-rgb, 242, 208, 169), 0.3);
+  filter: blur(0);
+  pointer-events: none;
+}
+
+.feature-geo-line {
+  position: absolute;
+  width: 120px;
+  height: 1px;
+  background-color: rgba(var(--text-secondary-rgb), 0.2);
+}
+
+.feature-geo-dot {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background-color: rgba(var(--brand-primary-rgb), 0.3);
+}
+
+.smooth-wave svg {
+  max-width: 360px;
+  width: 100%;
+  height: auto;
 }

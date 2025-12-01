@@ -165,7 +165,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
         {/* Header */}
         <div className="sticky top-0 bg-surface-background border-b border-border-primary px-6 py-4 flex justify-between items-center">
           <h2 className="text-2xl font-bold text-text-primary">
-            {isSuccess ? "You're on the list! 🎉" : "Join the Waitlist"}
+            {isSuccess ? "You're on the list! 🎉" : "Sign Up Now"}
           </h2>
           <button
             onClick={handleClose}
@@ -187,36 +187,41 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
 
             <div className="bg-surface-background border-l-4 border-brand-primary-cta p-6 mb-6 rounded-lg">
               <p className="text-text-secondary">
-                We're in private beta with select engineering teams, refining the voice-based interview experience and competency scoring framework.
+                We're in private beta with select engineering teams, refining
+                the voice-based interview experience and competency scoring
+                framework.
               </p>
             </div>
 
             <div className="space-y-4 text-text-secondary">
-              <p className="font-semibold text-text-primary">Here's what happens next:</p>
+              <p className="font-semibold text-text-primary">
+                Here's what happens next:
+              </p>
               <ul className="space-y-3 ml-6">
                 <li className="flex items-start">
                   <span className="text-brand-primary mr-2">✓</span>
                   <span>
-                    We'll email you at <strong>{formData.email}</strong> to schedule a brief chat about your recruiting needs
+                    We'll email you at <strong>{formData.email}</strong> to
+                    schedule a brief chat about your recruiting needs
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-brand-primary mr-2">✓</span>
                   <span>
-                    You'll get <strong>early access pricing</strong> when you join the beta program
+                    You'll get <strong>early access pricing</strong> when you
+                    join the beta program
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-brand-primary mr-2">✓</span>
                   <span>
-                    Early access to the platform once it's ready (expected Q2 2025)
+                    Early access to the platform once it's ready (expected early
+                    2026)
                   </span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-brand-primary mr-2">✓</span>
-                  <span>
-                    A chance to shape the product with your feedback
-                  </span>
+                  <span>A chance to shape the product with your feedback</span>
                 </li>
               </ul>
             </div>
@@ -263,7 +268,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <input
                       type="text"
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("name", e.target.value)
+                      }
                       placeholder="e.g., Jane Smith"
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none placeholder-text-disabled"
                     />
@@ -276,7 +283,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <input
                       type="email"
                       value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("email", e.target.value)
+                      }
                       placeholder="your@email.com"
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none placeholder-text-disabled"
                     />
@@ -294,7 +303,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     <input
                       type="text"
                       value={formData.company}
-                      onChange={(e) => handleInputChange("company", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("company", e.target.value)
+                      }
                       placeholder="e.g., TechCorp Inc."
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none placeholder-text-disabled"
                     />
@@ -306,7 +317,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     </label>
                     <select
                       value={formData.role}
-                      onChange={(e) => handleInputChange("role", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("role", e.target.value)
+                      }
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none"
                     >
                       <option value="">Select your role...</option>
@@ -324,7 +337,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     </label>
                     <select
                       value={formData.teamSize}
-                      onChange={(e) => handleInputChange("teamSize", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("teamSize", e.target.value)
+                      }
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none"
                     >
                       <option value="">Select team size...</option>
@@ -347,7 +362,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     </label>
                     <select
                       value={formData.rolesPerQuarter}
-                      onChange={(e) => handleInputChange("rolesPerQuarter", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("rolesPerQuarter", e.target.value)
+                      }
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none"
                     >
                       <option value="">Select range...</option>
@@ -365,7 +382,9 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                     </label>
                     <textarea
                       value={formData.painPoint}
-                      onChange={(e) => handleInputChange("painPoint", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("painPoint", e.target.value)
+                      }
                       placeholder="Tell us about your biggest recruiting challenges, specific needs, or questions..."
                       rows={4}
                       className="w-full px-4 py-3 bg-surface-background border border-border-primary rounded-lg focus:ring-2 focus:ring-brand-primary-cta focus:border-transparent outline-none resize-none placeholder-text-disabled"
@@ -404,7 +423,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   disabled={isLoading}
                   className="px-8 py-2 bg-brand-primary text-surface-background rounded-lg font-semibold hover-bg-brand-primary-80 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  {isLoading ? "Submitting..." : "Join Waitlist"}
+                  {isLoading ? "Submitting..." : "Submit"}
                 </button>
               )}
             </div>
