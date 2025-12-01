@@ -32,6 +32,14 @@ export const metadata: Metadata = {
       "Interview every engineer in half the time. AI-powered screening interviews that ask the right follow-ups, score consistently, and surface the signal your team needs.",
     type: "website",
   },
+  icons: {
+    icon: [
+      {
+        url: "/aperture-iq/icon.svg",
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 export default function ApertureIQLayout({

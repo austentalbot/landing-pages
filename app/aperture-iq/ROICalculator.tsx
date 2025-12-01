@@ -25,15 +25,12 @@ export default function ROICalculator() {
   const currentCostPerQuarter = currentHoursPerQuarter * hourlyRate;
 
   const withAIHoursPerQuarter = rolesPerQuarter * candidatesPerRole * (5 / 60); // 5 min review
-  const withAICostPerQuarter = withAIHoursPerQuarter * hourlyRate;
+  const withAIInterviewsPerQuarter = rolesPerQuarter * candidatesPerRole;
+  const withAICostPerQuarter = rolesPerQuarter * candidatesPerRole * 20;
 
   const timeSavedPerQuarter = currentHoursPerQuarter - withAIHoursPerQuarter;
   const costSavedPerQuarter = currentCostPerQuarter - withAICostPerQuarter;
   const annualSavings = costSavedPerQuarter * 4;
-  const additionalScreenedCandidates = Math.max(
-    Math.round(timeSavedPerQuarter / (5 / 60)),
-    0
-  );
   const interviewingCapacityLift =
     currentHoursPerQuarter > 0
       ? Math.round((timeSavedPerQuarter / currentHoursPerQuarter) * 100)
@@ -148,7 +145,7 @@ export default function ROICalculator() {
                 </div>
                 <input
                   type="range"
-                  min="25"
+                  min="50"
                   max="150"
                   step="5"
                   value={hourlyRate}
@@ -156,14 +153,14 @@ export default function ROICalculator() {
                   className="w-full h-3 bg-base-background rounded-lg appearance-none cursor-pointer slider"
                   style={{
                     background: `linear-gradient(to right, var(--brand-primary) 0%, var(--brand-primary) ${
-                      ((hourlyRate - 25) / 125) * 100
+                      ((hourlyRate - 50) / 100) * 100
                     }%, var(--base-background) ${
-                      ((hourlyRate - 25) / 125) * 100
+                      ((hourlyRate - 50) / 100) * 100
                     }%, var(--base-background) 100%)`,
                   }}
                 />
                 <div className="flex justify-between text-sm text-text-secondary mt-1">
-                  <span>$25</span>
+                  <span>$50</span>
                   <span>$150</span>
                 </div>
               </div>
@@ -207,10 +204,10 @@ export default function ROICalculator() {
                   <div className="space-y-2">
                     <div>
                       <div className="text-2xl font-bold">
-                        {formatHours(withAIHoursPerQuarter)} hrs
+                        {withAIInterviewsPerQuarter.toLocaleString()}
                       </div>
                       <div className="text-xs uppercase tracking-wide opacity-80">
-                        Hours per quarter
+                        Interviews per quarter
                       </div>
                     </div>
                     <div>
@@ -230,15 +227,7 @@ export default function ROICalculator() {
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-text-secondary mb-4">
                 Impact at a glance
               </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div>
-                  <div className="text-2xl font-bold text-text-primary">
-                    {formatHours(timeSavedPerQuarter)} hrs
-                  </div>
-                  <p className="text-sm text-text-secondary">
-                    Recruiter time back
-                  </p>
-                </div>
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div>
                   <div className="text-2xl font-bold text-text-primary">
                     {formatCurrency(costSavedPerQuarter)}
@@ -256,22 +245,24 @@ export default function ROICalculator() {
                   </p>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold text-text-primary">
-                    {additionalScreenedCandidates.toLocaleString()}
+                  <div className="text-2xl font-bold text-brand-primary-cta">
+                    {formatCurrency(annualSavings)}
                   </div>
                   <p className="text-sm text-text-secondary">
-                    Extra high-signal candidates
+                    Annualized savings
                   </p>
                 </div>
               </div>
-              <div className="mt-5 rounded-xl border border-dashed border-brand-primary-cta/70 p-4 text-center">
-                <p className="text-sm text-text-secondary mb-1">
-                  Annualized savings
-                </p>
-                <p className="text-3xl font-bold text-brand-primary-cta">
-                  {formatCurrency(annualSavings)}
-                </p>
-              </div>
+              <p className="mt-4">
+                <i className="text-sm text-text-secondary">
+                  Schedule more interviews while spending less.
+                </i>
+              </p>
+              <p>
+                <i className="text-sm text-text-secondary">
+                  Free recruiters to focus on higher-impact work.
+                </i>
+              </p>
             </div>
           </div>
         </div>

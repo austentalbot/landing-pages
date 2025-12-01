@@ -533,15 +533,6 @@ export default function ApertureIQPage() {
               );
             })}
           </div>
-
-          <FadeInSection delay={300}>
-            <div className="mx-auto mt-12 max-w-2xl rounded-2xl border border-brand-primary bg-surface-background p-6 text-center">
-              <p className="text-lg font-semibold text-text-primary">
-                Candidates click the link when they're ready. You get the
-                scorecard minutes later.
-              </p>
-            </div>
-          </FadeInSection>
         </div>
       </section>
       <div className="section-divider" aria-hidden="true" />

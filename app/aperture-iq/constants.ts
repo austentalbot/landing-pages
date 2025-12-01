@@ -59,7 +59,7 @@ export const PROBLEM_POINTS = [
 
 export const SOLUTION_BENEFITS = [
   {
-    title: "Recruiter Screen (20 min)",
+    title: "Recruiter Screen (30 min)",
     description: "Rapid filter for fit, clarity, and motivation",
     icon: "clipboard-check",
     bullets: [
@@ -69,9 +69,8 @@ export const SOLUTION_BENEFITS = [
     ],
   },
   {
-    title: "Hiring Manager Screen (30 min)",
-    description:
-      "Technical judgment, system design, and ownership depth",
+    title: "Hiring Manager Screen (40 min)",
+    description: "Technical judgment, system design, and ownership depth",
     icon: "search",
     bullets: [
       "Extract trade-offs and decision paths",
@@ -85,8 +84,7 @@ export const HOW_IT_WORKS_STEPS = [
   {
     step: 1,
     title: "Send Link",
-    description:
-      "Generate a role-specific link and share it. No scheduling.",
+    description: "Generate a role-specific link and share it. No scheduling.",
     icon: "send",
   },
   {
@@ -228,14 +226,14 @@ export const MOCK_SCORECARD = {
 export const ROI_DEFAULTS = {
   rolesPerQuarter: 10,
   candidatesPerRole: 20,
-  hourlyRate: 50,
+  hourlyRate: 60,
 } as const;
 
 export const PRICING_PLANS = {
   recruiter: {
     name: "Recruiter Screen",
     price: 20,
-    duration: "20-minute interview",
+    duration: "30-minute interview",
     features: [
       "Complete scorecard with transcript and evidence",
       "Behavioral and communication assessment",
@@ -247,7 +245,7 @@ export const PRICING_PLANS = {
   hiring: {
     name: "Hiring Manager Screen",
     price: 40,
-    duration: "30-minute interview",
+    duration: "40-minute interview",
     features: [
       "Complete scorecard with transcript and evidence",
       "Technical and decision-making assessment",
