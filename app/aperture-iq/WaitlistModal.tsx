@@ -489,14 +489,7 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
             </div>
 
             {/* Footer Buttons */}
-            <div className="px-6 py-4 border-t border-border-primary flex justify-between">
-              <button
-                onClick={step > 1 ? handleBack : handleClose}
-                className="px-6 py-2 text-text-secondary hover:text-text-primary font-semibold transition-colors"
-              >
-                {step > 1 ? "Back" : "Cancel"}
-              </button>
-
+            <div className="px-6 py-4 border-t border-border-primary flex flex-row-reverse items-center justify-between gap-4">
               {step < totalSteps ? (
                 <button
                   onClick={handleNext}
@@ -522,6 +515,13 @@ export default function WaitlistModal({ isOpen, onClose }: WaitlistModalProps) {
                   {isLoading ? "Submitting..." : "Submit"}
                 </button>
               )}
+
+              <button
+                onClick={step > 1 ? handleBack : handleClose}
+                className="px-6 py-2 text-text-secondary hover:text-text-primary font-semibold transition-colors"
+              >
+                {step > 1 ? "Back" : "Cancel"}
+              </button>
             </div>
           </>
         )}

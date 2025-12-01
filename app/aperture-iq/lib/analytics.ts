@@ -11,6 +11,24 @@ interface AnalyticsOptions {
 const DEFAULT_CATEGORY = "interaction";
 
 const isProd = process.env.NODE_ENV === "production";
+const LOCAL_HOSTNAMES = new Set(["localhost", "127.0.0.1", "::1"]);
+
+export const canSendAnalyticsEvents = () => {
+  if (typeof window === "undefined") {
+    return false;
+  }
+
+  if (!isProd) {
+    return false;
+  }
+
+  const hostname = window.location.hostname?.toLowerCase();
+  if (!hostname) {
+    return true;
+  }
+
+  return !LOCAL_HOSTNAMES.has(hostname);
+};
 
 const logWarning = (message: string, error: unknown) => {
   if (!isProd) {
@@ -19,6 +37,8 @@ const logWarning = (message: string, error: unknown) => {
 };
 
 const emitGaPageView = (path: string) => {
+  if (!canSendAnalyticsEvents()) return;
+
   try {
     const gtag = (window as any)?.gtag;
     if (typeof gtag === "function") {
@@ -35,7 +55,7 @@ export function trackAnalyticsEvent(
   eventName: string,
   options: AnalyticsOptions = {}
 ) {
-  if (typeof window === "undefined") return;
+  if (!canSendAnalyticsEvents()) return;
 
   const { category, label, value, payload, gaEventName } = options;
   const sanitizedPayload = { ...(payload || {}) };
