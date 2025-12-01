@@ -60,6 +60,9 @@ const ILLUSTRATIONS = {
   overwhelmed: encodePublicAssetPath(
     "Lifestyle and Leisure _ sleeping, rest, relaxation, man, silhouette, Vector illustration.svg"
   ),
+  faq: encodePublicAssetPath(
+    "Business and Finance _ businessman, confusion, uncertainty, questioning, perplexed.svg"
+  ),
 };
 
 const VARIANT_ILLUSTRATIONS: Record<
@@ -228,7 +231,7 @@ const HeroScorecard = () => (
             </p>
             <div className="h-1 rounded-full bg-base-background">
               <div
-                className="h-full rounded-full bg-brand-primary-cta"
+                className="h-full rounded-full bg-brand-accent"
                 style={{
                   width: `${signal.tone === "positive" ? "90%" : "65%"}`,
                 }}
@@ -245,7 +248,7 @@ const HeroScorecard = () => (
             </p>
             <div className="mt-1 h-1.5 rounded-full bg-base-background">
               <div
-                className="h-full rounded-full bg-brand-primary-cta"
+                className="h-full rounded-full bg-brand-accent"
                 style={{ width: `${line.value}%` }}
               />
             </div>
@@ -668,9 +671,21 @@ export default function ApertureIQPage() {
       <section className="section-shell section-shell--surface bg-base-background py-20">
         <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
           <FadeInSection>
-            <h2 className="mb-12 text-center text-4xl font-bold text-text-primary sm:text-5xl">
-              Common questions
-            </h2>
+            <div className="mb-12 flex flex-col items-center justify-center gap-6 sm:flex-row sm:flex-nowrap sm:items-center sm:justify-between">
+              <h2 className="text-center text-4xl font-bold text-text-primary sm:text-5xl sm:text-left sm:whitespace-nowrap">
+                Common questions
+              </h2>
+              <div className="flex justify-center">
+                <Image
+                  src={ILLUSTRATIONS.faq}
+                  alt="Illustration of a curious business leader considering questions"
+                  width={320}
+                  height={220}
+                  className="h-auto w-full max-w-[260px] rounded-[32px] shadow-warm"
+                  sizes="(min-width: 640px) 220px, 60vw"
+                />
+              </div>
+            </div>
           </FadeInSection>
           <FadeInSection delay={100}>
             <CollapsibleFAQs faqs={FAQS} />

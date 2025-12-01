@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import { trackAnalyticsEvent } from "./lib/analytics";
 
 interface StickyButtonProps {
   onClick: () => void;
@@ -24,10 +25,10 @@ export default function StickyButton({ onClick }: StickyButtonProps) {
   }, []);
 
   const handleClick = () => {
-    // Track with Umami if available
-    if (typeof window !== "undefined" && (window as any).umami) {
-      (window as any).umami.track("Sticky Button Click");
-    }
+    trackAnalyticsEvent("Sticky Button Click", {
+      category: "cta",
+      label: "Sticky CTA",
+    });
     onClick();
   };
 

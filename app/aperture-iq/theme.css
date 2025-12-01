@@ -1,6 +1,8 @@
 .aperture-iq-theme {
   --brand-primary: #99c1b9;
   --brand-primary-rgb: 153, 193, 185; /* RGB value for #99C1B9 */
+  --brand-primary-dark: #5a8f83;
+  --brand-primary-dark-rgb: 90, 143, 131;
   --brand-primary-cta: #d88c9a;
   --brand-accent: #f2d0a9;
   --base-background: #f1e3d3;
@@ -30,6 +32,9 @@
 
 .bg-brand-primary {
   background-color: var(--brand-primary);
+}
+.bg-brand-primary-dark {
+  background-color: var(--brand-primary-dark);
 }
 .bg-brand-primary-cta {
   background-color: var(--brand-primary-cta);
@@ -103,6 +108,9 @@
 
 .hover-bg-brand-primary-80:hover {
   background-color: rgba(var(--brand-primary-rgb), 0.8);
+}
+.hover-bg-brand-primary-dark-80:hover {
+  background-color: rgba(var(--brand-primary-dark-rgb), 0.8);
 }
 
 /* Custom class for placeholder text color */
