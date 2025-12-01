@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState, useId } from "react";
+import { Suspense, useEffect, useState, useId, useCallback } from "react";
 import {
   Clock,
   TrendingDown,
@@ -17,6 +17,7 @@ import {
   Linkedin,
   AlertTriangle,
 } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import CTAButton from "./CTAButton";
 import StickyButton from "./StickyButton";
 import CollapsibleFAQs from "./CollapsibleFAQs";
@@ -24,6 +25,7 @@ import CollapsibleFeatures from "./CollapsibleFeatures";
 import ROICalculator from "./ROICalculator";
 import ScorecardPreview from "./ScorecardPreview";
 import WaitlistModal from "./WaitlistModal";
+import ContactModal from "./ContactModal";
 import FadeInSection from "./FadeInSection";
 import {
   PROBLEM_POINTS,
@@ -326,7 +328,51 @@ const SmoothVoiceWave = ({
 };
 
 export default function ApertureIQPage() {
+  return (
+    <Suspense fallback={null}>
+      <ApertureIQPageContent />
+    </Suspense>
+  );
+}
+
+function ApertureIQPageContent() {
   const [showWaitlistModal, setShowWaitlistModal] = useState(false);
+  const [showContactModal, setShowContactModal] = useState(false);
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const contactQuery = searchParams.get("contact");
+
+  const updateContactQueryParam = useCallback(
+    (enabled: boolean) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (enabled) {
+        if (params.get("contact") === "1") return;
+        params.set("contact", "1");
+      } else {
+        if (!params.has("contact")) return;
+        params.delete("contact");
+      }
+
+      const nextQuery = params.toString();
+      const nextUrl = nextQuery ? `/aperture-iq?${nextQuery}` : "/aperture-iq";
+      router.replace(nextUrl, { scroll: false });
+    },
+    [router, searchParams]
+  );
+
+  useEffect(() => {
+    setShowContactModal(contactQuery === "1");
+  }, [contactQuery]);
+
+  const handleContactModalOpen = () => {
+    setShowContactModal(true);
+    updateContactQueryParam(true);
+  };
+
+  const handleContactModalClose = () => {
+    setShowContactModal(false);
+    updateContactQueryParam(false);
+  };
 
   return (
     <div className="min-h-screen">
@@ -362,7 +408,7 @@ export default function ApertureIQPage() {
                 </p>
               </FadeInSection>
               <FadeInSection delay={120}>
-                <div className="flex flex-row flex-nowrap items-center gap-4">
+                <div className="flex flex-row flex-wrap items-center gap-4">
                   <CTAButton
                     onClick={() => setShowWaitlistModal(true)}
                     variant="primary"
@@ -371,6 +417,15 @@ export default function ApertureIQPage() {
                     className="min-w-[200px]"
                   >
                     Sign Up Now
+                  </CTAButton>
+                  <CTAButton
+                    onClick={handleContactModalOpen}
+                    variant="secondary"
+                    size="lg"
+                    eventName="Contact CTA Click"
+                    className="min-w-[200px]"
+                  >
+                    Contact Us
                   </CTAButton>
                 </div>
                 <div className="mt-3 flex items-center gap-3 text-xs uppercase tracking-[0.22em] text-text-secondary">
@@ -405,7 +460,7 @@ export default function ApertureIQPage() {
             </FadeInSection>
           </div>
         </div>
-      </section>
+        </section>
       <div className="section-divider" aria-hidden="true" />
 
       {/* Section 2: Problem */}
@@ -795,15 +850,26 @@ export default function ApertureIQPage() {
             </p>
           </FadeInSection>
           <FadeInSection delay={140}>
-            <CTAButton
-              onClick={() => setShowWaitlistModal(true)}
-              variant="primary"
-              size="lg"
-              eventName="Final CTA Click"
-              className="mb-8"
-            >
-              Try Your First Interview Free
-            </CTAButton>
+            <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <CTAButton
+                onClick={() => setShowWaitlistModal(true)}
+                variant="primary"
+                size="lg"
+                eventName="Final CTA Click"
+                className="w-full sm:w-auto"
+              >
+                Try Your First Interview Free
+              </CTAButton>
+              <CTAButton
+                onClick={handleContactModalOpen}
+                variant="secondary"
+                size="lg"
+                eventName="Final Contact CTA Click"
+                className="w-full sm:w-auto"
+              >
+                Contact Us
+              </CTAButton>
+            </div>
           </FadeInSection>
           <FadeInSection delay={200}>
             <div className="mx-auto grid max-w-2xl grid-cols-2 gap-4 text-sm md:grid-cols-3">
@@ -988,6 +1054,10 @@ export default function ApertureIQPage() {
       <WaitlistModal
         isOpen={showWaitlistModal}
         onClose={() => setShowWaitlistModal(false)}
+      />
+      <ContactModal
+        isOpen={showContactModal}
+        onClose={handleContactModalClose}
       />
     </div>
   );
