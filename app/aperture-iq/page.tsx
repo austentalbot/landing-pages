@@ -61,7 +61,7 @@ const ILLUSTRATIONS = {
     "Lifestyle and Leisure _ sleeping, rest, relaxation, man, silhouette, Vector illustration.svg"
   ),
   faq: encodePublicAssetPath(
-    "Business and Finance _ businessman, confusion, uncertainty, questioning, perplexed.svg"
+    "Creative Design _ building, architect, blueprints, engineering, construction.svg"
   ),
 };
 
